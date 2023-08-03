@@ -9,7 +9,11 @@ const App = () => {
             .then((res) => console.log(res.data))
             .catch((err) => console.log(err));
     }, []);
-    return <h1>Hello contributors!</h1>;
+    return (
+        <>
+            <h1>Hello contributors!</h1>
+        </>
+    );
 };
 
 export default App;
