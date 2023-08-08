@@ -5,11 +5,15 @@ const Row = styled.div`
   display: flex
 `
 const TileGrass = styled.div`
-  background: green
+  background: green;
+  width: 25px;
+  height: 25px
 `
 
 const TileWall = styled.div`
-  background: brown
+  background: brown;
+  width: 25px;
+  height: 25px
 `
 
 export {Row, TileGrass, TileWall}
