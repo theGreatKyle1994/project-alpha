@@ -1,19 +1,18 @@
-import React from "react";
-import styled from 'styled-components'
+import styled from "styled-components";
 
 const Row = styled.div`
-  display: flex
-`
+    display: flex;
+`;
 const TileGrass = styled.div`
-  background: green;
-  width: 25px;
-  height: 25px
-`
+    background: green;
+    width: 25px;
+    height: 25px;
+`;
 
 const TileWall = styled.div`
-  background: brown;
-  width: 25px;
-  height: 25px
-`
+    background: brown;
+    width: 25px;
+    height: 25px;
+`;
 
-export {Row, TileGrass, TileWall}
+export { Row, TileGrass, TileWall };

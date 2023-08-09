@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import Combat from "./components/Combat";
+import Combat from "./components/combat/Combat";
 import MapGenerator from "./components/map/MapGenerator";
 import "./App.css";
 

@@ -1,4 +1,4 @@
-import { wait, applyChance, applyRange } from "../utilities/utilityFunctions";
+import { wait, applyChance, applyRange } from "../../utilities/utilityFunctions";
 
 const Combat = () => {
     const startCombat = async () => {
