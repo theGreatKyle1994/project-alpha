@@ -1,5 +1,5 @@
 class Entity {
-    // todo
+  // todo
 }
 
 export default Entity;

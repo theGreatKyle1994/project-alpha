@@ -1,9 +1,9 @@
-import generateNewMap from '../../utilities/map/map-logic'
+import generateNewMap from "../../utilities/map/map-logic";
 import { Row, TileWall, TileGrass } from "./MapCSS";
 const MapGenerator = (props) => {
   const { size } = props;
   // generate a map based on three different algos: web, chain, or spoke
-  const randomMap = generateNewMap('chain',size);
+  const randomMap = generateNewMap("chain", size);
   return (
     <>
       {randomMap.map((row, rIndex) => {

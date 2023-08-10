@@ -1,4 +1,3 @@
-
 const createBlankMap = (size) => {
   // Create blank map grid with borders of 1 along all sides
   const bookEnds = Array.from({ length: size }, () => 1);
@@ -22,52 +21,51 @@ const createBlankMap = (size) => {
     const [x, y] = endPoints[r - 1];
     newMap[x][y] = 2;
   }
-  return {newMap, endPoints}
-}
+  return { newMap, endPoints };
+};
 // This mapping algorithm takes a list of randomly generated points, and links the first,
 // to the second, and so on.
 const generateChainMap = (mapParams) => {
-  const {newMap, endPoints} = mapParams
-  for(let i = 0; i < endPoints.length; i++) {
-    const start = endPoints[i]
-    const end = (!i == endPoints.length - 1) ? endPoints[i+1] : endPoints[0]
-    const rise = start[0] - end[0]
-    const run = start[1] - end[1]
+  const { newMap, endPoints } = mapParams;
+  for (let i = 0; i < endPoints.length; i++) {
+    const start = endPoints[i];
+    const end = !i == endPoints.length - 1 ? endPoints[i + 1] : endPoints[0];
+    const rise = start[0] - end[0];
+    const run = start[1] - end[1];
     const movement = randomizeBlock(0, 2);
-    if(movement) {
+    if (movement) {
       createHorizontalPath(newMap, rise, run, end, start);
     } else {
       createVerticalPath(newMap, rise, run, end, start);
     }
-
   }
-  return newMap
-}
+  return newMap;
+};
 // This mapping algorithm takes a list of randomly generated endpoints, linking each endpoint
 // to every other endpoint.
 const generateWebMap = (mapParams) => {
-  const {newMap, endPoints} = mapParams
+  const { newMap, endPoints } = mapParams;
   // randomize whether path creation should start vert or horiz
   const movement = randomizeBlock(0, 2);
 
-  while(endPoints.length > 0) {
-    const start = endPoints.shift()
-    endPoints.forEach(end => {
-      const rise = start[0] - end[0]
-      const run = start[1] - end[1]
-      if(movement) {
+  while (endPoints.length > 0) {
+    const start = endPoints.shift();
+    endPoints.forEach((end) => {
+      const rise = start[0] - end[0];
+      const run = start[1] - end[1];
+      if (movement) {
         createHorizontalPath(newMap, rise, run, end, start);
       } else {
         createVerticalPath(newMap, rise, run, end, start);
       }
-    })
+    });
   }
-  return newMap
-}
+  return newMap;
+};
 //This mapping algorithm creates one random open tile on each row. (see endpoints line 15-23)
 // One endpoint is randomly chosen to be the hub, with every other endpoint (or spoke) connecting to this hub
 const generateSpokeMap = (mapParams) => {
-  const {newMap, endPoints} = mapParams
+  const { newMap, endPoints } = mapParams;
   // select random endpoint to be the hub
   const hubIndex = randomizeBlock(0, endPoints.length);
   const hubTile = endPoints.splice(hubIndex, 1).flat();
@@ -116,7 +114,7 @@ const createVerticalPath = (mapArray, rise, run, endPoint, startPoint) => {
       mapArray[startPoint[0]][y] = 2;
     }
   }
-}
+};
 // used by all map generator engines to create paths between to randomly created points
 const createHorizontalPath = (mapArray, rise, run, endPoint, startPoint) => {
   // Depending on whether run is + -, travers the map accordingly.
@@ -144,7 +142,7 @@ const createHorizontalPath = (mapArray, rise, run, endPoint, startPoint) => {
       mapArray[x][startPoint[1]] = 2;
     }
   }
-}
+};
 const randomizeBlock = (min, max) => {
   const block = Math.floor(Math.random() * (max - min) + min);
   return block;
@@ -152,16 +150,22 @@ const randomizeBlock = (min, max) => {
 
 // master function to call an algo based on user input
 const generateNewMap = (engine, size) => {
-  const mapParams = createBlankMap(size)
-  console.log(mapParams)
+  const mapParams = createBlankMap(size);
+  console.log(mapParams);
   const mapOptions = {
-    'spoke': () => {generateSpokeMap(mapParams)},
-    'web': () => {generateWebMap(mapParams)},
-    'chain': () => {generateChainMap(mapParams)}
-  }
-  const mapFunction = mapOptions[engine]
-  mapFunction()
-  console.log(mapParams.newMap)
-  return mapParams.newMap
-}
+    spoke: () => {
+      generateSpokeMap(mapParams);
+    },
+    web: () => {
+      generateWebMap(mapParams);
+    },
+    chain: () => {
+      generateChainMap(mapParams);
+    },
+  };
+  const mapFunction = mapOptions[engine];
+  mapFunction();
+  console.log(mapParams.newMap);
+  return mapParams.newMap;
+};
 export default generateNewMap;
