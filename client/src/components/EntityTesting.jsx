@@ -9,14 +9,15 @@ const EntityTesting = () => {
   };
 
   const changeEnemyName = () => {
-    if (enemy1.name === "Kyle") enemy1.changeName("Mark");
-    else enemy1.changeName("Kyle");
+    enemy1.changeName();
   };
 
   return (
     <>
       <h1>Entity Testing</h1>
       <h2>Entity Name: {enemy1.name}</h2>
+      <h2>Entity Health: {enemy1.health}</h2>
+      <h2>Entity Max Health: {enemy1.maxHealth}</h2>
       <button onClick={displayEnemy}>Log Enemy Test</button>
       <button onClick={changeEnemyName}>Change Enemy Name Test</button>
     </>

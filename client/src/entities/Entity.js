@@ -5,8 +5,18 @@ class Entity {
     this.name = name;
   }
 
-  changeName(newName) {
-    this.name = newName;
+  changeName() {
+    const nameArr = [
+      "Mark",
+      "Kyle",
+      "John",
+      "Stewart",
+      "James",
+      "Tim",
+      "Uh... Josh?",
+    ];
+    this.name = nameArr[Math.floor(Math.random() * nameArr.length)];
+    console.log(this.name);
   }
 }
 

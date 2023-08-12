@@ -10,8 +10,8 @@ const useEntity = (entity) => {
   const [projection, setProjection] = useState(projectEntity(entity));
   return {
     ...projection,
-    changeName: (newName) => {
-      entity.changeName(newName);
+    changeName: () => {
+      entity.changeName();
       setProjection(projectEntity(entity));
     },
   };
