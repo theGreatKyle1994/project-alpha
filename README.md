@@ -2,12 +2,18 @@
 Welcome to the ground floor of Project Alpha!
 So far, this game will be a true test of craftmanship using web technologies!
 
-## Features:
-- Map tile system
+## Current Version: 0.0.1
+- First iteration of the map gen system ( /map )
+- Concept for class state ( /entity )
+- Very basic combat loop: baisc loop with delays ( /combat )
+
+## Planned Features:
+- Map tile system: random gen
 - Turn based combat system
 - Questing
-- Sprite based design
+- Pixel art design
 - OOP random gen for weapons/enemies
+- Inventory system
 - Sound effects/Combat Sounds
 
 ## Requirements

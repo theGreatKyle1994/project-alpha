@@ -10,7 +10,7 @@ const EntityTesting = () => {
   };
 
   // Methods are called from the variable we declared above
-  // as all methods we're exported and defined in the hook
+  // as all methods were exported and defined in the hook
   const changeEnemyName = () => {
     enemy1.changeName();
   };
@@ -18,8 +18,8 @@ const EntityTesting = () => {
   return (
     <>
       <h1>Entity Testing</h1>
-      {/* We access any of the class attributes we defined
-        for display through the variable we defined from
+      {/* We access any of the class attributes we added
+        for display through the variable we declared from
         the hook above */}
       <h2>Entity Name: {enemy1.name}</h2>
       <h2>Entity Health: {enemy1.health}</h2>
