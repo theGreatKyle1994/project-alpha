@@ -1,5 +1,6 @@
 class Entity {
   constructor(health, maxHealth, name) {
+    this.id = Math.random();
     this.health = health;
     this.maxHealth = maxHealth;
     this.name = name;
@@ -18,6 +19,10 @@ class Entity {
     ];
     this.name = nameArr[Math.floor(Math.random() * nameArr.length)];
     console.log("From class: " + this.name);
+  }
+
+  doDamage(damIn) {
+    this.health -= damIn;
   }
 }
 
