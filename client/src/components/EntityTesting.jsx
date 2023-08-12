@@ -9,6 +9,8 @@ const EntityTesting = () => {
     console.log(enemy1);
   };
 
+  // Methods are called from the variable we declared above
+  // as all methods we're exported and defined in the hook
   const changeEnemyName = () => {
     enemy1.changeName();
   };

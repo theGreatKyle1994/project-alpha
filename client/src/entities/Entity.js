@@ -5,6 +5,7 @@ class Entity {
     this.name = name;
   }
 
+  // All logic stays inside the class when methods are called
   changeName() {
     const nameArr = [
       "Mark",
