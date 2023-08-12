@@ -16,7 +16,7 @@ class Entity {
       "Uh... Josh?",
     ];
     this.name = nameArr[Math.floor(Math.random() * nameArr.length)];
-    console.log(this.name);
+    console.log("From class: " + this.name);
   }
 }
 
