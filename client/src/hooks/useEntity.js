@@ -7,6 +7,7 @@ const projectEntity = (entity) => ({
   name: entity.name,
   health: entity.health,
   maxHealth: entity.maxHealth,
+  damage: entity.damage,
 });
 
 const useEntity = (...initialData) => {
@@ -25,14 +26,14 @@ const useEntity = (...initialData) => {
     ...projection,
     // Any method we want to be able to call from
     // the class is defined here
-    changeName() {
+    changeName(newName) {
       // Updating the class
-      entity.changeName();
+      entity.changeName(newName);
       // Updating the projection with the new class values
       setProjection(projectEntity(entity));
     },
-    doDamage(damIn) {
-      entity.doDamage(damIn);
+    takeDamage(damIn) {
+      entity.takeDamage(damIn);
       setProjection(projectEntity(entity));
     },
   };

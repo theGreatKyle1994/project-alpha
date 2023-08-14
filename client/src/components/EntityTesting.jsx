@@ -1,39 +1,32 @@
 import useEntity from "../hooks/useEntity";
 
 const EntityTesting = () => {
-  // We define an enemy through the useEntity custom hook
-  // and add starting data as if it was a new class definition
-  const enemy1 = useEntity(100, 100, "Kyle");
-
-  // Methods are called from the variable we declared above
-  // as all methods were exported and defined in the hook
-  const changeEnemyName = () => {
-    enemy1.changeName();
-  };
-
-  const displayEnemy = () => {
-    console.log("From EntityTesting.jsx", enemy1);
-  };
+  const player = useEntity("Player", 100, 5);
+  const enemy = useEntity("Enemy", 100, 10);
 
   // Basic damage test (no constraints)
+  const doPlayerDamage = () => {
+    player.takeDamage(enemy.damage);
+  };
+
   const doEnemyDamage = () => {
-    enemy1.doDamage(10);
+    enemy.takeDamage(player.damage);
   };
 
   return (
     <>
       <h1>Entity Testing</h1>
-      {/* We access any of the class attributes we added
-        for display through the variable we declared from
-        the hook above */}
-      <h2>Entity Id: {enemy1.id}</h2>
-      <h2>Entity Name: {enemy1.name}</h2>
-      <h2>Entity Health: {enemy1.health}</h2>
-      <h2>Entity Max Health: {enemy1.maxHealth}</h2>
-      {/* A few events to showcase state updating along with class */}
-      <button onClick={displayEnemy}>Log Enemy Test</button>
-      <button onClick={changeEnemyName}>Change Enemy Name Test</button>
-      <button onClick={doEnemyDamage}>Do Damage Test</button>
+      <h2>Player Id: {player.id}</h2>
+      <h2>Player Name: {player.name}</h2>
+      <h2>Player Health: {player.health}</h2>
+      <h2>Player Max Health: {player.maxHealth}</h2>
+      <hr />
+      <h2>Enemy Id: {enemy.id}</h2>
+      <h2>Enemy Name: {enemy.name}</h2>
+      <h2>Enemy Health: {enemy.health}</h2>
+      <h2>Player Max Health: {player.maxHealth}</h2>
+      <button onClick={doPlayerDamage}>Do Player Damage Test</button>
+      <button onClick={doEnemyDamage}>Do Enemy Damage Test</button>
     </>
   );
 };

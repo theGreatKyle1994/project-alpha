@@ -34,13 +34,13 @@ npm install
 
 ## Running the frontend/backend
 
-To start the frontend, run in terminal:
+To start the frontend, run in terminal at /client:
 
 ```
 npm run dev
 ```
 
-To start the backend, run in terminal:
+To start the backend, run in terminal at /server:
 
 ```
 nodemon server.js

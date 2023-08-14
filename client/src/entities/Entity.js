@@ -1,28 +1,24 @@
 class Entity {
-  constructor(health, maxHealth, name) {
+  constructor(name, health, damage) {
     this.id = Math.random();
-    this.health = health;
-    this.maxHealth = maxHealth;
     this.name = name;
+    this.health = health;
+    this.maxHealth = this.health;
+    this.damage = damage; // Placeholder until weapon class is created
+    this.resistance = 1.0; // 1.0 mean taking full damage. 0.5 means taking half
   }
 
   // All logic stays inside the class when methods are called
-  changeName() {
-    const nameArr = [
-      "Mark",
-      "Kyle",
-      "John",
-      "Stewart",
-      "James",
-      "Tim",
-      "Uh... Josh?",
-    ];
-    this.name = nameArr[Math.floor(Math.random() * nameArr.length)];
-    console.log("From class: " + this.name);
+  changeName(newName) {
+    this.name = newName;
   }
 
-  doDamage(damIn) {
-    this.health -= damIn;
+  calcDefense(damIn) {
+    return damIn * this.resistance;
+  }
+
+  takeDamage(damIn) {
+    this.health -= this.calcDefense(damIn);
   }
 }
 
