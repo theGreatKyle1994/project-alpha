@@ -1,4 +1,5 @@
 import useEntity from "../hooks/useEntity";
+import { generateID } from "../utilities/utilityFunctions";
 
 const EntityTesting = () => {
   const player = useEntity("Player", 100, 5);

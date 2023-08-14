@@ -1,6 +1,8 @@
+import { generateID } from "../utilities/utilityFunctions";
+
 class Entity {
   constructor(name, health, damage) {
-    this.id = Math.random();
+    this.id = generateID();
     this.name = name;
     this.health = health;
     this.maxHealth = this.health;
