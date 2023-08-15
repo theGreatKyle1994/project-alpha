@@ -8,6 +8,7 @@ const projectEntity = (entity) => ({
   health: entity.health,
   maxHealth: entity.maxHealth,
   damage: entity.damage,
+  resistance: entity.resistance,
 });
 
 const useEntity = (...initialData) => {

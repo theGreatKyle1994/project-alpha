@@ -2,7 +2,7 @@ import { generateID } from "../utilities/utilityFunctions";
 
 class Entity {
   constructor(name, health, damage) {
-    this.id = generateID();
+    this.id = generateID(15);
     this.name = name;
     this.health = health;
     this.maxHealth = this.health;
@@ -19,6 +19,7 @@ class Entity {
     return damIn * this.resistance;
   }
 
+  // Example of internal methods that don't need to be projected in the hook
   takeDamage(damIn) {
     this.health -= this.calcDefense(damIn);
   }
