@@ -18,9 +18,9 @@ export const applyRange = (lowerRange = 0, upperRange = 100, multiplier = 1) =>
   floor(random() * (upperRange - lowerRange) + lowerRange) * multiplier;
 
 // Generates unique ID
-export const generateID = () => {
+export const generateID = (size) => {
   const charArray = [...Array(94)].map((_, i) => String.fromCharCode(i + 33));
-  return [...Array(30)]
+  return [...Array(size)]
     .map(() => charArray[floor(random() * charArray.length - 1)])
     .join("");
 };
