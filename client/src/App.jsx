@@ -9,7 +9,7 @@ const App = () => {
       <h1>Hello contributors!</h1>
       <Routes>
         <Route path="/combat" element={<Combat />} />
-        <Route path="/map" element={<MapGenerator size={25} />} />
+        <Route path="/map" element={<MapGenerator/>} />
       </Routes>
     </>
   );
