@@ -8,6 +8,7 @@ class Entity {
     this.maxHealth = this.health;
     this.damage = damage; // Placeholder until weapon class is created
     this.resistance = 1.0; // 1.0 mean taking full damage. 0.5 means taking half
+    this.isDead = false;
   }
 
   // All logic stays inside the class when methods are called
@@ -21,7 +22,27 @@ class Entity {
 
   // Example of internal methods that don't need to be projected in the hook
   takeDamage(damIn) {
-    this.health -= this.calcDefense(damIn);
+    if (this.health > 0) {
+      this.health -= this.calcDefense(damIn);
+    }
+    if (this.health <= 0) {
+      this.isDead = true;
+      this.health = 0;
+    }
+  }
+
+  takeHeal(healIn) {
+    // This for debug purposes. 
+    // In the future this will be handled by revive potions/trickets
+    if (this.isDead) {
+      this.isDead = false;
+    }
+    if (this.health < this.maxHealth) {
+      this.health += healIn;
+      if (this.health > this.maxHealth) {
+        this.health = this.maxHealth;
+      }
+    }
   }
 }
 

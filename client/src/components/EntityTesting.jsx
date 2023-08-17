@@ -13,6 +13,13 @@ const EntityTesting = () => {
     enemy.takeDamage(player.damage);
   };
 
+  const globalRevive = () => {
+    player.takeHeal(1000);
+    enemy.takeHeal(1000);
+  };
+
+  console.log(player.isDead, enemy.isDead);
+
   return (
     <>
       <h1>Entity Testing</h1>
@@ -21,14 +28,23 @@ const EntityTesting = () => {
       <h2>Player Health: {player.health}</h2>
       <h2>Player Max Health: {player.maxHealth}</h2>
       <h2>Player Resistance: {player.resistance}</h2>
+      <h2>Player Dead: {String(player.isDead)}</h2>
       <hr />
       <h2>Enemy Id: {enemy.id}</h2>
       <h2>Enemy Name: {enemy.name}</h2>
       <h2>Enemy Health: {enemy.health}</h2>
       <h2>Enemy Max Health: {enemy.maxHealth}</h2>
       <h2>Enemy Resistance: {enemy.resistance}</h2>
-      <button onClick={doPlayerDamage}>Do Player Damage Test</button>
-      <button onClick={doEnemyDamage}>Do Enemy Damage Test</button>
+      <h2>Enemy Dead: {String(enemy.isDead)}</h2>
+      {!player.isDead && (
+        <button onClick={doPlayerDamage}>Do Player Damage Test</button>
+      )}
+      {!enemy.isDead && (
+        <button onClick={doEnemyDamage}>Do Enemy Damage Test</button>
+      )}
+      {(player.isDead || enemy.isDead) && (
+        <button onClick={globalRevive}>Revive Both</button>
+      )}
     </>
   );
 };

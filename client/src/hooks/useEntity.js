@@ -9,6 +9,7 @@ const projectEntity = (entity) => ({
   maxHealth: entity.maxHealth,
   damage: entity.damage,
   resistance: entity.resistance,
+  isDead: entity.isDead,
 });
 
 const useEntity = (...initialData) => {
@@ -35,6 +36,10 @@ const useEntity = (...initialData) => {
     },
     takeDamage(damIn) {
       entity.takeDamage(damIn);
+      setProjection(projectEntity(entity));
+    },
+    takeHeal(healIn) {
+      entity.takeHeal(healIn);
       setProjection(projectEntity(entity));
     },
   };
