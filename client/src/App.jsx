@@ -11,7 +11,7 @@ const App = () => {
       <Routes>
         <Route path="/combat" element={<Combat />} />
         <Route path="/entity" element={<EntityTesting />} />
-        <Route path="/map" element={<MapGenerator size={10} />} />
+        <Route path="/map" element={<MapGenerator />} />
       </Routes>
     </>
   );
