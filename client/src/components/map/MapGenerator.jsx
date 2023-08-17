@@ -1,9 +1,9 @@
-import generateNewMap from "../../utilities/map/map-logic";
+import generatePopulatedChunk from "../../utilities/map/functions/create-populated-chunk";
+import generateMap from "../../utilities/map/map-engine";
 import { Row, TileWall, TileGrass } from "./MapCSS";
-const MapGenerator = (props) => {
-  const { size } = props;
+const MapGenerator = () => {
   // generate a map based on three different algos: web, chain, or spoke
-  const randomMap = generateNewMap("chain", size);
+  const randomMap = generateMap(3,3);
   return (
     <>
       {randomMap.map((row, rIndex) => {
