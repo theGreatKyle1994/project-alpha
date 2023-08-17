@@ -2,7 +2,7 @@ import { generateID } from "../utilities/utilityFunctions";
 
 class Entity {
   constructor(name, health, damage) {
-    this.id = generateID("#FF:", "", 10);
+    this.id = generateID(10, "#FF:");
     this.name = name;
     this.health = health;
     this.maxHealth = this.health;

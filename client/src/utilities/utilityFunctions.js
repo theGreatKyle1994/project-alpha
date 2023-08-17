@@ -18,7 +18,7 @@ export const applyRange = (lowerRange = 0, upperRange = 100, multiplier = 1) =>
   floor(random() * (upperRange - lowerRange) + lowerRange) * multiplier;
 
 // Generates unique ID
-export const generateID = (prefix = "", suffix = "", size = 10) => {
+export const generateID = (size = 10, prefix = "", suffix = "") => {
   const charArray = [...Array(94)].map((_, i) => String.fromCharCode(i + 33));
   return (
     prefix +
