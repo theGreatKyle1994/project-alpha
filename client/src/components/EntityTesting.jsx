@@ -1,4 +1,5 @@
 import useEntity from "../hooks/useEntity";
+import { applyRange } from "../utilities/utilityFunctions";
 
 const EntityTesting = () => {
   const player = useEntity("Player", 100, 5);
@@ -17,8 +18,6 @@ const EntityTesting = () => {
     player.takeHeal(1000);
     enemy.takeHeal(1000);
   };
-
-  console.log(player.isDead, enemy.isDead);
 
   return (
     <>

@@ -2,7 +2,7 @@ import { generateID } from "../utilities/utilityFunctions";
 
 class Entity {
   constructor(name, health, damage) {
-    this.id = generateID(15);
+    this.id = generateID("#FF:", "", 10);
     this.name = name;
     this.health = health;
     this.maxHealth = this.health;
@@ -32,7 +32,7 @@ class Entity {
   }
 
   takeHeal(healIn) {
-    // This for debug purposes. 
+    // This for debug purposes.
     // In the future this will be handled by revive potions/trickets
     if (this.isDead) {
       this.isDead = false;
