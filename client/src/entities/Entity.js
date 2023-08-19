@@ -1,4 +1,4 @@
-import { generateID } from "../utilities/utilityFunctions";
+import { generateID } from "../utilities/general/functions/utilityFunctions";
 
 class Entity {
   constructor(name, health, damage) {

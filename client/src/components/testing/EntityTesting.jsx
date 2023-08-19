@@ -1,5 +1,4 @@
-import useEntity from "../hooks/useEntity";
-import { applyRange } from "../utilities/utilityFunctions";
+import useEntity from "../../hooks/useEntity";
 
 const EntityTesting = () => {
   const player = useEntity("Player", 100, 5);

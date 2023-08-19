@@ -1,8 +1,7 @@
 import {
   wait,
-  applyChance,
   applyRange,
-} from "../../utilities/utilityFunctions";
+} from "../../utilities/general/functions/utilityFunctions";
 
 const Combat = () => {
   const startCombat = async () => {

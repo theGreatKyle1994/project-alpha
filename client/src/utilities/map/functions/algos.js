@@ -1,12 +1,12 @@
-import { applyRange } from "../../utilityFunctions";
+import { applyRange } from "../../general/functions/utilityFunctions";
 import { createHorizontalPath, createVerticalPath } from "./create-paths";
 
 // Chain algo takes the randomly generated list of endpoints and links
 // the first to the second, the second to the third, and so on
 export const createChain = ({ newChunk, endPoints }) => {
-  for(let i = 0; i < endPoints.length ; i++) {
+  for (let i = 0; i < endPoints.length; i++) {
     const start = endPoints[i];
-    const end = endPoints[(i+1) % endPoints.length];
+    const end = endPoints[(i + 1) % endPoints.length];
     const rise = start.row - end.row;
     const run = start.col - end.col;
     const moveDirection = applyRange(0, 2);
@@ -39,7 +39,7 @@ export const createSpoke = ({ newChunk, endPoints }) => {
   });
 
   return newChunk;
-}
+};
 // Web algo takes a list of randomly generated endpoints and connect each
 // endpoint to every other endpoint. Very open and blobby result.
 export const createWeb = ({ newChunk, endPoints }) => {
@@ -59,4 +59,4 @@ export const createWeb = ({ newChunk, endPoints }) => {
     });
   }
   return newChunk;
-}
+};
