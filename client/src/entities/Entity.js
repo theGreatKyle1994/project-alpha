@@ -1,6 +1,15 @@
 import { generateID } from "../utilities/general/functions/utilityFunctions";
 
 class Entity {
+  #localCoord = {
+    localX: null,
+    localY: null,
+  };
+  #worldCoord = {
+    worldX: null,
+    worldY: null,
+  };
+
   constructor(name, health, damage) {
     this.id = generateID(10, "#FF:");
     this.name = name;
@@ -43,6 +52,28 @@ class Entity {
         this.health = this.maxHealth;
       }
     }
+  }
+
+  get getLocalCoordinates() {
+    return this.#localCoord;
+  }
+
+  set setLocalCoordinates([x, y]) {
+    this.#localCoord = {
+      localX: x,
+      localY: y,
+    };
+  }
+
+  get getWorldCoordinates() {
+    return this.#worldCoord;
+  }
+
+  set setWorldCoordinates([x, y]) {
+    this.#worldCoord = {
+      worldX: x,
+      worldY: y,
+    };
   }
 }
 

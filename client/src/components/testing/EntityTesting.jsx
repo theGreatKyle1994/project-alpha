@@ -1,8 +1,11 @@
 import useEntity from "../../hooks/useEntity";
+// import Entity from "../../entities/Entity";
 
 const EntityTesting = () => {
   const player = useEntity("Player", 100, 5);
   const enemy = useEntity("Enemy", 100, 10);
+
+  // const test = new Entity("test", 100, 1);
 
   // Basic damage test (no constraints)
   const doPlayerDamage = () => {
