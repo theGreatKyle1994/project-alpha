@@ -1,10 +1,11 @@
 import useEntity from "../../hooks/useEntity";
+import { applyRange } from "../../utilities/general/functions/utilityFunctions";
 
 const EntityTesting = () => {
   const player = useEntity("Player", "Player", 100, 5);
 
   const gainXp = () => {
-    player.setXp(100);
+    player.setXp(applyRange(5, 10, player.level));
   };
 
   console.log(player);
@@ -12,11 +13,11 @@ const EntityTesting = () => {
   return (
     <>
       <h1>Entity Testing</h1>
-      <h2>Player Id: {player.id}</h2>
-      <h2>Player Name: {player.name}</h2>
-      <h2>Player Level: {player.level}</h2>
-      <h2>Player XP: {player.xp}</h2>
-      <h2>Player XP Cap: {player.xpCap}</h2>
+      <h2>Name: {player.name}</h2>
+      <h2>Level: {player.level}</h2>
+      <h2>
+        XP: {player.xp}/{player.xpCap}
+      </h2>
       <progress value={player.xp} max={player.xpCap} />
       <button onClick={gainXp}>Get XP</button>
     </>

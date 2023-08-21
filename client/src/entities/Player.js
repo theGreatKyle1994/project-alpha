@@ -1,4 +1,5 @@
 import Entity from "./Entity";
+import { applyRange } from "../utilities/general/functions/utilityFunctions";
 
 class Player extends Entity {
   constructor(name, health, damage) {
@@ -9,14 +10,13 @@ class Player extends Entity {
 
   levelUp() {
     this.level += 1;
-    console.log("Levek up!", this.level);
   }
 
   setXp(xpIn) {
     this.xp += xpIn;
     while (this.xp >= this.xpCap) {
       this.xp = this.xp - this.xpCap;
-      this.xpCap += 100;
+      this.xpCap += applyRange(5, 20, this.level);
       this.levelUp();
     }
   }
