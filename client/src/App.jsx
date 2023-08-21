@@ -1,19 +1,20 @@
-import { useEffect } from "react";
-import axios from "axios";
+import { Routes, Route } from "react-router-dom";
+import Combat from "./components/combat/Combat";
+import EntityTesting from "./components/EntityTesting";
+import MapGenerator from "./components/map/MapGenerator";
 import "./App.css";
 
 const App = () => {
-    useEffect(() => {
-        axios
-            .get("http://localhost:8000/players")
-            .then((res) => console.log(res.data))
-            .catch((err) => console.log(err));
-    }, []);
-    return (
-        <>
-            <h1>Hello contributors!</h1>
-        </>
-    );
+  return (
+    <>
+      <h1>Hello contributors!</h1>
+      <Routes>
+        <Route path="/combat" element={<Combat />} />
+        <Route path="/entity" element={<EntityTesting />} />
+        <Route path="/map" element={<MapGenerator size={10} />} />
+      </Routes>
+    </>
+  );
 };
 
 export default App;
