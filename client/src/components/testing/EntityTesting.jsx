@@ -1,11 +1,8 @@
 import useEntity from "../../hooks/useEntity";
-// import Entity from "../../entities/Entity";
 
 const EntityTesting = () => {
   const player = useEntity("Player", 100, 5);
   const enemy = useEntity("Enemy", 100, 10);
-
-  // const test = new Entity("test", 100, 1);
 
   // Basic damage test (no constraints)
   const doPlayerDamage = () => {
@@ -26,6 +23,7 @@ const EntityTesting = () => {
       <h1>Entity Testing</h1>
       <h2>Player Id: {player.id}</h2>
       <h2>Player Name: {player.name}</h2>
+      <h2>Player Level: {player.level}</h2>
       <h2>Player Health: {player.health}</h2>
       <h2>Player Max Health: {player.maxHealth}</h2>
       <h2>Player Resistance: {player.resistance}</h2>
@@ -33,6 +31,7 @@ const EntityTesting = () => {
       <hr />
       <h2>Enemy Id: {enemy.id}</h2>
       <h2>Enemy Name: {enemy.name}</h2>
+      <h2>Enemy Level: {enemy.level}</h2>
       <h2>Enemy Health: {enemy.health}</h2>
       <h2>Enemy Max Health: {enemy.maxHealth}</h2>
       <h2>Enemy Resistance: {enemy.resistance}</h2>

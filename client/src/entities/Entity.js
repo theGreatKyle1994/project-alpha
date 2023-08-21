@@ -1,23 +1,23 @@
 import { generateID } from "../utilities/general/functions/utilityFunctions";
 
 class Entity {
-  #localCoord = {
-    localX: null,
-    localY: null,
-  };
-  #worldCoord = {
-    worldX: null,
-    worldY: null,
-  };
-
   constructor(name, health, damage) {
     this.id = generateID(10, "#FF:");
     this.name = name;
+    this.level = 1; // Placeholder until persistant data is used
     this.health = health;
     this.maxHealth = this.health;
     this.damage = damage; // Placeholder until weapon class is created
     this.resistance = 1.0; // 1.0 mean taking full damage. 0.5 means taking half
     this.isDead = false;
+    this.localCoord = {
+      localX: null,
+      localY: null,
+    };
+    this.worldCoord = {
+      worldX: null,
+      worldY: null,
+    };
   }
 
   // All logic stays inside the class when methods are called
@@ -54,22 +54,14 @@ class Entity {
     }
   }
 
-  get getLocalCoordinates() {
-    return this.#localCoord;
-  }
-
-  set setLocalCoordinates([x, y]) {
+  setLocalCoordinates([x, y]) {
     this.#localCoord = {
       localX: x,
       localY: y,
     };
   }
 
-  get getWorldCoordinates() {
-    return this.#worldCoord;
-  }
-
-  set setWorldCoordinates([x, y]) {
+  setWorldCoordinates([x, y]) {
     this.#worldCoord = {
       worldX: x,
       worldY: y,

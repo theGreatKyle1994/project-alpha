@@ -5,6 +5,7 @@ import Entity from "../entities/Entity";
 const projectEntity = (entity) => ({
   id: entity.id,
   name: entity.name,
+  level: entity.level,
   health: entity.health,
   maxHealth: entity.maxHealth,
   damage: entity.damage,
@@ -22,6 +23,7 @@ const useEntity = (...initialData) => {
   const entity = entityRef.current;
   // We set the hooks internal state to the projected data we
   // defined above plus the methods below
+
   const [projection, setProjection] = useState(projectEntity(entity));
   return {
     // Spreading out all displayable data defined above
