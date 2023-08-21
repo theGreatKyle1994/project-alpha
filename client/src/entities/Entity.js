@@ -55,14 +55,14 @@ class Entity {
   }
 
   setLocalCoordinates([x, y]) {
-    this.#localCoord = {
+    this.localCoord = {
       localX: x,
       localY: y,
     };
   }
 
   setWorldCoordinates([x, y]) {
-    this.#worldCoord = {
+    this.worldCoord = {
       worldX: x,
       worldY: y,
     };
