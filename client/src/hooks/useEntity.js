@@ -1,6 +1,6 @@
 import { useState, useRef } from "react";
 import Entity from "../entities/Entity";
-import Player from "../entities/Player";
+import Player from "../entities/player/Player";
 
 // All data from the class that we want to display goes here
 const projectEntity = (entity, classRefName) => {

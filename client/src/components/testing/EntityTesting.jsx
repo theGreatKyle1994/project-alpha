@@ -1,14 +1,13 @@
-import useEntity from "../../hooks/useEntity";
 import { applyRange } from "../../utilities/general/functions/utilityFunctions";
+import { useContext } from "react";
+import { getPlayer } from "../../entities/player/getPlayer";
 
 const EntityTesting = () => {
-  const player = useEntity("Player", "Player", 100, 5);
+  const player = useContext(getPlayer);
 
   const gainXp = () => {
     player.setXp(applyRange(5, 10, player.level));
   };
-
-  console.log(player);
 
   return (
     <>

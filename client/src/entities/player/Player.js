@@ -1,5 +1,5 @@
-import Entity from "./Entity";
-import { applyRange } from "../utilities/general/functions/utilityFunctions";
+import Entity from "../Entity";
+import { applyRange } from "../../utilities/general/functions/utilityFunctions";
 
 class Player extends Entity {
   constructor(name, health, damage) {
