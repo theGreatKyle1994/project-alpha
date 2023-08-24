@@ -13,6 +13,14 @@ const projectEntity = (entity, classRefName) => {
     damage: entity.damage,
     resistance: entity.resistance,
     isDead: entity.isDead,
+    localCoord: {
+      localX: entity.localCoord.localX,
+      localY: entity.localCoord.localY,
+    },
+    worldCoord: {
+      localX: entity.worldCoord.worldX,
+      localY: entity.worldCoord.worldY,
+    },
   };
 
   if (classRefName === "Player") {
@@ -21,7 +29,7 @@ const projectEntity = (entity, classRefName) => {
       xpCap: entity.xpCap,
     });
   }
-  
+
   return returnObj;
 };
 
@@ -63,6 +71,14 @@ const useEntity = (entityType = "Entity", ...initialData) => {
     },
     takeHeal(healIn) {
       entity.takeHeal(healIn);
+      setProjection(projectEntity(entity, classRefName));
+    },
+    setLocalCoordinates(x, y) {
+      entity.setLocalCoordinates(x, y);
+      setProjection(projectEntity(entity, classRefName));
+    },
+    setWorldCoordinates(x, y) {
+      entity.setWorldCoordinates(x, y);
       setProjection(projectEntity(entity, classRefName));
     },
   };
