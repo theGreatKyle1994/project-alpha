@@ -1,13 +1,12 @@
 # Project Alpha
 
 Welcome to the ground floor of Project Alpha!
-So far, this game will be a true test of craftmanship using web technologies!
 
-## Current Version: v0.0.1
+## Current Version: v0.0.2
 
-- First iteration of the map gen system ( /map )
-- Concept for class state ( /entity )
-- Very basic combat loop: baisc loop with delays ( /combat )
+- Second iteration of the map gen system ( /map )
+- Basic player movement using coord system ( /map )
+- XP system and Player class creation ( /entity )
 
 ## Planned Features:
 
@@ -34,13 +33,13 @@ npm install
 
 ## Running the frontend/backend
 
-To start the frontend, run in terminal:
+To start the frontend, run in terminal at /client:
 
 ```
 npm run dev
 ```
 
-To start the backend, run in terminal:
+To start the backend, run in terminal at /server:
 
 ```
 nodemon server.js

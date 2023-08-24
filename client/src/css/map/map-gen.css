@@ -1,0 +1,9 @@
+#map-container {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.map-row {
+  display: flex;
+  justify-content: flex-start;
+}

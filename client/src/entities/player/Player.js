@@ -1,0 +1,25 @@
+import Entity from "../Entity";
+import { applyRange } from "../../utilities/general/functions/utilityFunctions";
+
+class Player extends Entity {
+  constructor(name, health, damage) {
+    super(name, health, damage);
+    this.xp = 0;
+    this.xpCap = 100;
+  }
+
+  levelUp() {
+    this.level += 1;
+  }
+
+  setXp(xpIn) {
+    this.xp += xpIn;
+    while (this.xp >= this.xpCap) {
+      this.xp = this.xp - this.xpCap;
+      this.xpCap += applyRange(5, 20, this.level);
+      this.levelUp();
+    }
+  }
+}
+
+export default Player;
