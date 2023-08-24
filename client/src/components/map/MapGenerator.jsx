@@ -1,4 +1,5 @@
 // import generatePopulatedChunk from "../../utilities/map/functions/create-populated-chunk";
+import { useMemo } from "react";
 import generateMap from "../../utilities/map/map-engine";
 import playerStartPoint from "../../utilities/map/functions/player-start-point";
 import Row from "./tiles/Row";
@@ -10,17 +11,22 @@ import "../../css/map/tiles.css";
 
 const MapGenerator = () => {
   // generate a map based on three different algos: web, chain, or spoke
-  const randomMap = generateMap(2, 2);
+
+  const randomMap = useMemo(() => generateMap(2, 2), []);
   const startingPoint = playerStartPoint(randomMap)
   console.log(startingPoint)
+  
   return (
-    <>
+    <div id="map-container">
       {randomMap.map((row, rIndex) => {
         return (
           <Row key={rIndex}>
             {row.map((tile, cIndex) =>
               tile === 2 ? (
-                <Tile key={`r${cIndex}`} />
+                <Tile
+                  key={`r${cIndex}`}
+                  tileCoords={{ tileX: cIndex, tileY: rIndex }}
+                />
               ) : (
                 <TileWall key={`r${cIndex}`} />
               )
@@ -28,7 +34,7 @@ const MapGenerator = () => {
           </Row>
         );
       })}
-    </>
+    </div>
   );
 };
 

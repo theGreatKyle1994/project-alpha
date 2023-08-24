@@ -4,11 +4,20 @@ class Entity {
   constructor(name, health, damage) {
     this.id = generateID(10, "#FF:");
     this.name = name;
+    this.level = 1; // Placeholder until persistant data is used
     this.health = health;
     this.maxHealth = this.health;
     this.damage = damage; // Placeholder until weapon class is created
     this.resistance = 1.0; // 1.0 mean taking full damage. 0.5 means taking half
     this.isDead = false;
+    this.localCoord = {
+      localX: 0,
+      localY: 0,
+    };
+    this.worldCoord = {
+      worldX: null,
+      worldY: null,
+    };
   }
 
   // All logic stays inside the class when methods are called
@@ -43,6 +52,40 @@ class Entity {
         this.health = this.maxHealth;
       }
     }
+  }
+
+  setLocalCoordinates(x, y) {
+    this.localCoord = {
+      localX: x,
+      localY: y,
+    };
+  }
+
+  setWorldCoordinates(x, y) {
+    this.worldCoord = {
+      worldX: x,
+      worldY: y,
+    };
+  }
+
+  doMovement(tileX, tileY) {
+    if((tileX == this.localCoord.localX + 1 && tileY == this.localCoord.localY)) {
+      this.setLocalCoordinates(tileX, tileY);
+      console.log(`Player moved to (${tileX}, ${tileY})`);
+    }
+    else if((tileX == this.localCoord.localX - 1 && tileY == this.localCoord.localY)){
+      this.setLocalCoordinates(tileX, tileY);
+      console.log(`Player moved to (${tileX}, ${tileY})`);
+    }
+    else if((tileX == this.localCoord.localX && tileY == this.localCoord.localY + 1)){
+      this.setLocalCoordinates(tileX, tileY);
+      console.log(`Player moved to (${tileX}, ${tileY+1})`);
+    }
+    else if((tileX == this.localCoord.localX && tileY == this.localCoord.localY - 1)){
+      this.setLocalCoordinates(tileX, tileY);
+      console.log(`Player moved to (${tileX}, ${tileY})`);
+    }
+    else console.log("Player couldn't move!");
   }
 }
 
