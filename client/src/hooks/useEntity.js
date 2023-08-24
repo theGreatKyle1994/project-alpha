@@ -81,6 +81,10 @@ const useEntity = (entityType = "Entity", ...initialData) => {
       entity.setWorldCoordinates(x, y);
       setProjection(projectEntity(entity, classRefName));
     },
+    doMovement(tileX, tileY) {
+      entity.doMovement(tileX, tileY);
+      setProjection(projectEntity(entity, classRefName));
+    },
   };
   // Checking if the class ref is player to add associated class methods
   if (classRefName === "Player") {
