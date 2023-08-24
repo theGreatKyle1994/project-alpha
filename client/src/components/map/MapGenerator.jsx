@@ -1,5 +1,5 @@
 // import generatePopulatedChunk from "../../utilities/map/functions/create-populated-chunk";
-import { useMemo, useContext } from "react";
+import { useMemo, useContext, useEffect } from "react";
 import generateMap from "../../utilities/map/map-engine";
 import playerStartPoint from "../../utilities/map/functions/player-start-point";
 import Row from "./tiles/Row";
@@ -15,10 +15,11 @@ const MapGenerator = () => {
   const player = useContext(getPlayer);
   const randomMap = useMemo(() => generateMap(1, 1), []);
 
-  const startingPoint = playerStartPoint(randomMap);
-  const { x, y } = startingPoint;
-  useMemo(() => player.setLocalCoordinates(x, y), []);
-  console.log(startingPoint, player.localCoord);
+  useEffect(() => {
+    const startingPoint = playerStartPoint(randomMap);
+    const { x, y } = startingPoint;
+    player.setLocalCoordinates(x, y);
+  }, [randomMap]);
 
   return (
     <div id="map-container">
