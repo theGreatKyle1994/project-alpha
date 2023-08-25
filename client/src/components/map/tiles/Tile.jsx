@@ -1,21 +1,32 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import { getPlayer } from "../../../entities/player/getPlayer";
+import { applyChance } from "../../../utilities/general/functions/utilityFunctions";
 
 const Tile = ({ tileCoords }) => {
   const player = useContext(getPlayer);
   const { tileX, tileY } = tileCoords;
   const { localX, localY } = player.localCoord;
 
-  console.log("Tile");
+  const isChest = useMemo(() => (applyChance(0.05) ? "chest" : ""), []);
+  const isEnemy = useMemo(() => (applyChance(0.05) ? "monster" : ""), []);
+
+  console.log("tile");
 
   return (
     <div
-      style={{
-        backgroundColor: localX == tileX && localY == tileY ? "black" : "green",
-      }}
+      className={`map-tile-open ${isChest} ${isEnemy}`}
       onClick={() => player.doMovement(tileX, tileY)}
-      className="map-tile-open"
-    ></div>
+    >
+      {localX == tileX && localY == tileY && (
+        <div
+          style={{
+            backgroundColor: "black",
+            height: "50%",
+            width: "50%",
+          }}
+        ></div>
+      )}
+    </div>
   );
 };
 

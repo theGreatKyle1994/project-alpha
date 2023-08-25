@@ -1,11 +1,11 @@
 // import generatePopulatedChunk from "../../utilities/map/functions/create-populated-chunk";
 import { useMemo, useContext, useEffect } from "react";
-import generateMap from "../../utilities/map/map-engine";
+import { getPlayer } from "../../entities/player/getPlayer";
 import playerStartPoint from "../../utilities/map/functions/player-start-point";
+import generateMap from "../../utilities/map/map-engine";
 import Row from "./tiles/Row";
 import Tile from "./tiles/Tile";
 import TileWall from "./tiles/TileWall";
-import { getPlayer } from "../../entities/player/getPlayer";
 // CSS Imports, Import all map CSS here
 import "../../css/map/map-gen.css";
 import "../../css/map/tiles.css";
@@ -17,8 +17,7 @@ const MapGenerator = () => {
 
   useEffect(() => {
     const startingPoint = playerStartPoint(randomMap);
-    const { x, y } = startingPoint;
-    player.setLocalCoordinates(x, y);
+    player.setLocalCoordinates(startingPoint.x, startingPoint.y);
   }, [randomMap]);
 
   return (
