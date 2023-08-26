@@ -1,6 +1,8 @@
 import { wait } from "../../utilities/general/functions/utilityFunctions";
-import useEntity from "../../hooks/useEntity";
 import { useReducer, useContext, useEffect } from "react";
+import enemyAction from "../../utilities/combat/functions/enemyCombatRouting";
+import playerAction from "../../utilities/combat/functions/playerCombatRouting";
+import useEntity from "../../hooks/useEntity";
 import { getPlayer } from "../../entities/player/getPlayer";
 
 const CombatCore = ({ toggleCombat }) => {
@@ -21,7 +23,15 @@ const CombatCore = ({ toggleCombat }) => {
           isEnemyTurn: false,
         };
       },
+      // Placeholder until we have a looting system in place
       changeToPlayerWins() {
+        return {
+          isPlayerTurn: false,
+          isEnemyTurn: false,
+        };
+      },
+      // Placeholder until we create death aftermath code
+      changeToEnemyWins() {
         return {
           isPlayerTurn: false,
           isEnemyTurn: false,
@@ -36,13 +46,25 @@ const CombatCore = ({ toggleCombat }) => {
     isEnemyTurn: false,
   });
 
-  const checkEnemyAction = async () => {
+  const checkPlayerAction = (action) => {
+    if (player.isDead) {
+      dispatchAction({ type: "changeToEnemyWins" });
+    }
+    if (state.isPlayerTurn) {
+      dispatchAction({ type: "changeToEnemyTurn" });
+      // playerAction(action);
+      enemy.takeDamage(player.damage);
+    }
+  };
+
+  const checkEnemyAction = async (action) => {
     if (enemy.isDead) {
       dispatchAction({ type: "changeToPlayerWins" });
     }
     if (state.isEnemyTurn) {
       await wait(1000);
       dispatchAction({ type: "changeToPlayerTurn" });
+      // enemyAction(action);
       player.takeDamage(enemy.damage);
     }
   };
@@ -50,7 +72,9 @@ const CombatCore = ({ toggleCombat }) => {
   useEffect(() => {
     console.log("combat");
     if (!enemy.isDead) {
-      checkEnemyAction();
+      // "damage" is placeholder until AI is made inside the class
+      // to choose its own actions
+      checkEnemyAction("damage");
     }
   }, [state]);
 
@@ -87,12 +111,7 @@ const CombatCore = ({ toggleCombat }) => {
       </div>
       <div>Dead: {String(enemy.isDead)}</div>
       {state.isPlayerTurn && !player.isDead && (
-        <button
-          onClick={() => {
-            dispatchAction({ type: "changeToEnemyTurn" });
-            enemy.takeDamage(player.damage);
-          }}
-        >
+        <button onClick={() => checkPlayerAction("attack")}>
           Attack Enemy!
         </button>
       )}
