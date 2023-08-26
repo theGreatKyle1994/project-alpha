@@ -3,8 +3,8 @@ import useEntity from "../../hooks/useEntity";
 import { useReducer, useContext, useEffect } from "react";
 import { getPlayer } from "../../entities/player/getPlayer";
 
-const CombatCore = () => {
-  const enemy = useEntity("Entity", "Enemy", 100, 5);
+const CombatCore = ({ toggleCombat }) => {
+  const enemy = useEntity("Entity", "Enemy", 100, 20);
   const player = useContext(getPlayer);
 
   const handleCombatTurns = (_, action) => {
@@ -19,6 +19,11 @@ const CombatCore = () => {
           isPlayerTurn: true,
           isEnemyTurn: false,
         };
+      case "changeToPlayerWins":
+        return {
+          isPlayerTurn: false,
+          isEnemyTurn: false,
+        };
     }
   };
 
@@ -27,9 +32,12 @@ const CombatCore = () => {
     isEnemyTurn: false,
   });
 
-  const inCombat = async () => {
+  const checkEnemyAction = async () => {
+    if (enemy.isDead) {
+      dispatchAction({ type: "changeToPlayerWins" });
+    }
     if (state.isEnemyTurn) {
-      await wait(2000);
+      await wait(1000);
       dispatchAction({ type: "changeToPlayerTurn" });
       player.takeDamage(enemy.damage);
     }
@@ -37,7 +45,9 @@ const CombatCore = () => {
 
   useEffect(() => {
     console.log("combat");
-    inCombat();
+    if (!enemy.isDead) {
+      checkEnemyAction();
+    }
   }, [state]);
 
   return (
@@ -52,13 +62,16 @@ const CombatCore = () => {
         borderRadius: "10px",
       }}
     >
-      <h2>Combat Menu Test</h2>
+      <h2 id="combat-header">Combat Menu Test</h2>
       <hr />
       <h3>Player</h3>
       <div>Turn: {String(state.isPlayerTurn)}</div>
       <div>Damage: {player.damage}</div>
       <div>
         Health: {player.health}/{player.maxHealth}
+        {player.health < player.maxHealth && (
+          <button onClick={() => player.takeHeal(10)}>Heal</button>
+        )}
       </div>
       <div>Dead: {String(player.isDead)}</div>
       <hr />
@@ -69,7 +82,7 @@ const CombatCore = () => {
         Health: {enemy.health}/{enemy.maxHealth}
       </div>
       <div>Dead: {String(enemy.isDead)}</div>
-      {state.isPlayerTurn && (
+      {state.isPlayerTurn && !player.isDead && (
         <button
           onClick={() => {
             dispatchAction({ type: "changeToEnemyTurn" });
@@ -79,8 +92,20 @@ const CombatCore = () => {
           Attack Enemy!
         </button>
       )}
-      {state.isEnemyTurn && (
+      {state.isEnemyTurn && !enemy.isDead && (
         <div style={{ color: "grey" }}>Enemy Attacking...</div>
+      )}
+      {enemy.isDead && <h2>Player Wins!</h2>}
+      {player.isDead && <h2>Enemy Wins!</h2>}
+      {(player.isDead || enemy.isDead) && (
+        <button
+          onClick={() => {
+            player.takeHeal(10000);
+            toggleCombat();
+          }}
+        >
+          Exit Combat (debug)
+        </button>
       )}
     </div>
   );

@@ -5,20 +5,20 @@ import { useState } from "react";
 const Combat = () => {
   const [isInCombat, setIsInCombat] = useState(false);
 
-  const startCombat = async () => {
+  const toggleCombat = async () => {
     setIsInCombat(!isInCombat);
   };
 
   return (
     <>
       <h1>Combat Module</h1>
-      <button onClick={startCombat}>
+      <button onClick={toggleCombat}>
         {!isInCombat ? "Start" : "Stop"} Combat Test (debug)
       </button>
       {isInCombat && (
-        <Draggable bounds="html">
+        <Draggable bounds="html" handle="#combat-header">
           <div style={{ position: "absolute" }}>
-            <CombatCore />
+            <CombatCore toggleCombat={toggleCombat} />
           </div>
         </Draggable>
       )}
