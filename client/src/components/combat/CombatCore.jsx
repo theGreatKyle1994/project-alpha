@@ -8,23 +8,27 @@ const CombatCore = ({ toggleCombat }) => {
   const player = useContext(getPlayer);
 
   const handleCombatTurns = (_, action) => {
-    switch (action.type) {
-      case "changeToEnemyTurn":
+    const listOfActions = {
+      changeToEnemyTurn() {
         return {
           isPlayerTurn: false,
           isEnemyTurn: true,
         };
-      case "changeToPlayerTurn":
+      },
+      changeToPlayerTurn() {
         return {
           isPlayerTurn: true,
           isEnemyTurn: false,
         };
-      case "changeToPlayerWins":
+      },
+      changeToPlayerWins() {
         return {
           isPlayerTurn: false,
           isEnemyTurn: false,
         };
-    }
+      },
+    };
+    return listOfActions[action.type]();
   };
 
   const [state, dispatchAction] = useReducer(handleCombatTurns, {
