@@ -1,23 +1,27 @@
-import {
-  wait,
-  applyRange,
-} from "../../utilities/general/functions/utilityFunctions";
+import CombatCore from "./CombatCore";
+import Draggable from "react-draggable";
+import { useState } from "react";
 
 const Combat = () => {
+  const [isInCombat, setIsInCombat] = useState(false);
+
   const startCombat = async () => {
-    console.log("You Attacking...");
-    await wait(1000);
-    console.log(`${applyRange(1, 10, 1)} Damage!`);
-    await wait(1000);
-    console.log("Enemy Attacking...");
-    await wait(1000);
-    console.log(`${applyRange(1, 10, 1)} Damage!`);
+    setIsInCombat(!isInCombat);
   };
 
   return (
     <>
       <h1>Combat Module</h1>
-      <button onClick={startCombat}>Start Combat Test</button>
+      <button onClick={startCombat}>
+        {!isInCombat ? "Start" : "Stop"} Combat Test (debug)
+      </button>
+      {isInCombat && (
+        <Draggable bounds="html">
+          <div style={{ position: "absolute" }}>
+            <CombatCore />
+          </div>
+        </Draggable>
+      )}
     </>
   );
 };

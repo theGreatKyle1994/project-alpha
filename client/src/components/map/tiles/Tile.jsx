@@ -7,10 +7,8 @@ const Tile = ({ tileCoords }) => {
   const { tileX, tileY } = tileCoords;
   const { localX, localY } = player.localCoord;
 
-  const isChest = useMemo(() => (applyChance(0.05) ? "chest" : ""), []);
-  const isEnemy = useMemo(() => (applyChance(0.05) ? "monster" : ""), []);
-
-  console.log("tile");
+  const isChest = useMemo(() => (applyChance(1.25) ? "chest" : ""), []);
+  const isEnemy = useMemo(() => (applyChance(3) ? "monster" : ""), []);
 
   return (
     <div
