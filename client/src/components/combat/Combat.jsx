@@ -5,7 +5,7 @@ import { useState } from "react";
 const Combat = () => {
   const [isInCombat, setIsInCombat] = useState(false);
 
-  const toggleCombat = async () => {
+  const toggleCombat = () => {
     setIsInCombat(!isInCombat);
   };
 
