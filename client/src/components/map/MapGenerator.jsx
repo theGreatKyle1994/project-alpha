@@ -1,6 +1,6 @@
 // import generatePopulatedChunk from "../../utilities/map/functions/create-populated-chunk";
 import { useMemo, useContext, useEffect } from "react";
-import { getPlayer } from "../../entities/player/getPlayer";
+import { globalContext } from "../../App";
 import playerStartPoint from "../../utilities/map/functions/player-start-point";
 import generateMap from "../../utilities/map/map-engine";
 import Row from "./tiles/Row";
@@ -12,7 +12,8 @@ import "../../css/map/tiles.css";
 
 const MapGenerator = () => {
   // generate a map based on three different algos: web, chain, or spoke
-  const player = useContext(getPlayer);
+  const context = useContext(globalContext);
+  const { player } = context;
   const randomMap = useMemo(() => generateMap(1, 1), []);
 
   useEffect(() => {

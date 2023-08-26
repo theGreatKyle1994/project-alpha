@@ -1,19 +1,16 @@
 import { useContext, useMemo } from "react";
-import { getPlayer } from "../../../entities/player/getPlayer";
+import { globalContext } from "../../../App";
 import { applyChance } from "../../../utilities/general/functions/utilityFunctions";
 
 const Tile = ({ tileCoords }) => {
-  const player = useContext(getPlayer);
+  const context = useContext(globalContext);
+  const { player } = context;
   const { tileX, tileY } = tileCoords;
   const { localX, localY } = player.localCoord;
 
-
-  const isChest = useMemo(() => (applyChance(1.25) ? "chest" : ""), []);
-  const isEnemy = useMemo(() => (applyChance(3) ? "monster" : ""), []);
-
   return (
     <div
-      className={`map-tile-open ${isChest} ${isEnemy}`}
+      className={`map-tile-open`}
       onClick={() => player.doMovement(tileX, tileY)}
     >
       {localX == tileX && localY == tileY && (

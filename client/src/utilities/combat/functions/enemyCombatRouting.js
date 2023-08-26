@@ -1,8 +1,9 @@
 import { useContext } from "react";
-import { getPlayer } from "../../../entities/player/getPlayer";
+import { globalContext } from "../../../App";
 
 const enemyAction = (action) => {
-  const player = useContext(getPlayer);
+  const context = useContext(globalContext);
+  const { player } = context;
   const routeAction = {
     damage() {
       player.takeDamage(enemy.damage);

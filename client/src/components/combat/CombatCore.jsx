@@ -3,11 +3,11 @@ import { useReducer, useContext, useEffect } from "react";
 import enemyAction from "../../utilities/combat/functions/enemyCombatRouting";
 import playerAction from "../../utilities/combat/functions/playerCombatRouting";
 import useEntity from "../../hooks/useEntity";
-import { getPlayer } from "../../entities/player/getPlayer";
+import { globalContext } from "../../App";
 
 const CombatCore = ({ toggleCombat }) => {
   const enemy = useEntity("Entity", "Enemy", 100, 20);
-  const player = useContext(getPlayer);
+  const player = useContext(globalContext);
 
   const handleCombatTurns = (_, action) => {
     const listOfActions = {
