@@ -6,10 +6,10 @@ import Combat from "../../combat/Combat";
 
 const Tile = ({ tileCoords }) => {
   const { player } = useContext(globalContext);
-  const [isPlayerOnTile, setIsPlayerOnTile] = useState(false);
-  const { tileX, tileY } = tileCoords;
   const enemy = useEntity("Entity", "Enemy", 50, 5);
-  const isEnemy = useMemo(() => applyChance(5), []);
+  const isEnemy = useMemo(() => applyChance(3), []);
+  const [isInLocalCombat, setIsInLocalCombat] = useState(false);
+  const { tileX, tileY } = tileCoords;
 
   if (isEnemy) {
     useMemo(() => {
@@ -23,22 +23,33 @@ const Tile = ({ tileCoords }) => {
         enemy.localCoord.localX == player.localCoord.localX &&
         enemy.localCoord.localY == player.localCoord.localY
       ) {
-        setIsPlayerOnTile(true);
+        setIsInLocalCombat(true);
       } else {
-        setIsPlayerOnTile(false);
+        setIsInLocalCombat(false);
       }
     }
-  }, [player.localCoord]);
+  }, [player.localCoord.localX, player.localCoord.localY]);
 
   useEffect(() => {
-    if (isEnemy) console.log(enemy);
-  }, [enemy.health]);
+    if (isInLocalCombat && !enemy.isDead) {
+      player.setIsInCombat(isInLocalCombat);
+    }
+  }, [isInLocalCombat]);
+
+  useEffect(() => {
+    if (isEnemy && enemy.isDead) {
+      player.setIsInCombat(false);
+    }
+  }, [enemy.isDead]);
 
   return (
     <>
       <div
-        className={`map-tile-open ${isEnemy ? "enemy" : ""}`}
-        onClick={() => player.doMovement(tileX, tileY)}
+        className={`map-tile-open  ${isEnemy ? "enemy" : ""}`}
+        id={enemy.isDead ? "dead-enemy" : ""}
+        onClick={() => {
+          if (!player.isInCombat) player.doMovement(tileX, tileY);
+        }}
       >
         {player.localCoord.localX == tileX &&
           player.localCoord.localY == tileY && (
@@ -51,7 +62,7 @@ const Tile = ({ tileCoords }) => {
             ></div>
           )}
       </div>
-      {isPlayerOnTile && <Combat enemy={enemy} />}
+      {isEnemy && isInLocalCombat && <Combat enemy={enemy} />}
     </>
   );
 };

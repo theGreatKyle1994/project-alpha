@@ -20,10 +20,12 @@
   background-color: red;
 }
 
-.chest {
-  background-color: gold !important;
-}
+/* Debug until we get sprites */
 
 .enemy {
   background-color: purple !important;
+}
+
+#dead-enemy {
+  background-color: gray !important;
 }

@@ -27,6 +27,7 @@ const projectEntity = (entity, classRefName) => {
     Object.assign(returnObj, {
       xp: entity.xp,
       xpCap: entity.xpCap,
+      isInCombat: entity.isInCombat,
     });
   }
 
@@ -91,6 +92,10 @@ const useEntity = (entityType = "Entity", ...initialData) => {
     Object.assign(returnObj, {
       setXp(xpIn) {
         entity.setXp(xpIn);
+        setProjection(projectEntity(entity, classRefName));
+      },
+      setIsInCombat(isCombat) {
+        entity.setIsInCombat(isCombat);
         setProjection(projectEntity(entity, classRefName));
       },
     });

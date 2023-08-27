@@ -4,7 +4,7 @@ import { useReducer, useContext, useEffect } from "react";
 // import playerAction from "../../utilities/combat/functions/playerCombatRouting";
 import { globalContext } from "../../App";
 
-const CombatCore = ({ toggleCombat, enemy }) => {
+const CombatCore = ({ enemy }) => {
   const { player } = useContext(globalContext);
 
   const handleCombatTurns = (_, action) => {
@@ -118,7 +118,7 @@ const CombatCore = ({ toggleCombat, enemy }) => {
           </div>
           <div>Dead: {String(enemy.isDead)}</div>
           <div>{enemy.id}</div>
-          {state.isPlayerTurn && !player.isDead && (
+          {state.isPlayerTurn && !player.isDead && !enemy.isDead && (
             <button onClick={() => checkPlayerAction("attack")}>
               Attack Enemy!
             </button>
@@ -128,16 +128,6 @@ const CombatCore = ({ toggleCombat, enemy }) => {
           )}
           {enemy.isDead && <h2>Player Wins!</h2>}
           {player.isDead && <h2>Enemy Wins!</h2>}
-          {(player.isDead || enemy.isDead) && (
-            <button
-              onClick={() => {
-                player.takeHeal(10000);
-                toggleCombat();
-              }}
-            >
-              Exit Combat (debug)
-            </button>
-          )}
         </div>
       )}
     </>
