@@ -14,7 +14,7 @@ import "../../css/map/tiles.css";
 const MapGenerator = () => {
   // generate a map based on three different algos: web, chain, or spoke
   const context = useContext(globalContext);
-  const { player, combatActions } = context;
+  let { player, combatActions } = context;
   const randomMap = useMemo(() => generateMap(1, 1), []);
 
   useEffect(() => {
