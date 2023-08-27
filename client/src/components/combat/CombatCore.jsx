@@ -2,12 +2,11 @@ import { wait } from "../../utilities/general/functions/utilityFunctions";
 import { useReducer, useContext, useEffect } from "react";
 import enemyAction from "../../utilities/combat/functions/enemyCombatRouting";
 import playerAction from "../../utilities/combat/functions/playerCombatRouting";
-import useEntity from "../../hooks/useEntity";
 import { globalContext } from "../../App";
 
-const CombatCore = ({ toggleCombat }) => {
-  const enemy = useEntity("Entity", "Enemy", 100, 20);
-  const player = useContext(globalContext);
+const CombatCore = ({ toggleCombat, determineEnemyToFight }) => {
+  const { player, enemyActions } = useContext(globalContext);
+  const enemy = determineEnemyToFight()[0];
 
   const handleCombatTurns = (_, action) => {
     const listOfActions = {
@@ -60,6 +59,16 @@ const CombatCore = ({ toggleCombat }) => {
   const checkEnemyAction = async (action) => {
     if (enemy.isDead) {
       dispatchAction({ type: "changeToPlayerWins" });
+      enemyActions.setEnemyList((prevEnemyList) => {
+        return prevEnemyList.filter((enemy) => {
+          if (
+            enemy.localCoord.localX != player.localCoord.localX &&
+            enemy.localCoord.localY != player.localCoord.localY
+          ) {
+            return enemy;
+          }
+        });
+      });
     }
     if (state.isEnemyTurn) {
       await wait(1000);
@@ -70,7 +79,6 @@ const CombatCore = ({ toggleCombat }) => {
   };
 
   useEffect(() => {
-    console.log("combat");
     if (!enemy.isDead) {
       // "damage" is placeholder until AI is made inside the class
       // to choose its own actions
@@ -81,8 +89,6 @@ const CombatCore = ({ toggleCombat }) => {
   return (
     <div
       style={{
-        top: "50%",
-        left: "50%",
         margin: "20px",
         padding: "20px",
         backgroundColor: "lightgrey",

@@ -1,24 +1,39 @@
 import CombatCore from "./CombatCore";
 import Draggable from "react-draggable";
-import { useState } from "react";
+import { globalContext } from "../../App";
+import { useContext } from "react";
 
 const Combat = () => {
-  const [isInCombat, setIsInCombat] = useState(false);
+  const { player, enemyList, combatActions } = useContext(globalContext);
+
+  const determineEnemyToFight = () => {
+    return enemyList.filter((enemy) => {
+      if (
+        enemy.localCoord.localX == player.localCoord.localX &&
+        enemy.localCoord.localY == player.localCoord.localY
+      ) {
+        return enemy;
+      }
+    });
+  };
 
   const toggleCombat = () => {
-    setIsInCombat(!isInCombat);
+    combatActions.setIsInCombat(!combatActions.isInCombat);
   };
 
   return (
     <>
       <h1>Combat Module</h1>
       <button onClick={toggleCombat}>
-        {!isInCombat ? "Start" : "Stop"} Combat Test (debug)
+        {!combatActions.isInCombat ? "Start" : "Stop"} Combat Test (debug)
       </button>
-      {isInCombat && (
+      {combatActions.isInCombat && (
         <Draggable bounds="html" handle="#combat-header">
           <div style={{ position: "absolute" }}>
-            <CombatCore toggleCombat={toggleCombat} />
+            <CombatCore
+              toggleCombat={toggleCombat}
+              determineEnemyToFight={determineEnemyToFight}
+            />
           </div>
         </Draggable>
       )}
