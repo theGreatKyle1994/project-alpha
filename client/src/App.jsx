@@ -3,7 +3,9 @@ import EntityTesting from "./components/testing/EntityTesting";
 import MapGenerator from "./components/map/MapGenerator";
 import useEntity from "./hooks/useEntity";
 import { createContext, useState } from "react";
+// CSS Imports
 import "./App.css";
+
 export const globalContext = createContext();
 
 const App = () => {
@@ -21,7 +23,6 @@ const App = () => {
         },
       }}
     >
-      <h1>Hello contributors!</h1>
       <Routes>
         <Route path="/entity" element={<EntityTesting />} />
         <Route path="/map" element={<MapGenerator />} />

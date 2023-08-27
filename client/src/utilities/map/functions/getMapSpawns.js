@@ -1,4 +1,4 @@
-import { applyChance } from "../../utilities/general/functions/utilityFunctions";
+import { applyChance } from "../../general/functions/utilityFunctions";
 
 const getSpawnPoints = (openSpaces) => {
   const spawnPoints = [];
@@ -22,6 +22,6 @@ const findOpenSpawns = (currentMap) => {
   return getSpawnPoints(openSpaces);
 };
 
-export const getSpawns = (currentMap) => {
+export const getMapSpawns = (currentMap) => {
   return findOpenSpawns(currentMap);
 };
