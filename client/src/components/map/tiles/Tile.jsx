@@ -11,12 +11,14 @@ const Tile = ({ tileCoords }) => {
   const [isInLocalCombat, setIsInLocalCombat] = useState(false);
   const { tileX, tileY } = tileCoords;
 
+  // If enemy exists, set coords to current tile
   if (isEnemy) {
     useMemo(() => {
       enemy.setLocalCoordinates(tileX, tileY);
     }, []);
   }
 
+  // Sends a pulse through every enemy occupied tile for combat check on player move
   useEffect(() => {
     if (isEnemy) {
       if (
@@ -30,12 +32,14 @@ const Tile = ({ tileCoords }) => {
     }
   }, [player.localCoord.localX, player.localCoord.localY]);
 
+  // Syncs player class combat with local tile combat and makes sure enemy isnt dead
   useEffect(() => {
     if (isInLocalCombat && !enemy.isDead) {
       player.setIsInCombat(isInLocalCombat);
     }
   }, [isInLocalCombat]);
 
+  // Checks for enemy death to exit combat
   useEffect(() => {
     if (isEnemy && enemy.isDead) {
       player.setIsInCombat(false);
