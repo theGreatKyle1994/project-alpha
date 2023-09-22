@@ -5,8 +5,8 @@ import { useReducer, useContext, useEffect } from "react";
 // import playerAction from "../../utilities/combat/functions/playerCombatRouting";
 import { globalContext } from "../../App";
 
-const CombatCore = ({ enemy }) => {
-  const { player } = useContext(globalContext);
+const CombatCore = ({ enemy, setEnemy }) => {
+  const { player, setPlayer } = useContext(globalContext);
 
   // Combat turn controller for reducer
   const handleCombatTurns = (_, action) => {
@@ -57,13 +57,14 @@ const CombatCore = ({ enemy }) => {
       // todo for player action routing
       // playerAction(action);
       enemy.takeDamage(player.damage);
+      setEnemy(enemy.copySelf());
     }
   };
 
   // main function to route enemy actions
   const checkEnemyAction = async (action) => {
     // enemy death conditions
-    if (enemy.isDead) {
+    if (enemy?.isDead) {
       dispatchAction({ type: "changeToPlayerWins" });
       enemyActions.setEnemyList((prevEnemyList) => {
         return prevEnemyList.filter((enemy) => {
@@ -83,12 +84,13 @@ const CombatCore = ({ enemy }) => {
       // todo for enemy action routing (AI file must be made)
       // enemyAction(action);
       player.takeDamage(enemy.damage);
+      setPlayer(player.copySelf());
     }
   };
 
   // On rerender checks if enemy is dead before continuing fight
   useEffect(() => {
-    if (!enemy.isDead) {
+    if (!enemy?.isDead) {
       // "damage" is placeholder until AI is made inside the class
       // to choose its own actions
       checkEnemyAction("damage");
@@ -115,7 +117,14 @@ const CombatCore = ({ enemy }) => {
           <div>
             Health: {player.health}/{player.maxHealth}
             {player.health < player.maxHealth && (
-              <button onClick={() => player.takeHeal(10)}>Heal</button>
+              <button
+                onClick={() => {
+                  player.takeHeal(10);
+                  setPlayer(player.copySelf());
+                }}
+              >
+                Heal
+              </button>
             )}
           </div>
           <div>Dead: {String(player.isDead)}</div>

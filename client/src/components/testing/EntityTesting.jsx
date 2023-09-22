@@ -3,13 +3,11 @@ import { useContext } from "react";
 import { globalContext } from "../../App";
 
 const EntityTesting = () => {
-  const context = useContext(globalContext);
-  const { player } = context;
-
-  // Create any functions for testing new class features here.
+  const { player, setPlayer } = useContext(globalContext);
 
   const gainXp = () => {
     player.setXp(applyRange(5, 10, player.level));
+    setPlayer(player.copySelf());
   };
 
   return (

@@ -91,6 +91,9 @@ class Entity {
       this.setLocalCoordinates(tileX, tileY);
     }
   }
+  copySelf() {
+    return Object.assign(Object.create(Object.getPrototypeOf(this)), this);
+  }
 }
 
 export default Entity;

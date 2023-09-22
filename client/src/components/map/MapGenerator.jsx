@@ -11,14 +11,14 @@ import "../../css/map/map-gen.css";
 import "../../css/map/tiles.css";
 
 const MapGenerator = () => {
+  const { player, setPlayer } = useContext(globalContext);
   // generate a map based on three different algos: web, chain, or spoke
-  const context = useContext(globalContext);
-  let { player } = context;
-  const randomMap = useMemo(() => generateMap(1, 1), []);
+  const randomMap = useMemo(() => generateMap(5, 5), []);
 
   useEffect(() => {
     const startingPoint = playerStartPoint(randomMap);
     player.setLocalCoordinates(startingPoint.x, startingPoint.y);
+    setPlayer(player.copySelf());
   }, [randomMap]);
 
   return (
