@@ -7,6 +7,7 @@ class Player extends Entity {
     this.xp = 0;
     this.xpCap = 100;
     this.isInCombat = false;
+    this.weapon = null
   }
 
   levelUp() {

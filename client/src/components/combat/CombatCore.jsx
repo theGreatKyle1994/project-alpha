@@ -3,10 +3,14 @@ import { useReducer, useContext, useEffect } from "react";
 // These need to be finalized before official use
 // import enemyAction from "../../utilities/combat/functions/enemyCombatRouting";
 // import playerAction from "../../utilities/combat/functions/playerCombatRouting";
+import { applyChance } from "../../utilities/general/functions/utilityFunctions";
 import { globalContext } from "../../App";
+import Weapon from "../../entities/weapons/Weapon"; 
 
 const CombatCore = ({ enemy, setEnemy }) => {
   const { player, setPlayer } = useContext(globalContext);
+  const plushieHammer = new Weapon('Plushie Hammer', 'cute but surprisingly powerful for a toy', null, 5, 90, 10, 70, 25 )
+  player.weapon = plushieHammer
 
   // Combat turn controller for reducer
   const handleCombatTurns = (_, action) => {
@@ -56,7 +60,8 @@ const CombatCore = ({ enemy, setEnemy }) => {
       dispatchAction({ type: "changeToEnemyTurn" });
       // todo for player action routing
       // playerAction(action);
-      enemy.takeDamage(player.damage);
+      console.log(action)
+      enemy.takeDamage(player.weapon.Attack(action));
       setEnemy(enemy.copySelf());
     }
   };
@@ -83,7 +88,9 @@ const CombatCore = ({ enemy, setEnemy }) => {
       dispatchAction({ type: "changeToPlayerTurn" });
       // todo for enemy action routing (AI file must be made)
       // enemyAction(action);
-      player.takeDamage(enemy.damage);
+
+        player.takeDamage(enemy.damage);
+
       setPlayer(player.copySelf());
     }
   };
@@ -138,8 +145,13 @@ const CombatCore = ({ enemy, setEnemy }) => {
           <div>Dead: {String(enemy.isDead)}</div>
           <div>{enemy.id}</div>
           {state.isPlayerTurn && !player.isDead && !enemy.isDead && (
-            <button onClick={() => checkPlayerAction("attack")}>
-              Attack Enemy!
+            <button onClick={() => checkPlayerAction("light")}>
+              Light Attack
+            </button>
+          )}
+          {state.isPlayerTurn && !player.isDead && !enemy.isDead && (
+            <button onClick={() => checkPlayerAction("heavy")}>
+              Heavy Attack
             </button>
           )}
           {state.isEnemyTurn && !enemy.isDead && (
