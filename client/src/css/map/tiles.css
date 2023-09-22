@@ -1,17 +1,32 @@
 .map-tile-open {
   /* Future styles for tile rendering */
-  
+
   /* image-rendering: pixelated;
   background-position: center;
   background-size: contain;
   background-image: url("./test/Grass-Concept.png"); */
-  height: 25px;
-  width: 25px;
   background-color: green;
+  border: 1px solid black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .map-tile-wall {
-  height: 25px;
-  width: 25px;
   background-color: red;
+}
+
+.map-tile-open,
+.map-tile-wall {
+  min-height: 25px;
+  min-width: 25px;
+}
+
+/* Debug until we get sprites */
+.enemy {
+  background-color: purple !important;
+}
+
+#dead-enemy {
+  background-color: gray !important;
 }
