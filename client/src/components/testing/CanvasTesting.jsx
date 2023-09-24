@@ -1,4 +1,5 @@
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
+import Draggable from "react-draggable";
 
 // This class represents a square instance in the canvas
 class Square {
@@ -87,6 +88,9 @@ class Square {
 const square = new Square();
 
 const CanvasTesting = () => {
+  // setting up state to watch both mouse movement and context menu visable state
+  const [contextMenu, setContextMenu] = useState(false);
+  const [mousePos, setMousePos] = useState({ mouseX: 0, mouseY: 0 });
   // a direct reference is needed to access canvas, we use useRef()
   const canvasRef = useRef(null);
 
@@ -104,6 +108,17 @@ const CanvasTesting = () => {
     const ctx = canvas.getContext("2d");
     // preparing to track the current frame for useEffect cleanup
     let frameId = undefined;
+    // tracking of mouse movement within the canvas for context menu
+    canvas.addEventListener("mousemove", (e) => {
+      e.preventDefault();
+      // setting mouse position to canvas bounds
+      setMousePos({ mouseX: e.offsetX, mouseY: e.offsetY });
+    });
+    // Right click listener for context menu
+    canvas.addEventListener("contextmenu", (e) => {
+      e.preventDefault();
+      setContextMenu((prevMenuState) => !prevMenuState);
+    });
     // the main update function used to call any number of
     // functions per frame to update the canvas sprites
     const update = () => {
@@ -129,6 +144,9 @@ const CanvasTesting = () => {
     return () => {
       // we pass in the frame id to referense which animation frame to stop
       cancelAnimationFrame(frameId);
+      // removal of mouse listener and context menu on component removal
+      document.removeEventListener("mousemove");
+      document.removeEventListener("contextmenu");
     };
   }, []);
 
@@ -165,6 +183,45 @@ const CanvasTesting = () => {
         alignItems: "center",
       }}
     >
+      {contextMenu && (
+        <Draggable
+          // setting up the context menu position on spawn to be within the canvas itself,
+          // offset to right and down a little instead of spawning on the mouse itself
+          defaultPosition={{
+            x: mousePos.mouseX - canvasRef?.current.width / 2 + 75,
+            y: mousePos.mouseY - canvasRef?.current.height / 2 + 25,
+          }}
+        >
+          <div
+            style={{
+              width: "150px",
+              position: "absolute",
+              backgroundColor: "white",
+              borderRadius: "10px",
+              padding: "10px",
+              border: "1px solid black",
+            }}
+          >
+            <button
+              // removal of context menu with the X button
+              onClick={() => setContextMenu(false)}
+              style={{ position: "relative", float: "right", padding: "3px" }}
+            >
+              X
+            </button>
+            <h4>Context Menu</h4>
+            <select>
+              <option>Option 1</option>
+              <option>Option 2</option>
+              <option>Option 3</option>
+              <option>Option 4</option>
+              <option>Option 5</option>
+              <option>Option 6</option>
+              <option>Option 7</option>
+            </select>
+          </div>
+        </Draggable>
+      )}
       <h1>Canvas Test</h1>
       <canvas
         // passing in our ref defined at the top for access to the elements methods
