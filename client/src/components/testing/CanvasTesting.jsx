@@ -12,17 +12,17 @@ class Square {
     // base position change per frame
     this.speed = 3;
     this.sprintSpeed = this.speed + 2;
-    // spped change per direction -+(x or y)
+    // speed change per direction -+(x or y)
     this.dx = 0;
     this.dy = 0;
-    // key object for tracking what keys are pressed
+    // keystroke object for tracking what keys are pressed
     this.keyObj = { w: false, a: false, s: false, d: false, alt: false };
   }
   // method for drawing a single instance of this square (called per frame)
   drawSquare(ctx) {
-    // begin drawing shape
+    // prepare for drawing shape on canvas
     ctx.beginPath();
-    // draw rect (x position, y position, scale x, scale y)
+    // draw rect on canvas (x position, y position, scale x, scale y)
     ctx.rect(this.x, this.y, this.sizeX, this.sizeY);
     // color to fill in the shape with
     ctx.fillStyle = "red";
@@ -35,10 +35,10 @@ class Square {
     this.x += this.dx;
     this.y += this.dy;
     // basic canvas boundary collision detection
-    // X-Axis collision
+    // X-Axis collision (shape size considered)
     if (this.x < 0) this.x = 0;
     if (this.x > canvas.width - this.sizeX) this.x = canvas.width - this.sizeX;
-    // Y-Axis collision
+    // Y-Axis collision (shape size considered)
     if (this.y < 0) this.y = 0;
     if (this.y > canvas.height - this.sizeY)
       this.y = canvas.height - this.sizeY;
@@ -46,6 +46,7 @@ class Square {
   // method used to change which direction the shape is going based on key input
   checkMovement(e) {
     // modification of keyObj to input booleans based on key press
+    // depending on event
     if (e.type == "keydown") this.keyObj[e.key.toLowerCase()] = true;
     if (e.type == "keyup") this.keyObj[e.key.toLowerCase()] = false;
     // when alt is held, we move faster (sprinting)
@@ -72,10 +73,9 @@ class Square {
     } else {
       this.dx = 0;
     }
-    // diagonal movement speed adjustment
-    // if both x and y axis are used, we
-    // apply the square root of the direction by 0.5
-    // sqrt(0.5) per axis
+    // diagonal movement speed adjustment, if both x and y axis are used, we
+    // apply the product of the square root of both directions by 0.5 sqrt(0.5) per axis
+    // if you comment this out you will find diagonal movement is too fast
     if (this.dx && this.dy) {
       this.dx *= Math.SQRT1_2;
       this.dy *= Math.SQRT1_2;
@@ -83,21 +83,21 @@ class Square {
   }
 }
 
-// create instance of a square object
+// create new instance of a square object
 const square = new Square();
 
 const CanvasTesting = () => {
-  // a direct reference is needed to access canvas
+  // a direct reference is needed to access canvas, we use useRef()
   const canvasRef = useRef(null);
 
-  // all the magic happens in useEffect()
+  // all the magic happens in this useEffect()
   useEffect(() => {
     // extraction of the ref for use
     const canvas = canvasRef.current;
-    // setting the canvas width and height
+    // setting the canvas width and height (only on mount)
     canvas.width = 800;
     canvas.height = 800;
-    // spawning the square in the dead center of the canvas
+    // spawning the square in the dead center of the canvas (shape size considered)
     square.x = canvas.width / 2 - square.sizeX / 2;
     square.y = canvas.height / 2 - square.sizeY / 2;
     // assigning what type of canvas to use and extracting the context, in this case: 2d
@@ -107,15 +107,15 @@ const CanvasTesting = () => {
     // the main update function used to call any number of
     // functions per frame to update the canvas sprites
     const update = () => {
-      // here we clear the entire board every time a frame is rendered
+      // clearing the entire board every time a frame is rendered
       // comment this out for a make-shift drawing program!
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       // our square class drawing method is called, we pass in our ctx for method use
       square.drawSquare(ctx);
-      // here we check for position changes if valid keys are pressed, we pass in our canvas
+      // checking for position changes if valid keys are pressed, we pass in our canvas
       // for direct use of our collision detection system
       square.newPos(canvas);
-      // here we assign our frame id and start the frame process
+      // assigning our frame id and start the frame process
       // this runs natively at 60fps which means everything inside update() will
       // run 60 times a second. this is intensional.
       // we must pass in the same function name it's declared inside to create the recurive effect
@@ -124,8 +124,8 @@ const CanvasTesting = () => {
     // the initial call on component render to update to start the frame loop
     update();
     // our cleanup function to stop our 60fps update() function. without this, react would crash
-    // since we would have 60 requestAnimationFrame loops happening per second.
-    // this would turn quadratic quickly. this return cleanup is REQUIRED.
+    // since we would have 60 requestAnimationFrame loops running per second.
+    // this would turn quadratically laggy very quickly. this return cleanup is REQUIRED.
     return () => {
       // we pass in the frame id to referense which animation frame to stop
       cancelAnimationFrame(frameId);
@@ -147,8 +147,8 @@ const CanvasTesting = () => {
       e.preventDefault();
       square.checkMovement(e);
     });
-    // same story as above, a cleanup function to remove these listeners and make sure
-    // only 1 of each is ever active at a time
+    // same story as the above useEffect, a cleanup function to remove these listeners and make sure
+    // only 1 of each or none is ever active at a time
     return () => {
       document.removeEventListener("keydown");
       document.removeEventListener("keyup");
