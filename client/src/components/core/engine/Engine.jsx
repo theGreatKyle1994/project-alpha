@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import "../../../css/engine/engine.css";
 
-const Engine = ({ renderBoxes, count }) => {
+const Engine = ({ renderBoxes }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -20,16 +20,11 @@ const Engine = ({ renderBoxes, count }) => {
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, [count]);
+  }, []);
 
   return (
     <div id="game-container">
-      <canvas
-        id="game-canvas"
-        width={1920}
-        height={1080}
-        ref={canvasRef}
-      />
+      <canvas id="game-canvas" width={1920} height={1080} ref={canvasRef} />
     </div>
   );
 };

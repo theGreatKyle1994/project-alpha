@@ -6,17 +6,37 @@ class Instance {
     size = { x: 10, y: 10 },
     pos = { x: 0, y: 0 },
     speed = { x: 0, y: 0 },
+    options = { useBounds: false, usePhysics: false, useCollision: false },
     spriteSrc = ""
   ) {
     this.id = generateID(10);
     this.type = type;
-    this.sizeX = size.x;
-    this.sizeY = size.y;
-    this.x = pos.x;
-    this.y = pos.y;
+    this.size = size;
+    this.pos = pos;
     this.speed = speed;
     this.spriteSrc = spriteSrc;
+    this.options = options;
     this.isColliding = false;
+  }
+
+  drawRect(ctx) {
+    ctx.beginPath();
+    ctx.rect(this.pos.x, this.pos.y, this.size.x, this.size.y);
+    ctx.fillStyle = "black";
+    ctx.fill();
+  }
+
+  drawCircle(ctx) {
+    ctx.beginPath();
+    ctx.arc(this.pos.x, this.pos.y, this.size.x, 0, Math.PI * 2);
+    ctx.fillStyle = "black";
+    ctx.fill();
+  }
+
+  drawImage(ctx) {
+    const img = new Image(this.size.x, this.size.y);
+    img.src = this.spriteSrc;
+    ctx.drawImage(img, this.pos.x, this.pos.y, this.size.x, this.size.y);
   }
 
   render(ctx) {
@@ -33,151 +53,182 @@ class Instance {
     }
   }
 
-  drawRect(ctx) {
-    ctx.beginPath();
-    ctx.rect(this.x, this.y, this.sizeX, this.sizeY);
-    ctx.fillStyle = "black";
-    ctx.fill();
+  checkCollision(targets = [], canvas = null) {
+    if (this.options.useCollision) {
+      this.checkEntityCollision(targets);
+    }
+    if (this.options.useBounds) this.checkBoundsCollision(canvas);
   }
 
-  drawCircle(ctx) {
-    ctx.beginPath();
-    ctx.arc(this.x, this.y, this.sizeX, 0, Math.PI * 2);
-    ctx.fillStyle = "black";
-    ctx.fill();
-  }
-
-  drawImage(ctx) {
-    const img = new Image(this.sizeX, this.sizeY);
-    img.src = this.spriteSrc;
-    ctx.drawImage(img, this.x, this.y, this.sizeX, this.sizeY);
-  }
-
-  checkCollision(
-    targets = [],
-    bounds = { useBounds: false, useBounce: false },
-    canvas = {}
-  ) {
+  checkEntityCollision(targets) {
     if (targets) {
       targets.forEach((target) => {
         if (this.id !== target.id) {
           switch (this.type) {
             case "box":
-            case "sprite":
-              {
-                if (
-                  this.x < target.x + target.sizeX &&
-                  this.x + this.sizeX > target.x &&
-                  this.y < target.y + target.sizeY &&
-                  this.y + this.sizeY > target.y
-                )
-                  this.isColliding = true;
-                else this.isColliding = false;
-              }
+            case "sprite": {
+              if (
+                this.pos.x > target.pos.x + target.size.x ||
+                this.pos.x + this.size.x < target.pos.x ||
+                this.pos.y > target.pos.y + target.size.y ||
+                this.pos.y + this.size.y < target.pos.y
+              )
+                this.isColliding = false;
+              else this.isColliding = true;
               break;
+            }
             case "circle": {
-              const dx = target.x - this.x;
-              const dy = target.y - this.y;
+              const dx = target.pos.x - this.pos.x;
+              const dy = target.pos.y - this.pos.y;
               const distance = Math.sqrt(dx * dx + dy * dy);
-              const sumOfRadii = this.sizeX + target.sizeX;
+              const sumOfRadii = this.size.x + target.size.x;
               if (distance <= sumOfRadii) {
                 this.isColliding = true;
               } else {
                 this.isColliding = false;
               }
+              break;
             }
           }
-          if (this.isColliding) {
-            if (!bounds.useBounce) {
+          this.handleCollision(target);
+        }
+      });
+    }
+  }
+
+  checkBoundsCollision(canvas) {
+    switch (this.type) {
+      case "box":
+      case "sprite":
+        {
+          if (this.pos.x < 0) {
+            if (this.options.usePhysics) {
+              this.speed.x *= -1;
+            } else {
+              this.pos.x = 0;
               this.speed.x = 0;
               this.speed.y = 0;
             }
-            const vCollision = { x: target.x - this.x, y: target.y - this.y };
-            const distance = Math.sqrt(
-              (target.x - this.x) * (target.x - this.x) +
-                (target.y - this.y) * (target.y - this.y)
-            );
-            const vCollisionNorm = {
-              x: vCollision.x / distance,
-              y: vCollision.y / distance,
-            };
-            const vRelativeVelocity = {
-              x: this.speed.x - target.speed.x,
-              y: this.speed.y - target.speed.y,
-            };
-            const speed =
-              vRelativeVelocity.x * vCollisionNorm.x +
-              vRelativeVelocity.y * vCollisionNorm.y;
-            if (speed < 0) {
-              return;
+          }
+          if (this.pos.x > canvas.width - this.size.x) {
+            if (this.options.usePhysics) {
+              this.speed.x *= -1;
+            } else {
+              this.pos.x = canvas.width - this.size.x;
+              this.speed.x = 0;
+              this.speed.y = 0;
             }
-            this.speed.x -= speed * vCollisionNorm.x;
-            this.speed.y -= speed * vCollisionNorm.y;
-            target.speed.x += speed * vCollisionNorm.x;
-            target.speed.y += speed * vCollisionNorm.y;
+          }
+          if (this.pos.y < 0) {
+            if (this.options.usePhysics) {
+              this.speed.y *= -1;
+            } else {
+              this.pos.y = 0;
+              this.speed.x = 0;
+              this.speed.y = 0;
+            }
+          }
+          if (this.pos.y > canvas.height - this.size.y) {
+            if (this.options.usePhysics) {
+              this.speed.y *= -1;
+            } else {
+              this.pos.y = canvas.height - this.size.y;
+              this.speed.x = 0;
+              this.speed.y = 0;
+            }
           }
         }
-        return;
-      });
+        break;
+      case "circle":
+        {
+          if (this.pos.x - this.size.x < 0) {
+            if (this.options.usePhysics) {
+              this.speed.x *= -1;
+            } else {
+              this.pos.x = 0 + this.size.x;
+              this.speed.x = 0;
+              this.speed.y = 0;
+            }
+          }
+          if (this.pos.x > canvas.width - this.size.x) {
+            if (this.options.usePhysics) {
+              this.speed.x *= -1;
+            } else {
+              this.pos.x = canvas.width - this.size.x;
+              this.speed.x = 0;
+              this.speed.y = 0;
+            }
+          }
+          if (this.pos.y - this.size.y < 0) {
+            if (this.options.usePhysics) {
+              this.speed.y *= -1;
+            } else {
+              this.pos.y = 0 + this.size.y;
+              this.speed.x = 0;
+              this.speed.y = 0;
+            }
+          }
+          if (this.pos.y > canvas.height - this.size.y) {
+            if (this.options.usePhysics) {
+              this.speed.y *= -1;
+            } else {
+              this.pos.y = canvas.height - this.size.y;
+              this.speed.x = 0;
+              this.speed.y = 0;
+            }
+          }
+        }
+        break;
     }
-    switch (this.type) {
-      case "box":
-      case "sprite": {
-        if (bounds.useBounds) {
-          if (this.x < 0) {
-            this.x = 0;
-            this.speed.x *= -1;
-          }
-          if (this.x > canvas.width - this.sizeX) {
-            this.x = canvas.width - this.sizeX;
-            this.speed.x *= -1;
-          }
-          if (this.y < 0) {
-            this.y = 0;
-            this.speed.y *= -1;
-          }
-          if (this.y > canvas.height - this.sizeY) {
-            this.y = canvas.height - this.sizeY;
-            this.speed.y *= -1;
-          }
+  }
+
+  handleCollision(target) {
+    if (this.isColliding) {
+      if (!this.options.usePhysics) {
+        this.speed.x = 0;
+        this.speed.y = 0;
+      } else {
+        const vCollision = {
+          x: target.pos.x - this.pos.x,
+          y: target.pos.y - this.pos.y,
+        };
+        const distance = Math.sqrt(
+          (target.pos.x - this.pos.x) * (target.pos.x - this.pos.x) +
+            (target.pos.y - this.pos.y) * (target.pos.y - this.pos.y)
+        );
+        const vCollisionNorm = {
+          x: vCollision.x / distance,
+          y: vCollision.y / distance,
+        };
+        const vRelativeVelocity = {
+          x: this.speed.x - target.speed.x,
+          y: this.speed.y - target.speed.y,
+        };
+        const speed =
+          vRelativeVelocity.x * vCollisionNorm.x +
+          vRelativeVelocity.y * vCollisionNorm.y;
+        if (speed < 0) {
+          return;
         }
-        break;
-      }
-      case "circle": {
-        if (bounds.useBounds) {
-          if (this.x - this.sizeX < 0) {
-            this.x = 0 + this.sizeX;
-            this.speed.x *= -1;
-          }
-          if (this.x > canvas.width - this.sizeX) {
-            this.x = canvas.width - this.sizeX;
-            this.speed.x *= -1;
-          }
-          if (this.y - this.sizeY < 0) {
-            this.y = 0 + this.sizeY;
-            this.speed.y *= -1;
-          }
-          if (this.y > canvas.height - this.sizeY) {
-            this.y = canvas.height - this.sizeY;
-            this.speed.y *= -1;
-          }
-        }
-        break;
+        this.speed.x -= speed * vCollisionNorm.x;
+        this.speed.y -= speed * vCollisionNorm.y;
+        target.speed.x += speed * vCollisionNorm.x;
+        target.speed.y += speed * vCollisionNorm.y;
       }
     }
   }
 
-  update(newSpeedX = 0, newSpeedY = 0, sizeX = 0, sizeY = 0) {
+  update(newSpeedX = 0, newSpeedY = 0, newSizeX = 0, newSizeY = 0) {
     if (newSpeedX || newSpeedY) {
       this.speed.x = newSpeedX;
       this.speed.y = newSpeedY;
     }
-    if (sizeX || sizeY) {
-      this.sizeX = sizeX;
-      this.sizeY = sizeY;
+    if (newSizeX || newSizeY) {
+      this.size.x = newSizeX;
+      this.size.y = newSizeY;
     }
-    this.x += this.speed.x;
-    this.y += this.speed.y;
+    this.pos.x += this.speed.x;
+    this.pos.y += this.speed.y;
   }
 }
 
