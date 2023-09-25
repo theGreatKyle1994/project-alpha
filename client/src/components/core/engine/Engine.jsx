@@ -9,6 +9,8 @@ const Engine = ({ renderBoxes }) => {
     const ctx = canvas.getContext("2d");
     let frameId = undefined;
 
+    // Eveything we need rendered per frame goes here,
+    // pass through props
     const update = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       renderBoxes(ctx, canvas);
@@ -24,6 +26,10 @@ const Engine = ({ renderBoxes }) => {
 
   return (
     <div id="game-container">
+      {/* 
+        Do not remove width and height from canvas, 
+        these are required for resolution purposes
+      */}
       <canvas id="game-canvas" width={1920} height={1080} ref={canvasRef} />
     </div>
   );

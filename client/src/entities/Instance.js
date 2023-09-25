@@ -74,6 +74,7 @@ class Instance {
           switch (this.type) {
             case "box":
             case "sprite": {
+              // Checking each side of the box for overlap
               if (
                 this.pos.x > target.pos.x + target.size.x ||
                 this.pos.x + this.size.x < target.pos.x ||
@@ -85,6 +86,7 @@ class Instance {
               break;
             }
             case "circle": {
+              // Checking for radial overlap
               const dx = target.pos.x - this.pos.x;
               const dy = target.pos.y - this.pos.y;
               const distance = Math.sqrt(dx * dx + dy * dy);
@@ -97,7 +99,7 @@ class Instance {
               break;
             }
           }
-          this.handleCollision(target);
+          if (this.isColliding) this.handleCollision(target);
         }
       });
     }
@@ -109,6 +111,7 @@ class Instance {
       case "box":
       case "sprite":
         {
+          // Checking left bound collision
           if (this.pos.x < 0) {
             if (this.options.usePhysics) {
               this.speed.x *= -1;
@@ -118,6 +121,7 @@ class Instance {
               this.speed.y = 0;
             }
           }
+          // Checking right bound collision
           if (this.pos.x > canvas.width - this.size.x) {
             if (this.options.usePhysics) {
               this.speed.x *= -1;
@@ -127,6 +131,7 @@ class Instance {
               this.speed.y = 0;
             }
           }
+          // Checking top bound collision
           if (this.pos.y < 0) {
             if (this.options.usePhysics) {
               this.speed.y *= -1;
@@ -136,6 +141,7 @@ class Instance {
               this.speed.y = 0;
             }
           }
+          // Checking bottom bound collision
           if (this.pos.y > canvas.height - this.size.y) {
             if (this.options.usePhysics) {
               this.speed.y *= -1;
@@ -149,6 +155,7 @@ class Instance {
         break;
       case "circle":
         {
+          // Checking left bound collision
           if (this.pos.x - this.size.x < 0) {
             if (this.options.usePhysics) {
               this.speed.x *= -1;
@@ -158,6 +165,7 @@ class Instance {
               this.speed.y = 0;
             }
           }
+          // Checking right bound collision
           if (this.pos.x > canvas.width - this.size.x) {
             if (this.options.usePhysics) {
               this.speed.x *= -1;
@@ -167,6 +175,7 @@ class Instance {
               this.speed.y = 0;
             }
           }
+          // Checking top bound collision
           if (this.pos.y - this.size.y < 0) {
             if (this.options.usePhysics) {
               this.speed.y *= -1;
@@ -176,6 +185,7 @@ class Instance {
               this.speed.y = 0;
             }
           }
+          // Checking bottom bound collision
           if (this.pos.y > canvas.height - this.size.y) {
             if (this.options.usePhysics) {
               this.speed.y *= -1;
@@ -192,38 +202,42 @@ class Instance {
 
   // Our method used to have our instance react after colliding
   handleCollision(target) {
-    if (this.isColliding) {
-      if (!this.options.usePhysics) {
-        this.speed.x = 0;
-        this.speed.y = 0;
-      } else {
-        const vCollision = {
-          x: target.pos.x - this.pos.x,
-          y: target.pos.y - this.pos.y,
-        };
-        const distance = Math.sqrt(
-          (target.pos.x - this.pos.x) * (target.pos.x - this.pos.x) +
-            (target.pos.y - this.pos.y) * (target.pos.y - this.pos.y)
-        );
-        const vCollisionNorm = {
-          x: vCollision.x / distance,
-          y: vCollision.y / distance,
-        };
-        const vRelativeVelocity = {
-          x: this.speed.x - target.speed.x,
-          y: this.speed.y - target.speed.y,
-        };
-        const speed =
-          vRelativeVelocity.x * vCollisionNorm.x +
-          vRelativeVelocity.y * vCollisionNorm.y;
-        if (speed < 0) {
-          return;
-        }
-        this.speed.x -= speed * vCollisionNorm.x;
-        this.speed.y -= speed * vCollisionNorm.y;
-        target.speed.x += speed * vCollisionNorm.x;
-        target.speed.y += speed * vCollisionNorm.y;
+    if (!this.options.usePhysics) {
+      this.speed.x = 0;
+      this.speed.y = 0;
+    } else {
+      // Calc the collision vector
+      const vCollision = {
+        x: target.pos.x - this.pos.x,
+        y: target.pos.y - this.pos.y,
+      };
+      // Calc the distance of the collision vector
+      const distance = Math.sqrt(
+        (target.pos.x - this.pos.x) * (target.pos.x - this.pos.x) +
+          (target.pos.y - this.pos.y) * (target.pos.y - this.pos.y)
+      );
+      // Calc the normalized collision vector
+      const vCollisionNorm = {
+        x: vCollision.x / distance,
+        y: vCollision.y / distance,
+      };
+      // Calc collision velocity/speed
+      const vRelativeVelocity = {
+        x: this.speed.x - target.speed.x,
+        y: this.speed.y - target.speed.y,
+      };
+      const speed =
+        vRelativeVelocity.x * vCollisionNorm.x +
+        vRelativeVelocity.y * vCollisionNorm.y;
+      // Check speed direction towards or away from target
+      if (speed < 0) {
+        return;
       }
+      // Assigning new values
+      this.speed.x -= speed * vCollisionNorm.x;
+      this.speed.y -= speed * vCollisionNorm.y;
+      target.speed.x += speed * vCollisionNorm.x;
+      target.speed.y += speed * vCollisionNorm.y;
     }
   }
 
@@ -238,6 +252,7 @@ class Instance {
       this.size.x = newSizeX;
       this.size.y = newSizeY;
     }
+    // Use internal
     this.pos.x += this.speed.x;
     this.pos.y += this.speed.y;
   }

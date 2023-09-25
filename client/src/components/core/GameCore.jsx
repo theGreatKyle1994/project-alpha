@@ -41,8 +41,8 @@ const GameCore = () => {
           { x: Number(size), y: Number(size) },
           // Spawn Location
           {
-            x: applyRange(20, 1900),
-            y: applyRange(20, 1060),
+            x: applyRange(0 + Number(size), 1920 - Number(size)),
+            y: applyRange(0 + Number(size), 1080 - Number(size)),
           },
           // Initial speed (constant)
           { x: applyRange(-speed, speed), y: applyRange(-speed, speed) },
