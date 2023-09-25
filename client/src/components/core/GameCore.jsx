@@ -7,10 +7,15 @@ const GameCore = () => {
   const [count, setCount] = useState(0);
   const boxArr = useRef([]);
 
-  const renderBoxes = (ctx) => {
+  const renderBoxes = (ctx, canvas) => {
     for (let i = 0; i < boxArr.current.length; i++) {
-      boxArr.current[i].drawRect(ctx);
-      boxArr.current[i].newPos(applyRange(-2, 1), applyRange(-2, 1));
+      boxArr.current[i].render(ctx);
+      boxArr.current[i].update();
+      boxArr.current[i].checkCollision(
+        boxArr.current,
+        { useBounds: true, useBounce: true },
+        canvas
+      );
     }
   };
 
@@ -19,8 +24,13 @@ const GameCore = () => {
     for (let i = 0; i < count; i++) {
       boxArr.current.push(
         new Instance(
-          { x: applyRange(5, 7), y: applyRange(5, 7) },
-          { x: applyRange(0, 1920), y: applyRange(0, 1080) }
+          "box",
+          { x: 50, y: 50 },
+          {
+            x: applyRange(20, 1900),
+            y: applyRange(20, 1060),
+          },
+          { x: applyRange(-1, 2), y: applyRange(-1, 2) }
         )
       );
     }
@@ -34,8 +44,8 @@ const GameCore = () => {
         onChange={(e) => setCount(e.target.value)}
         type="range"
         min={0}
-        max={10000}
-        step={500}
+        max={100}
+        step={10}
       />
       <p>Particles: {count}</p>
     </>
