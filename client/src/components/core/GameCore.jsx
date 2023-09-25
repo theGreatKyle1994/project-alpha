@@ -11,28 +11,42 @@ const GameCore = () => {
   const [collision, setCollision] = useState(false);
   const [physics, setPhysics] = useState(true);
   const [type, setType] = useState("box");
+  // Since visual classes will be handled by canvas
+  // we use a ref instead to take care of state
   const boxArr = useRef([]);
 
+  // This is the function we pass to the engine to render boxes per frame
+  // Once we have a drawMap() function, it will be passed into engine props
   const renderBoxes = (ctx, canvas) => {
     for (let i = 0; i < boxArr.current.length; i++) {
+      // First we render the instance
       boxArr.current[i].render(ctx);
+      // Then we update any movement or size changes
       boxArr.current[i].update();
+      // Finally, we check for new collision changes
       boxArr.current[i].checkCollision(boxArr.current, canvas);
     }
   };
 
+  // Initial creation of the boxes and any tweaks from our inputs
   useEffect(() => {
     boxArr.current = [];
     for (let i = 0; i < count; i++) {
       boxArr.current.push(
+        // Instance is our canvas version of Entity
         new Instance(
+          // Type "box", "circle", "sprite"
           type,
+          // Size
           { x: Number(size), y: Number(size) },
+          // Spawn Location
           {
             x: applyRange(20, 1900),
             y: applyRange(20, 1060),
           },
+          // Initial speed (constant)
           { x: applyRange(-speed, speed), y: applyRange(-speed, speed) },
+          // Any options we want to add
           { usePhysics: physics, useBounds: bounds, useCollision: collision }
         )
       );
@@ -41,6 +55,7 @@ const GameCore = () => {
 
   return (
     <>
+      {/* This is our core engine component, it's required to make canvas work */}
       <Engine renderBoxes={renderBoxes} />
       <p>Particles: {count}</p>
       <input

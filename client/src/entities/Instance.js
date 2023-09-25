@@ -1,5 +1,7 @@
 import { generateID } from "../utilities/general/functions/utilityFunctions";
 
+// This is our main class we will build off of
+// Be warned to all those who hate math.
 class Instance {
   constructor(
     type = "box",
@@ -19,6 +21,7 @@ class Instance {
     this.isColliding = false;
   }
 
+  // Drawing a basic rectangle
   drawRect(ctx) {
     ctx.beginPath();
     ctx.rect(this.pos.x, this.pos.y, this.size.x, this.size.y);
@@ -26,6 +29,7 @@ class Instance {
     ctx.fill();
   }
 
+  // Drawing a basic circle
   drawCircle(ctx) {
     ctx.beginPath();
     ctx.arc(this.pos.x, this.pos.y, this.size.x, 0, Math.PI * 2);
@@ -33,12 +37,15 @@ class Instance {
     ctx.fill();
   }
 
+  // Drawing a sprite (non animated)
   drawImage(ctx) {
     const img = new Image(this.size.x, this.size.y);
     img.src = this.spriteSrc;
     ctx.drawImage(img, this.pos.x, this.pos.y, this.size.x, this.size.y);
   }
 
+  // This is the method we will always call from the function
+  // we pass to the engine. It's routing is already setup
   render(ctx) {
     switch (this.type) {
       case "box":
@@ -53,13 +60,13 @@ class Instance {
     }
   }
 
+  // Our collision routing function
   checkCollision(targets = [], canvas = null) {
-    if (this.options.useCollision) {
-      this.checkEntityCollision(targets);
-    }
+    if (this.options.useCollision) this.checkEntityCollision(targets);
     if (this.options.useBounds) this.checkBoundsCollision(canvas);
   }
 
+  // Checking for entity collision
   checkEntityCollision(targets) {
     if (targets) {
       targets.forEach((target) => {
@@ -96,6 +103,7 @@ class Instance {
     }
   }
 
+  // Checking canvas bounds collision
   checkBoundsCollision(canvas) {
     switch (this.type) {
       case "box":
@@ -182,6 +190,7 @@ class Instance {
     }
   }
 
+  // Our method used to have our instance react after colliding
   handleCollision(target) {
     if (this.isColliding) {
       if (!this.options.usePhysics) {
@@ -218,6 +227,8 @@ class Instance {
     }
   }
 
+  // Base function to change position based on new values per frame
+  // If no new values are given, it looks at internal values
   update(newSpeedX = 0, newSpeedY = 0, newSizeX = 0, newSizeY = 0) {
     if (newSpeedX || newSpeedY) {
       this.speed.x = newSpeedX;
