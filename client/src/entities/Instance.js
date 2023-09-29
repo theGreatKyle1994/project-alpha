@@ -5,19 +5,27 @@ import { generateID } from "../utilities/general/functions/utilityFunctions";
 class Instance {
   constructor(
     type = "box",
-    size = { x: 10, y: 10 },
-    pos = { x: 0, y: 0 },
-    speed = { x: 0, y: 0 },
-    options = { useBounds: false, usePhysics: false, useCollision: false },
-    spriteSrc = ""
+    options = {
+      pos: { x: 0, y: 0 },
+      size: { x: 10, y: 10 },
+      speed: { x: 0, y: 0 },
+      color: "black",
+      spriteSrc: "",
+      useBounds: false,
+      usePhysics: false,
+      useCollision: false,
+    }
   ) {
     this.id = generateID(10);
     this.type = type;
-    this.size = size;
-    this.pos = pos;
-    this.speed = speed;
-    this.spriteSrc = spriteSrc;
-    this.options = options;
+    this.size = options.size;
+    this.pos = options.pos;
+    this.speed = options.speed;
+    this.color = options.color;
+    this.spriteSrc = options.spriteSrc;
+    this.useBounds = options.useBounds;
+    this.usePhysics = options.usePhysics;
+    this.useCollision = options.useCollision;
     this.isColliding = false;
   }
 
@@ -25,7 +33,7 @@ class Instance {
   drawRect(ctx) {
     ctx.beginPath();
     ctx.rect(this.pos.x, this.pos.y, this.size.x, this.size.y);
-    ctx.fillStyle = "black";
+    ctx.fillStyle = this.color;
     ctx.fill();
   }
 
@@ -33,7 +41,7 @@ class Instance {
   drawCircle(ctx) {
     ctx.beginPath();
     ctx.arc(this.pos.x, this.pos.y, this.size.x, 0, Math.PI * 2);
-    ctx.fillStyle = "black";
+    ctx.fillStyle = this.color;
     ctx.fill();
   }
 
@@ -62,8 +70,8 @@ class Instance {
 
   // Our collision routing function
   checkCollision(targets = [], canvas = null) {
-    if (this.options.useCollision) this.checkEntityCollision(targets);
-    if (this.options.useBounds) this.checkBoundsCollision(canvas);
+    if (this.useCollision) this.checkEntityCollision(targets);
+    if (this.useBounds) this.checkBoundsCollision(canvas);
   }
 
   // Checking for entity collision
@@ -113,7 +121,7 @@ class Instance {
         {
           // Checking left bound collision
           if (this.pos.x < 0) {
-            if (this.options.usePhysics) {
+            if (this.usePhysics) {
               this.speed.x *= -1;
             } else {
               this.pos.x = 0;
@@ -123,7 +131,7 @@ class Instance {
           }
           // Checking right bound collision
           if (this.pos.x > canvas.width - this.size.x) {
-            if (this.options.usePhysics) {
+            if (this.usePhysics) {
               this.speed.x *= -1;
             } else {
               this.pos.x = canvas.width - this.size.x;
@@ -133,7 +141,7 @@ class Instance {
           }
           // Checking top bound collision
           if (this.pos.y < 0) {
-            if (this.options.usePhysics) {
+            if (this.usePhysics) {
               this.speed.y *= -1;
             } else {
               this.pos.y = 0;
@@ -143,7 +151,7 @@ class Instance {
           }
           // Checking bottom bound collision
           if (this.pos.y > canvas.height - this.size.y) {
-            if (this.options.usePhysics) {
+            if (this.usePhysics) {
               this.speed.y *= -1;
             } else {
               this.pos.y = canvas.height - this.size.y;
@@ -157,7 +165,7 @@ class Instance {
         {
           // Checking left bound collision
           if (this.pos.x - this.size.x < 0) {
-            if (this.options.usePhysics) {
+            if (this.usePhysics) {
               this.speed.x *= -1;
             } else {
               this.pos.x = 0 + this.size.x;
@@ -167,7 +175,7 @@ class Instance {
           }
           // Checking right bound collision
           if (this.pos.x > canvas.width - this.size.x) {
-            if (this.options.usePhysics) {
+            if (this.usePhysics) {
               this.speed.x *= -1;
             } else {
               this.pos.x = canvas.width - this.size.x;
@@ -177,7 +185,7 @@ class Instance {
           }
           // Checking top bound collision
           if (this.pos.y - this.size.y < 0) {
-            if (this.options.usePhysics) {
+            if (this.usePhysics) {
               this.speed.y *= -1;
             } else {
               this.pos.y = 0 + this.size.y;
@@ -187,7 +195,7 @@ class Instance {
           }
           // Checking bottom bound collision
           if (this.pos.y > canvas.height - this.size.y) {
-            if (this.options.usePhysics) {
+            if (this.usePhysics) {
               this.speed.y *= -1;
             } else {
               this.pos.y = canvas.height - this.size.y;
@@ -202,7 +210,7 @@ class Instance {
 
   // Our method used to have our instance react after colliding
   handleCollision(target) {
-    if (!this.options.usePhysics) {
+    if (!this.usePhysics) {
       this.speed.x = 0;
       this.speed.y = 0;
     } else {

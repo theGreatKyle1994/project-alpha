@@ -1,11 +1,16 @@
 import Engine from "./engine/Engine";
-import Instance from "../../entities/Instance";
-import { useState, useEffect } from "react";
+import GameMap from "../../entities/map/GameMap";
+import { useRef, useMemo } from "react";
 
 const GameCore = () => {
+  const newMap = useRef(new GameMap(3, 2));
+  const currentMap = newMap.current;
+
+  useMemo(() => currentMap.createMap(), []);
+
   return (
     <>
-      <Engine renderBoxes={renderBoxes} />
+      <Engine map={currentMap} />
     </>
   );
 };

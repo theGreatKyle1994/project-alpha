@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import "../../../css/engine/engine.css";
 
-const Engine = ({ renderBoxes }) => {
+const Engine = ({ map }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const Engine = ({ renderBoxes }) => {
     // pass through props
     const update = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      renderBoxes(ctx, canvas);
+      map.renderMap(ctx);
       frameId = requestAnimationFrame(update);
     };
 
