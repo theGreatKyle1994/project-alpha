@@ -52,7 +52,6 @@ class PlayerInstance extends Instance {
       this.speed.x *= Math.SQRT1_2;
       this.speed.y *= Math.SQRT1_2;
     }
-    console.log(this.speed);
   }
 }
 

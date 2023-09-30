@@ -1,13 +1,22 @@
 # Project Alpha Change Log
 
-## Current Version: v0.0.2
+## Current Version: v0.1.0
 
-- Second iteration of the map gen system ( /map )
-- Basic player movement using coord system ( /map )
-- XP system and Player class creation ( /entity )
+- Migration to the canvas system
+- Player movement
+- W A S D controls for movement
+- Wall collsion system
+- Map drawing system
+- Game route defined ( /game )
 
 ## Past Versions
 
+<details>
+    <summary>v0.0.2</summary>
+- Second iteration of the map gen system ( /map )
+- Basic player movement using coord system ( /map )
+- XP system and Player class creation ( /entity )
+</details>
 <details>
     <summary>v0.0.1</summary>
 - First iteration of the map gen system ( /map )
