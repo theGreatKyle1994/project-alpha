@@ -7,6 +7,8 @@ class GameMap {
     this.mapHeight = mapHeight;
     this.mapLayout = [];
     this.walls = [];
+    this.openSpace = [];
+    this.size = 50;
   }
 
   // This method is called once whenever we need to generate a map
@@ -22,13 +24,15 @@ class GameMap {
         const isWall = map[i][j] == 2 ? false : true;
         // Create tile instance
         const currentTile = new Instance("box", {
-          size: { x: 50, y: 50 },
-          pos: { x: 50 * j, y: 50 * i },
+          size: { x: this.size, y: this.size },
+          pos: { x: this.size * j, y: this.size * i },
           color: isWall ? "red" : "green",
           useCollision: isWall,
+          isStatic: true,
         });
         // Capture walls for collision algos
         if (isWall) this.walls.push(currentTile);
+        else this.openSpace.push(currentTile);
         // Assing tile to map layout for rendering
         this.mapLayout.push(currentTile);
       }
