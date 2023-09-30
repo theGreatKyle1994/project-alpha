@@ -6,8 +6,6 @@ import CanvasTesting from "./components/testing/CanvasTesting";
 // Core Game
 import GameCore from "./components/core/GameCore";
 import Player from "./entities/player/Player";
-// CSS Imports
-import "./App.css";
 
 export const globalContext = createContext();
 
