@@ -1,0 +1,12 @@
+#game-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#game-canvas {
+  width: 1920px;
+  height: 1080px;
+  background-color: aliceblue;
+  image-rendering: crisp-edges;
+}

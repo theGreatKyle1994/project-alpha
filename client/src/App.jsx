@@ -1,22 +1,24 @@
-import { Routes, Route } from "react-router-dom";
-import EntityTesting from "./components/testing/EntityTesting";
-import MapGenerator from "./components/map/MapGenerator";
-import Player from "./entities/player/Player";
 import { createContext, useState } from "react";
-// CSS Imports
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
+// Testing Environments
+import EntityTesting from "./components/testing/EntityTesting";
+import CanvasTesting from "./components/testing/CanvasTesting";
+// Core Game
+import GameCore from "./components/core/GameCore";
+import Player from "./entities/player/Player";
 
 export const globalContext = createContext();
 
 const App = () => {
   const [player, setPlayer] = useState(new Player("Player", 100, 10));
-  console.log(player);
+
   return (
     // Global context values used across the application
     <globalContext.Provider value={{ player, setPlayer }}>
       <Routes>
         <Route path="/entity" element={<EntityTesting />} />
-        <Route path="/map" element={<MapGenerator />} />
+        <Route path="/canvas" element={<CanvasTesting />} />
+        <Route path="/game" element={<GameCore />} />
       </Routes>
     </globalContext.Provider>
   );
