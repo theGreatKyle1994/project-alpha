@@ -5,7 +5,7 @@
 - Migration to the canvas system
 - Player movement
 - W A S D controls for movement
-- Wall collsion system
+- Wall collision system
 - Map drawing system
 - Game route defined ( /game )
 
