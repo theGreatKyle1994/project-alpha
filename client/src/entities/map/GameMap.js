@@ -23,7 +23,7 @@ class GameMap {
         // Check for a wall
         const isWall = map[i][j] == 2 ? false : true;
         // Create tile instance
-        const currentTile = new Instance("box", {
+        const currentTile = new Instance("", "box", {
           size: { x: this.size, y: this.size },
           pos: { x: this.size * j, y: this.size * i },
           color: isWall ? "red" : "green",

@@ -1,14 +1,15 @@
 import Instance from "../Instance";
 
 class PlayerInstance extends Instance {
-  constructor(type, options) {
-    super(type, options);
+  constructor(id, type, options) {
+    super(id, type, options);
+    this.spawnPoint = null;
     this.keyObj = { w: false, a: false, s: false, d: false, alt: false };
   }
 
   // Spawn point algo
-  findSpawn(type, map) {
-    switch (type) {
+  findSpawn(spawnType, map) {
+    switch (spawnType) {
       // Random based on free space
       case "random": {
         const openSpacesLength = map.openSpace.length;
@@ -17,7 +18,9 @@ class PlayerInstance extends Instance {
         // Grabbing center point of chosen tile
         this.pos.x = tileChoice.pos.x + tileChoice.size.x / 2;
         this.pos.y = tileChoice.pos.y + tileChoice.size.y / 2;
-        return this.pos;
+        // Setting spawn point for map movement
+        this.spawnPoint = this.pos;
+        return this.spawnPoint;
       }
       default:
         break;

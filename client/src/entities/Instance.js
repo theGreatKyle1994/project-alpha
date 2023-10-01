@@ -4,12 +4,13 @@ import { generateID } from "../utilities/general/functions/utilityFunctions";
 // Be warned to all those who hate math.
 class Instance {
   constructor(
-    type = "",
+    id = "",
+    type = "box",
     options = {
       pos: { x: 0, y: 0 },
-      size: { x: 0, y: 0 },
+      size: { x: 1, y: 1 },
       speed: { x: 0, y: 0, actual: 0 },
-      color: "",
+      color: "black",
       spriteSrc: "",
       useBounds: false,
       usePhysics: false,
@@ -17,9 +18,9 @@ class Instance {
       isStatic: false,
     }
   ) {
-    this.id = generateID(10);
+    this.id = id === "" ? generateID(10) : id;
     this.type = type || "box";
-    this.size = options.size || { x: 10, y: 10 };
+    this.size = options.size || { x: 1, y: 1 };
     this.pos = options.pos || { x: 0, y: 0 };
     this.speed = options.speed || { x: 0, y: 0, actual: 0 };
     this.color = options.color || "black";
@@ -29,7 +30,6 @@ class Instance {
     this.useCollision = options.useCollision || false;
     this.isStatic = options.isStatic || false;
   }
-
   // Drawing a basic rectangle
   drawRect(ctx) {
     ctx.beginPath();
@@ -37,7 +37,6 @@ class Instance {
     ctx.fillStyle = this.color;
     ctx.fill();
   }
-
   // Drawing a basic circle
   drawCircle(ctx) {
     ctx.beginPath();
@@ -45,20 +44,17 @@ class Instance {
     ctx.fillStyle = this.color;
     ctx.fill();
   }
-
   // Drawing a sprite (non animated)
   drawImage(ctx) {
     const img = new Image(this.size.x, this.size.y);
     img.src = this.spriteSrc;
     ctx.drawImage(img, this.pos.x, this.pos.y, this.size.x, this.size.y);
   }
-
   // Change position based on speed
   update() {
     this.pos.x += this.speed.x;
     this.pos.y += this.speed.y;
   }
-
   // This is the method we will always call from the function
   // we pass to the engine. It's routing is already setup
   render(ctx, targets, canvas) {
@@ -77,13 +73,12 @@ class Instance {
     this.update();
     if (targets) this.checkCollision(targets, canvas);
   }
-
   // Our collision routing function
   checkCollision(targets = [], canvas = null) {
     if (this.useCollision) this.checkEntityCollision(targets);
     if (this.useBounds) this.checkBoundsCollision(canvas);
   }
-
+  // Return boolean based on collision event
   verifyCollision(target) {
     switch (this.type) {
       // Square to square collision
@@ -107,7 +102,6 @@ class Instance {
       // Todo: add circle to square collision
     }
   }
-
   // Checking for entity collision
   checkEntityCollision(targets) {
     if (targets) {
@@ -118,7 +112,6 @@ class Instance {
       });
     }
   }
-
   // Our method used to have our instance react after colliding
   handleCollision(target) {
     if (!this.usePhysics) {
@@ -164,7 +157,6 @@ class Instance {
       }
     }
   }
-
   // Checking canvas bounds collision
   checkBoundsCollision(canvas) {
     switch (this.type) {
