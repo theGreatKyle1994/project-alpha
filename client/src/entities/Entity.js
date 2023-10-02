@@ -11,6 +11,7 @@ class Entity {
     this.damage = damage; // Placeholder until weapon class is created
     this.resistance = 1.0; // 1.0 mean taking full damage. 0.5 means taking half
     this.isDead = false;
+    this.isInCombat = false;
   }
   // Base method to change entity name
   changeName(newName) {
@@ -40,6 +41,37 @@ class Entity {
       if (this.health > this.maxHealth) {
         this.health = this.maxHealth;
       }
+    }
+  }
+  // Base method for setting the entity in combat
+  setIsInCombat(isCombat) {
+    this.isInCombat = isCombat;
+  }
+  // Event to trigger connection with react combat system
+  checkForCombat(entity) {
+    // Todo: setup ability to enter and leave combat
+    if (this.instance) {
+      if (this.instance.combatCollision.verifyCollision(entity.instance)) {
+        if (!entity.isInCombat) {
+          entity.setIsInCombat(true);
+          this.setIsInCombat(true);
+          console.log(
+            `${this.name} is in combat with: ${entity.name}: ${this.id}`
+          );
+          return true;
+        }
+      } else if (
+        !this.instance.combatCollision.verifyCollision(entity.instance) &&
+        entity.isInCombat &&
+        this.isInCombat
+      ) {
+        entity.setIsInCombat(false);
+        this.setIsInCombat(false);
+        console.log(
+          `${this.name} is leaving combat with: ${entity.name}: ${this.id}`
+        );
+      }
+      return false;
     }
   }
   // Setting of the canvas instance

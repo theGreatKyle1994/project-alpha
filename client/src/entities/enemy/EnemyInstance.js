@@ -16,17 +16,6 @@ class EnemyInstance extends Instance {
     this.combatCollision.pos = { x: this.pos.x - 25, y: this.pos.y - 25 };
     this.combatCollision.render(ctx);
   }
-  // Event to trigger connection with react combat system
-  checkForCombat(player, setPlayer) {
-    // Todo: setup ability to enter and leave combat
-    if (this.combatCollision.verifyCollision(player.instance)) {
-      if (!player.isInCombat) {
-        player.isInCombat = true;
-        console.log(`Player is in combat with: ${this.id}`);
-        setPlayer(player.copySelf());
-      }
-    }
-  }
 }
 
 export default EnemyInstance;

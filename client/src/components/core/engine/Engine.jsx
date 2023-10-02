@@ -23,7 +23,7 @@ const Engine = ({ map, player, enemies }) => {
       // Render enemies and check for valid collisions
       enemies.forEach((enemy) => {
         enemy.instance.render(ctx, [player.instance, ...map.walls], canvas);
-        // enemy.instance.checkForCombat(player);
+        if (enemy.checkForCombat(player)) console.log("COMBAT!");
       });
       frameId = requestAnimationFrame(update);
     };

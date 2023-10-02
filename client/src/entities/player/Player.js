@@ -6,7 +6,6 @@ class Player extends Entity {
     super(name, health, damage);
     this.xp = 0;
     this.xpCap = 100;
-    this.isInCombat = false;
     this.weapon = null
   }
   // Base method used for leveling up
@@ -21,10 +20,6 @@ class Player extends Entity {
       this.xpCap += applyRange(5, 20, this.level);
       this.levelUp();
     }
-  }
-  // Base method for setting the player in combat
-  setIsInCombat(isCombat) {
-    this.isInCombat = isCombat;
   }
 }
 
