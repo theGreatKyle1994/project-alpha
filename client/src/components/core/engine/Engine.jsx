@@ -11,9 +11,13 @@ const Engine = ({ map, player, setPlayer, enemies }) => {
     // Eveything we need rendered per frame goes here,
     // pass through props
     const update = () => {
+      // Clearing canvas per frame
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Render map outline
       map.renderMap(ctx);
+      // Render player and check for collisions
       player.instance.render(ctx, map.walls, canvas);
+      // Render enemies and check for valid collisions
       enemies.forEach((enemy) => {
         enemy.instance.render(ctx, [player.instance, ...map.walls], canvas);
         enemy.instance.checkForCombat(player, setPlayer);

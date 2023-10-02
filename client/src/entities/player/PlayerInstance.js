@@ -4,7 +4,7 @@ class PlayerInstance extends Instance {
   constructor(id, type, options) {
     super(id, type, options);
     this.spawnPoint = null;
-    this.keyObj = { w: false, a: false, s: false, d: false, alt: false };
+    this.keyObj = { w: false, a: false, s: false, d: false };
   }
 
   // method used to change which direction the shape is going based on key input

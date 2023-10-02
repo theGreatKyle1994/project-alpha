@@ -12,8 +12,7 @@ export const globalContext = createContext();
 
 const App = () => {
   const [player, setPlayer] = useState(new Player("Player", 100, 10));
-  // Memoized player instance. Without this, we would recreate the player
-  // instance from scratch every component rerender
+  // Memoized player instance for canvas.
   useMemo(
     () =>
       player.setInstance(

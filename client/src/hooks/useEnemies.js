@@ -4,6 +4,8 @@ import EnemyInstance from "../entities/enemy/EnemyInstance";
 
 const useEnemies = (openSpawns) => {
   const [enemies, setEnemies] = useState([]);
+
+  // Generation of enemy list based on valid map spawn locations
   useEffect(() => {
     const newList = [];
     for (let i = 0; i < 5; i++) {
@@ -13,7 +15,7 @@ const useEnemies = (openSpawns) => {
           size: { x: 20, y: 20 },
           speed: { x: 0, y: 0, actual: 2 },
           color: "yellow",
-          useCollision: true
+          useCollision: true,
         })
       );
       newEnemy.instance.findSpawn("random", openSpawns);
@@ -21,8 +23,6 @@ const useEnemies = (openSpawns) => {
     }
     setEnemies(newList);
   }, []);
-
-  useEffect(() => console.log(enemies), [enemies]);
 
   return [enemies, setEnemies];
 };
