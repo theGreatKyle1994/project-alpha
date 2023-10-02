@@ -56,7 +56,7 @@ class Entity {
           entity.setIsInCombat(true);
           this.setIsInCombat(true);
           console.log(
-            `${this.name} is in combat with: ${entity.name}: ${this.id}`
+            `${entity.name} is in combat with: ${this.name}: ${this.id}`
           );
           return true;
         }
@@ -68,7 +68,7 @@ class Entity {
         entity.setIsInCombat(false);
         this.setIsInCombat(false);
         console.log(
-          `${this.name} is leaving combat with: ${entity.name}: ${this.id}`
+          `${entity.name} is leaving combat with: ${this.name}: ${this.id}`
         );
       }
       return false;
