@@ -1,4 +1,4 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useEffect } from "react";
 import Enemy from "../entities/enemy/Enemy";
 import EnemyInstance from "../entities/enemy/EnemyInstance";
 
@@ -13,7 +13,7 @@ const useEnemies = (openSpawns) => {
           size: { x: 20, y: 20 },
           speed: { x: 0, y: 0, actual: 2 },
           color: "yellow",
-          useCollision: true,
+          useCollision: true
         })
       );
       newEnemy.instance.findSpawn("random", openSpawns);

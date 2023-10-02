@@ -15,6 +15,7 @@ class Instance {
       useBounds: false,
       usePhysics: false,
       useCollision: false,
+      useCollisionOutline: false,
       isStatic: false,
     }
   ) {
@@ -28,6 +29,7 @@ class Instance {
     this.useBounds = options.useBounds || false;
     this.usePhysics = options.usePhysics || false;
     this.useCollision = options.useCollision || false;
+    this.useCollisionOutline = options.useCollisionOutline || false;
     this.isStatic = options.isStatic || false;
   }
   // Drawing a basic rectangle
@@ -36,6 +38,10 @@ class Instance {
     ctx.rect(this.pos.x, this.pos.y, this.size.x, this.size.y);
     ctx.fillStyle = this.color;
     ctx.fill();
+    if (this.useCollisionOutline) {
+      ctx.strokeStyle = "black";
+      ctx.stroke();
+    }
   }
   // Drawing a basic circle
   drawCircle(ctx) {
@@ -114,7 +120,6 @@ class Instance {
   }
   // Our method used to have our instance react after colliding
   handleCollision(target) {
-    console.log("collided");
     if (!this.usePhysics) {
       // Pushing back a few pixels to prevent collision vacuum
       this.pos.x -= this.speed.x;

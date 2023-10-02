@@ -19,7 +19,14 @@ const GameCore = () => {
   // Creation of the event listeners needed for controls
   useControlEvents(player.instance);
 
-  return <Engine map={map} player={player.instance} enemies={enemies} />;
+  return (
+    <Engine
+      map={map}
+      player={player}
+      setPlayer={setPlayer}
+      enemies={enemies}
+    />
+  );
 };
 
 export default GameCore;
