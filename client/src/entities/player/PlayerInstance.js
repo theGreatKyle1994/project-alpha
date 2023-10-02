@@ -7,25 +7,6 @@ class PlayerInstance extends Instance {
     this.keyObj = { w: false, a: false, s: false, d: false, alt: false };
   }
 
-  // Spawn point algo
-  findSpawn(spawnType, map) {
-    switch (spawnType) {
-      // Random based on free space
-      case "random": {
-        const openSpacesLength = map.openSpace.length;
-        const tileChoice =
-          map.openSpace[Math.floor(Math.random() * openSpacesLength)];
-        // Grabbing center point of chosen tile
-        this.pos.x = tileChoice.pos.x + tileChoice.size.x / 2;
-        this.pos.y = tileChoice.pos.y + tileChoice.size.y / 2;
-        // Setting spawn point for map movement
-        this.spawnPoint = this.pos;
-        return this.spawnPoint;
-      }
-      default:
-        break;
-    }
-  }
   // method used to change which direction the shape is going based on key input
   checkMovement(e) {
     // modification of keyObj to input booleans based on key press

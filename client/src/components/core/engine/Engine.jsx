@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import "../../../css/engine/engine.css";
 
-const Engine = ({ map, player }) => {
+const Engine = ({ map, player, enemies }) => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
@@ -14,6 +14,9 @@ const Engine = ({ map, player }) => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       map.renderMap(ctx);
       player.render(ctx, map.walls, canvas);
+      enemies.forEach((enemy) => {
+        enemy.instance.render(ctx, [player, ...map.walls], canvas);
+      });
       frameId = requestAnimationFrame(update);
     };
 
@@ -22,7 +25,7 @@ const Engine = ({ map, player }) => {
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, []);
+  }, [player, map, enemies]);
 
   return (
     <div id="game-container">

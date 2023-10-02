@@ -70,7 +70,7 @@ class Instance {
         break;
     }
     // We update the instance then check for collision on new position
-    this.update();
+    if (!this.isStatic) this.update();
     if (targets) this.checkCollision(targets, canvas);
   }
   // Our collision routing function
@@ -114,12 +114,17 @@ class Instance {
   }
   // Our method used to have our instance react after colliding
   handleCollision(target) {
+    console.log("collided");
     if (!this.usePhysics) {
       // Pushing back a few pixels to prevent collision vacuum
       this.pos.x -= this.speed.x;
       this.pos.y -= this.speed.y;
+      target.pos.x -= target.speed.x;
+      target.pos.y -= target.speed.y;
       this.speed.x = 0;
       this.speed.y = 0;
+      target.speed.x = 0;
+      target.speed.y = 0;
     } else {
       // Calc the collision vector
       const vCollision = {
@@ -248,6 +253,25 @@ class Instance {
             }
           }
         }
+        break;
+    }
+  }
+  // Spawn point algo
+  findSpawn(spawnType, openSpace) {
+    switch (spawnType) {
+      // Random based on free space
+      case "random": {
+        const openSpacesLength = openSpace.length;
+        const tileChoice =
+          openSpace[Math.floor(Math.random() * openSpacesLength)];
+        // Grabbing center point of chosen tile
+        this.pos.x = tileChoice.pos.x + tileChoice.size.x / 2;
+        this.pos.y = tileChoice.pos.y + tileChoice.size.y / 2;
+        // Setting spawn point for map movement
+        this.spawnPoint = this.pos;
+        return this.spawnPoint;
+      }
+      default:
         break;
     }
   }
