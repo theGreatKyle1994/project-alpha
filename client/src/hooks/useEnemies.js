@@ -1,12 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Enemy from "../entities/enemy/Enemy";
 import EnemyInstance from "../entities/enemy/EnemyInstance";
 
-const useEnemies = (openSpawns) => {
+const useEnemies = (spawnSpaces = []) => {
   const [enemies, setEnemies] = useState([]);
-
   // Generation of enemy list based on valid map spawn locations
-  useEffect(() => {
+  useMemo(() => {
     const newList = [];
     for (let i = 0; i < 5; i++) {
       const newEnemy = new Enemy("Enemy", 100, 5);
@@ -18,7 +17,9 @@ const useEnemies = (openSpawns) => {
           useCollision: true,
         })
       );
-      newEnemy.instance.findSpawn("random", openSpawns);
+      // If map spawns are not set we skip spawn location (debug purposes)
+      if (spawnSpaces.length !== 0)
+        newEnemy.instance.findSpawn("random", spawnSpaces);
       newList.push(newEnemy);
     }
     setEnemies(newList);

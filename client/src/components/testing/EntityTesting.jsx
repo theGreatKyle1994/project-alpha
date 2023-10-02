@@ -1,9 +1,8 @@
 import { applyRange } from "../../utilities/general/functions/utilityFunctions";
-import { useContext } from "react";
-import { globalContext } from "../../App";
+import usePlayer from "../../hooks/usePlayer";
 
 const EntityTesting = () => {
-  const { player, setPlayer } = useContext(globalContext);
+  const [player, setPlayer] = usePlayer();
 
   const gainXp = () => {
     player.setXp(applyRange(5, 10, player.level));

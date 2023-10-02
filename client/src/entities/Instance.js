@@ -262,13 +262,13 @@ class Instance {
     }
   }
   // Spawn point algo
-  findSpawn(spawnType, openSpace) {
+  findSpawn(spawnType, spawnSpaces) {
     switch (spawnType) {
       // Random based on free space
       case "random": {
-        const openSpacesLength = openSpace.length;
+        const openSpacesLength = spawnSpaces.length;
         const tileChoice =
-          openSpace[Math.floor(Math.random() * openSpacesLength)];
+          spawnSpaces[Math.floor(Math.random() * openSpacesLength)];
         // Grabbing center point of chosen tile
         this.pos.x = tileChoice.pos.x + tileChoice.size.x / 2;
         this.pos.y = tileChoice.pos.y + tileChoice.size.y / 2;
