@@ -4,8 +4,11 @@ import "../../../css/engine/engine.css";
 const Engine = ({ map, player, setPlayer, enemies }) => {
   const canvasRef = useRef(null);
 
+  // Creation of the canvas
   useEffect(() => {
     const canvas = canvasRef.current;
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
     const ctx = canvas.getContext("2d");
     let frameId = undefined;
     // Eveything we need rendered per frame goes here,
@@ -32,15 +35,19 @@ const Engine = ({ map, player, setPlayer, enemies }) => {
     };
   }, [map, enemies]);
 
-  return (
-    <div id="game-container">
-      {/* 
-        Do not remove width and height from canvas, 
-        these are required for resolution purposes
-      */}
-      <canvas id="game-canvas" width={1920} height={1080} ref={canvasRef} />
-    </div>
-  );
+  // Resize event for the canvas
+  useEffect(() => {
+    addEventListener("resize", () => {
+      canvasRef.current.width = innerWidth;
+      canvasRef.current.height = innerHeight;
+    });
+
+    return () => {
+      removeEventListener("resize");
+    };
+  }, []);
+
+  return <canvas id="game-canvas" ref={canvasRef} />;
 };
 
 export default Engine;
