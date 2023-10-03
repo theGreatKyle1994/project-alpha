@@ -56,9 +56,6 @@ class Entity {
           entity.setIsInCombat(true);
           this.setIsInCombat(true);
           setCombatEnemy(this);
-          console.log(
-            `${entity.name} is in combat with: ${this.name}: ${this.id}`
-          );
           return true;
         }
       } else if (
@@ -69,9 +66,6 @@ class Entity {
         entity.setIsInCombat(false);
         this.setIsInCombat(false);
         setCombatEnemy(null);
-        console.log(
-          `${entity.name} is leaving combat with: ${this.name}: ${this.id}`
-        );
       }
       return false;
     }
