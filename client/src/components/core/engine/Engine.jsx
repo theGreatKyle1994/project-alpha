@@ -33,7 +33,7 @@ const Engine = ({ map, player, enemies, combatEnemy, setCombatEnemy }) => {
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, [map, enemies]);
+  }, [map, enemies, combatEnemy, player]);
 
   // Resize event for the canvas
   useEffect(() => {

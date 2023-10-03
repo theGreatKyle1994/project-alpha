@@ -8,6 +8,8 @@ const useCombat = (enemies, setEnemies) => {
       let newEnemyList = enemies.filter((enemy) => {
         if (enemy.id !== combatEnemy.id) return enemy;
       });
+      // Placeholder until sprites are used
+      if (combatEnemy.isDead) combatEnemy.instance.color = "grey";
       setEnemies([...newEnemyList, combatEnemy.copySelf()]);
     }
   }, [combatEnemy]);

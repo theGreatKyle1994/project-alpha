@@ -2,14 +2,11 @@
 
 Welcome to Project Alpha!
 
-## Current Version: v0.1.0
+## Current Version: v0.1.1
 
-- Migration to the canvas system
-- Player movement
-- W A S D controls for movement
-- Wall collision system
-- Map drawing system
-- Game route defined ( /game )
+- Dynamic combat system when next to enemies
+- Enemy Collision
+- Basic turn based combat features
 
 ## Planned Features:
 

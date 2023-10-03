@@ -56,6 +56,7 @@ class Entity {
           entity.setIsInCombat(true);
           this.setIsInCombat(true);
           setCombatEnemy(this);
+          console.log("working");
           return true;
         }
       } else if (

@@ -1,16 +1,22 @@
 # Project Alpha Change Log
 
-## Current Version: v0.1.0
+## Current Version: v0.1.1
 
+- Dynamic combat system when next to enemies
+- Enemy Collision
+- Basic turn based combat features
+
+## Past Versions
+
+<details>
+    <summary>v0.1.0</summary>
 - Migration to the canvas system
 - Player movement
 - W A S D controls for movement
 - Wall collision system
 - Map drawing system
 - Game route defined ( /game )
-
-## Past Versions
-
+</details>
 <details>
     <summary>v0.0.2</summary>
 - Second iteration of the map gen system ( /map )

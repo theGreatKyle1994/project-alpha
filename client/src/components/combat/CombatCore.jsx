@@ -20,7 +20,7 @@ const CombatCore = ({
     90,
     10,
     70,
-    25
+    99
   );
   player.weapon = plushieHammer;
 
