@@ -118,12 +118,12 @@ const CombatCore = ({
 
   return (
     <Draggable
-      bounds="html"
-      handle="#combat-header"
       defaultPosition={{
         x: enemy.instance.pos.x + 50,
         y: enemy.instance.pos.y,
       }}
+      bounds="canvas"
+      handle="#combat-header"
     >
       <div
         style={{
