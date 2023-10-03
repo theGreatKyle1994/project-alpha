@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import "../../../css/engine/engine.css";
 
-const Engine = ({ map, player, enemies }) => {
+const Engine = ({ map, player, enemies, combatEnemy, setCombatEnemy }) => {
   const canvasRef = useRef(null);
 
   // Creation of the canvas
@@ -23,7 +23,7 @@ const Engine = ({ map, player, enemies }) => {
       // Render enemies and check for valid collisions
       enemies.forEach((enemy) => {
         enemy.instance.render(ctx, [player.instance, ...map.walls], canvas);
-        if (enemy.checkForCombat(player)) console.log("COMBAT!");
+        enemy.checkForCombat(player, setCombatEnemy);
       });
       frameId = requestAnimationFrame(update);
     };

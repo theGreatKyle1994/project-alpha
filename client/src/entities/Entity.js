@@ -48,13 +48,14 @@ class Entity {
     this.isInCombat = isCombat;
   }
   // Event to trigger connection with react combat system
-  checkForCombat(entity) {
+  checkForCombat(entity, setCombatEnemy) {
     // Todo: setup ability to enter and leave combat
     if (this.instance) {
       if (this.instance.combatCollision.verifyCollision(entity.instance)) {
         if (!entity.isInCombat) {
           entity.setIsInCombat(true);
           this.setIsInCombat(true);
+          setCombatEnemy(this);
           console.log(
             `${entity.name} is in combat with: ${this.name}: ${this.id}`
           );
@@ -67,6 +68,7 @@ class Entity {
       ) {
         entity.setIsInCombat(false);
         this.setIsInCombat(false);
+        setCombatEnemy(null);
         console.log(
           `${entity.name} is leaving combat with: ${this.name}: ${this.id}`
         );

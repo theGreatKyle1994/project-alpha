@@ -1,16 +1,28 @@
 import { wait } from "../../utilities/general/functions/utilityFunctions";
-import { useReducer, useContext, useEffect } from "react";
+import { useReducer, useEffect } from "react";
+import Draggable from "react-draggable";
 // These need to be finalized before official use
 // import enemyAction from "../../utilities/combat/functions/enemyCombatRouting";
 // import playerAction from "../../utilities/combat/functions/playerCombatRouting";
-import { applyChance } from "../../utilities/general/functions/utilityFunctions";
-import { globalContext } from "../../App";
-import Weapon from "../../entities/weapons/Weapon"; 
+import Weapon from "../../entities/weapons/Weapon";
 
-const CombatCore = ({ enemy, setEnemy }) => {
-  const { player, setPlayer } = useContext(globalContext);
-  const plushieHammer = new Weapon('Plushie Hammer', 'cute but surprisingly powerful for a toy', null, 5, 90, 10, 70, 25 )
-  player.weapon = plushieHammer
+const CombatCore = ({
+  player,
+  setPlayer,
+  combatEnemy: enemy,
+  setCombatEnemy: setEnemy,
+}) => {
+  const plushieHammer = new Weapon(
+    "Plushie Hammer",
+    "cute but surprisingly powerful for a toy",
+    null,
+    5,
+    90,
+    10,
+    70,
+    25
+  );
+  player.weapon = plushieHammer;
 
   // Combat turn controller for reducer
   const handleCombatTurns = (_, action) => {
@@ -60,7 +72,7 @@ const CombatCore = ({ enemy, setEnemy }) => {
       dispatchAction({ type: "changeToEnemyTurn" });
       // todo for player action routing
       // playerAction(action);
-      console.log(action)
+      console.log(action);
       enemy.takeDamage(player.weapon.Attack(action));
       setEnemy(enemy.copySelf());
     }
@@ -89,7 +101,7 @@ const CombatCore = ({ enemy, setEnemy }) => {
       // todo for enemy action routing (AI file must be made)
       // enemyAction(action);
 
-        player.takeDamage(enemy.damage);
+      player.takeDamage(enemy.damage);
 
       setPlayer(player.copySelf());
     }
@@ -105,63 +117,62 @@ const CombatCore = ({ enemy, setEnemy }) => {
   }, [state]);
 
   return (
-    <>
-      {enemy && (
-        <div
-          style={{
-            margin: "20px",
-            padding: "20px",
-            backgroundColor: "lightgrey",
-            border: "2px solid black",
-            borderRadius: "10px",
-          }}
-        >
-          <h2 id="combat-header">Combat Menu Test</h2>
-          <hr />
-          <h3>Player</h3>
-          <div>Turn: {String(state.isPlayerTurn)}</div>
-          <div>Damage: {player.damage}</div>
-          <div>
-            Health: {player.health}/{player.maxHealth}
-            {player.health < player.maxHealth && (
-              <button
-                onClick={() => {
-                  player.takeHeal(10);
-                  setPlayer(player.copySelf());
-                }}
-              >
-                Heal
-              </button>
-            )}
-          </div>
-          <div>Dead: {String(player.isDead)}</div>
-          <hr />
-          <h3>Enemy</h3>
-          <div>Turn: {String(state.isEnemyTurn)}</div>
-          <div>Damage: {enemy.damage}</div>
-          <div>
-            Health: {enemy.health}/{enemy.maxHealth}
-          </div>
-          <div>Dead: {String(enemy.isDead)}</div>
-          <div>{enemy.id}</div>
-          {state.isPlayerTurn && !player.isDead && !enemy.isDead && (
-            <button onClick={() => checkPlayerAction("light")}>
-              Light Attack
+    <Draggable bounds="html" handle="#combat-header">
+      <div
+        style={{
+          position: "absolute",
+          backgroundColor: "white",
+          borderRadius: "10px",
+          padding: "10px",
+          border: "1px solid black",
+          zIndex: 100,
+        }}
+      >
+        <h2 id="combat-header">Combat Menu Test</h2>
+        <hr />
+        <h3>Player</h3>
+        <div>Turn: {String(state.isPlayerTurn)}</div>
+        <div>Damage: {player.damage}</div>
+        <div>
+          Health: {player.health}/{player.maxHealth}
+          {player.health < player.maxHealth && (
+            <button
+              onClick={() => {
+                player.takeHeal(10);
+                setPlayer(player.copySelf());
+              }}
+            >
+              Heal
             </button>
           )}
-          {state.isPlayerTurn && !player.isDead && !enemy.isDead && (
-            <button onClick={() => checkPlayerAction("heavy")}>
-              Heavy Attack
-            </button>
-          )}
-          {state.isEnemyTurn && !enemy.isDead && (
-            <div style={{ color: "grey" }}>Enemy Attacking...</div>
-          )}
-          {enemy.isDead && <h2>Player Wins!</h2>}
-          {player.isDead && <h2>Enemy Wins!</h2>}
         </div>
-      )}
-    </>
+        <div>Dead: {String(player.isDead)}</div>
+        <hr />
+        <h3>Enemy</h3>
+        <div>Turn: {String(state.isEnemyTurn)}</div>
+        <div>Damage: {enemy.damage}</div>
+        <div>
+          Health: {enemy.health}/{enemy.maxHealth}
+        </div>
+        <div>Dead: {String(enemy.isDead)}</div>
+        <div>{enemy.id}</div>
+        {state.isPlayerTurn && !player.isDead && !enemy.isDead && (
+          <button onClick={() => checkPlayerAction("light")}>
+            Light Attack
+          </button>
+        )}
+        {state.isPlayerTurn && !player.isDead && !enemy.isDead && (
+          <button onClick={() => checkPlayerAction("heavy")}>
+            Heavy Attack
+          </button>
+        )}
+        {state.isEnemyTurn && !enemy.isDead && (
+          <div style={{ color: "grey" }}>Enemy Attacking...</div>
+        )}
+        {enemy.isDead && <h2>Player Wins!</h2>}
+        {player.isDead && <h2>Enemy Wins!</h2>}
+      </div>
+    </Draggable>
   );
 };
 
