@@ -47,29 +47,6 @@ class Entity {
   setIsInCombat(isCombat) {
     this.isInCombat = isCombat;
   }
-  // Event to trigger connection with react combat system
-  checkForCombat(entity, setCombatEnemy) {
-    // Todo: setup ability to enter and leave combat
-    if (this.instance) {
-      if (this.instance.combatCollision.verifyCollision(entity.instance)) {
-        if (!entity.isInCombat) {
-          entity.setIsInCombat(true);
-          this.setIsInCombat(true);
-          setCombatEnemy(this);
-          return true;
-        }
-      } else if (
-        !this.instance.combatCollision.verifyCollision(entity.instance) &&
-        entity.isInCombat &&
-        this.isInCombat
-      ) {
-        entity.setIsInCombat(false);
-        this.setIsInCombat(false);
-        setCombatEnemy(null);
-      }
-      return false;
-    }
-  }
   // Setting of the canvas instance
   setInstance(newInstance) {
     this.instance = newInstance;
