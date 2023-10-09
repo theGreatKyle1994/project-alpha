@@ -1,42 +1,26 @@
 import Instance from "../Instance";
-import controlObj from "../../utilities/controls/controlBindings";
 
 class PlayerInstance extends Instance {
   constructor(id, type, options) {
     super(id, type, options);
     this.spawnPoint = null;
-    this.isInventoryOpen = false;
-    this.keyObj = controlObj;
   }
   // method used to check any control inputs made by player
-  checkControls(e) {
-    // modification of keyObj to input booleans based on key press
-    if (e.type == "keydown") this.keyObj[e.key.toLowerCase()] = true;
-    if (e.type == "keyup") this.keyObj[e.key.toLowerCase()] = false;
-    // Listen for movement controls
+  checkControls(keyObj) {
     if (
-      this.keyObj.w ||
-      !this.keyObj.w ||
-      this.keyObj.a ||
-      !this.keyObj.a ||
-      this.keyObj.s ||
-      !this.keyObj.s ||
-      this.keyObj.d ||
-      !this.keyObj.d
+      keyObj.w ||
+      !keyObj.w ||
+      keyObj.a ||
+      !keyObj.a ||
+      keyObj.s ||
+      !keyObj.s ||
+      keyObj.d ||
+      !keyObj.d
     )
-      this.doMovement(this.keyObj);
-    // Listen for inventory controls
-    if (this.keyObj.tab) this.toggleInventory();
-  }
-  // Open/close inventory
-  toggleInventory() {
-    // toggle inventory
-    this.isInventoryOpen = !this.isInventoryOpen;
-    console.log(this.isInventoryOpen);
+      this.doMovement(keyObj);
   }
   // Move player
   doMovement(keyObj) {
-    console.log(keyObj);
     // W / S Key (up)
     if (keyObj.w) this.speed.y = -this.speed.actual;
     else if (keyObj.s) this.speed.y = this.speed.actual;
