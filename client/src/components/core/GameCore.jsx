@@ -9,7 +9,7 @@ import useControlEvents from "../../hooks/useControlEvents";
 // use player. to access player data
 // use player.instance. to access the canvas variant
 const GameCore = () => {
-  const map = useMap(3, 2);
+  const map = useMap(2, 2);
   // Grabbing enemy info
   const [player, setPlayer] = usePlayer(map.openSpace);
   const [enemies, setEnemies] = useEnemies(map.openSpace);

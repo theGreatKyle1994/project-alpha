@@ -84,6 +84,24 @@ class Instance {
     if (this.useCollision) this.checkEntityCollision(targets);
     if (this.useBounds) this.checkBoundsCollision(canvas);
   }
+  // Checking for entity collision
+  checkEntityCollision(targets) {
+    if (targets) {
+      targets.forEach((target) => {
+        if (this.id !== target.id) {
+          // Determine if target is in collidable distance
+          if (
+            this.pos.x + this.size.x * 3 > target.pos.x &&
+            target.pos.x + target.size.x > this.pos.x - this.size.x * 2 &&
+            this.pos.y + this.size.y * 3 > target.pos.y &&
+            target.pos.y + target.size.y > this.pos.y - this.size.y * 2
+          ) {
+            if (this.verifyCollision(target)) this.handleCollision(target);
+          }
+        }
+      });
+    }
+  }
   // Return boolean based on collision event
   verifyCollision(target) {
     switch (this.type) {
@@ -106,16 +124,6 @@ class Instance {
         return distance <= sumOfRadii;
       }
       // Todo: add circle to square collision
-    }
-  }
-  // Checking for entity collision
-  checkEntityCollision(targets) {
-    if (targets) {
-      targets.forEach((target) => {
-        if (this.id !== target.id) {
-          if (this.verifyCollision(target)) this.handleCollision(target);
-        }
-      });
     }
   }
   // Our method used to have our instance react after colliding

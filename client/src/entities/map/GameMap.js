@@ -29,6 +29,8 @@ class GameMap {
           color: isWall ? "red" : "green",
           useCollision: isWall,
           isStatic: true,
+          // Debug for seeing tile outlines
+          useCollisionOutline: true,
         });
         // Capture walls for collision algos
         if (isWall) this.walls.push(currentTile);
