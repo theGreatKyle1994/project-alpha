@@ -4,11 +4,11 @@ const useControlEvents = (player) => {
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
       e.preventDefault();
-      player.checkMovement(e);
+      player.checkControls(e);
     });
     document.addEventListener("keyup", (e) => {
       e.preventDefault();
-      player.checkMovement(e);
+      player.checkControls(e);
     });
     return () => {
       document.removeEventListener("keydown");
