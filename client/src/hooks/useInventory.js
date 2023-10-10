@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const useInventory = (keyObj, player) => {
+const useInventory = (keyObj) => {
   const [isInventoryOpen, setIsInventoryOpen] = useState(false);
   // Listening for the inventory key (tab)
   useEffect(() => {

@@ -21,7 +21,8 @@ const GameCore = () => {
   const keyObj = useControlEvents(player.instance);
   // Setup of combat system
   const [combatEnemy, setCombatEnemy] = useCombat(enemies, setEnemies);
-  const isInventoryOpen = useInventory(keyObj, player);
+  // Setup invenentory listening system
+  const isInventoryOpen = useInventory(keyObj);
 
   return (
     <>
