@@ -1,11 +1,10 @@
 import Engine from "./engine/Engine";
 import CombatCore from "../combat/CombatCore";
-import InventoryCore from "../inventory/InventoryCore";
+import UICore from "../inventory/UICore";
 import useMap from "../../hooks/useMap";
 import usePlayer from "../../hooks/usePlayer";
 import useEnemies from "../../hooks/useEnemies";
 import useCombat from "../../hooks/useCombat";
-import useInventory from "../../hooks/useInventory";
 import useControlEvents from "../../hooks/useControlEvents";
 
 // use player. to access player data
@@ -21,8 +20,6 @@ const GameCore = () => {
   const keyObj = useControlEvents(player.instance);
   // Setup of combat system
   const [combatEnemy, setCombatEnemy] = useCombat(enemies, setEnemies);
-  // Setup invenentory listening system
-  const isInventoryOpen = useInventory(keyObj);
 
   return (
     <>
@@ -34,9 +31,7 @@ const GameCore = () => {
           setCombatEnemy={setCombatEnemy}
         />
       )}
-      {isInventoryOpen && (
-        <InventoryCore player={player} setPlayer={setPlayer} />
-      )}
+      <UICore keyObj={keyObj} />
       <Engine
         map={map}
         player={player}

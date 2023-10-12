@@ -1,6 +1,6 @@
 import Draggable from "react-draggable";
 
-const InventoryCore = ({ player, setPlayer }) => {
+const InventoryCore = () => {
   return (
     <Draggable
       defaultPosition={{
