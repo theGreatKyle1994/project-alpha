@@ -1,11 +1,29 @@
-import { globalContext } from "../GameCore";
-import { useRef, useEffect, useContext } from "react";
+import { useRef, useEffect, createContext } from "react";
+import useMap from "../../../hooks/useMap";
+import usePlayer from "../../../hooks/usePlayer";
+import useEnemies from "../../../hooks/useEnemies";
+import useCombat from "../../../hooks/useCombat";
+import useControlEvents from "../../../hooks/useControlEvents";
+import GameCore from "../GameCore";
+// CSS Imports
 import "../../../css/engine/engine.css";
+// Creation of our context, keep this global
+export const globalContext = createContext({});
 
+// use player. to access player data
+// use player.instance. to access the canvas variant
 const Engine = () => {
-  const { map, player, enemies, combatEnemy, setCombatEnemy } =
-    useContext(globalContext);
   const canvasRef = useRef(null);
+  // Creation of the map
+  const map = useMap(2, 2);
+  // Creation of player
+  const [player, setPlayer] = usePlayer(map.openSpace);
+  // Creation of enemy(s)
+  const [enemies, setEnemies] = useEnemies(map.openSpace);
+  // Setup of combat system
+  const [combatEnemy, setCombatEnemy] = useCombat(enemies, setEnemies);
+  // Setting up the controls
+  const keyObj = useControlEvents(player.instance);
 
   // Creation of the canvas
   useEffect(() => {
@@ -13,9 +31,9 @@ const Engine = () => {
     canvas.width = innerWidth;
     canvas.height = innerHeight;
     const ctx = canvas.getContext("2d");
-    let frameId = undefined;
-    // Eveything we need rendered per frame goes here,
-    // pass through props
+    let frameId = 0;
+    // Eveything we need rendered per frame goes here
+    // passed through context
     const update = () => {
       // Clearing canvas per frame
       ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -50,7 +68,25 @@ const Engine = () => {
     };
   }, []);
 
-  return <canvas id="game-canvas" ref={canvasRef} />;
+  return (
+    // Global context, no prop drilling needed!
+    <globalContext.Provider
+      value={{
+        canvas: canvasRef.current,
+        map,
+        player,
+        setPlayer,
+        enemies,
+        setEnemies,
+        keyObj,
+        combatEnemy,
+        setCombatEnemy,
+      }}
+    >
+      <canvas id="game-canvas" ref={canvasRef} />
+      <GameCore />
+    </globalContext.Provider>
+  );
 };
 
 export default Engine;

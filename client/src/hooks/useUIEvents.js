@@ -1,8 +1,6 @@
-import { globalContext } from "../components/core/GameCore";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 
-const useUIEvents = () => {
-  const { keyObj } = useContext(globalContext);
+const useUIEvents = (keyObj) => {
   // UI boolean object, add any new UI booleans here
   const [displayUIObj, setDisplayUIObj] = useState({
     isInventory: false,
