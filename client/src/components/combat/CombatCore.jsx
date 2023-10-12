@@ -1,4 +1,4 @@
-import { globalContext } from "../core/GameCore";
+import { globalContext } from "../core/engine/Engine";
 import { wait } from "../../utilities/general/functions/utilityFunctions";
 import { useReducer, useEffect, useContext } from "react";
 import Draggable from "react-draggable";

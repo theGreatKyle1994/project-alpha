@@ -74,16 +74,17 @@ const Engine = () => {
       value={{
         canvas: canvasRef.current,
         map,
+        keyObj,
         player,
         setPlayer,
         enemies,
         setEnemies,
-        keyObj,
         combatEnemy,
         setCombatEnemy,
       }}
     >
       <canvas id="game-canvas" ref={canvasRef} />
+      {/* All systems and game content go in GameCore */}
       <GameCore />
     </globalContext.Provider>
   );
