@@ -1,6 +1,6 @@
 import Draggable from "react-draggable";
 
-const InventoryCore = () => {
+const InventoryMenu = () => {
   return (
     <Draggable
       defaultPosition={{
@@ -27,4 +27,4 @@ const InventoryCore = () => {
   );
 };
 
-export default InventoryCore;
+export default InventoryMenu;

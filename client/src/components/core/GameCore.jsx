@@ -1,6 +1,6 @@
 import Engine from "./engine/Engine";
 import CombatCore from "../combat/CombatCore";
-import UICore from "../inventory/UICore";
+import UICore from "../ui/UICore";
 import useMap from "../../hooks/useMap";
 import usePlayer from "../../hooks/usePlayer";
 import useEnemies from "../../hooks/useEnemies";
