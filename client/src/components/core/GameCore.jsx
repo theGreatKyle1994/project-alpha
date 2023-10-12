@@ -1,3 +1,4 @@
+import { createContext } from "react";
 import Engine from "./engine/Engine";
 import CombatCore from "../combat/CombatCore";
 import UICore from "../ui/UICore";
@@ -6,6 +7,8 @@ import usePlayer from "../../hooks/usePlayer";
 import useEnemies from "../../hooks/useEnemies";
 import useCombat from "../../hooks/useCombat";
 import useControlEvents from "../../hooks/useControlEvents";
+// Creation of our context, keep this global
+export const globalContext = createContext({});
 
 // use player. to access player data
 // use player.instance. to access the canvas variant
@@ -22,24 +25,23 @@ const GameCore = () => {
   const [combatEnemy, setCombatEnemy] = useCombat(enemies, setEnemies);
 
   return (
-    <>
-      {combatEnemy && (
-        <CombatCore
-          player={player}
-          setPlayer={setPlayer}
-          combatEnemy={combatEnemy}
-          setCombatEnemy={setCombatEnemy}
-        />
-      )}
-      <UICore keyObj={keyObj} />
-      <Engine
-        map={map}
-        player={player}
-        enemies={enemies}
-        combatEnemy={combatEnemy}
-        setCombatEnemy={setCombatEnemy}
-      />
-    </>
+    // Global context, no prop drilling needed!
+    <globalContext.Provider
+      value={{
+        map,
+        player,
+        setPlayer,
+        enemies,
+        setEnemies,
+        keyObj,
+        combatEnemy,
+        setCombatEnemy,
+      }}
+    >
+      {combatEnemy && <CombatCore />}
+      <UICore />
+      <Engine />
+    </globalContext.Provider>
   );
 };
 

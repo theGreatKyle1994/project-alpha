@@ -1,7 +1,10 @@
-import { useRef, useEffect } from "react";
+import { globalContext } from "../GameCore";
+import { useRef, useEffect, useContext } from "react";
 import "../../../css/engine/engine.css";
 
-const Engine = ({ map, player, enemies, combatEnemy, setCombatEnemy }) => {
+const Engine = () => {
+  const { map, player, enemies, combatEnemy, setCombatEnemy } =
+    useContext(globalContext);
   const canvasRef = useRef(null);
 
   // Creation of the canvas

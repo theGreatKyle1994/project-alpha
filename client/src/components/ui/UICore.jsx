@@ -1,8 +1,8 @@
 import useUIEvents from "../../hooks/useUIEvents";
 import InventoryMenu from "./InventoryMenu";
 
-const UICore = ({ keyObj }) => {
-  const displayUIObj = useUIEvents(keyObj);
+const UICore = () => {
+  const displayUIObj = useUIEvents();
   return <>{displayUIObj.isInventory && <InventoryMenu />}</>;
 };
 

@@ -1,17 +1,19 @@
+import { globalContext } from "../core/GameCore";
 import { wait } from "../../utilities/general/functions/utilityFunctions";
-import { useReducer, useEffect } from "react";
+import { useReducer, useEffect, useContext } from "react";
 import Draggable from "react-draggable";
 // These need to be finalized before official use
 // import enemyAction from "../../utilities/combat/functions/enemyCombatRouting";
 // import playerAction from "../../utilities/combat/functions/playerCombatRouting";
 import Weapon from "../../entities/weapons/Weapon";
 
-const CombatCore = ({
-  player,
-  setPlayer,
-  combatEnemy: enemy,
-  setCombatEnemy: setEnemy,
-}) => {
+const CombatCore = () => {
+  const {
+    player,
+    setPlayer,
+    combatEnemy: enemy,
+    setCombatEnemy: setEnemy,
+  } = useContext(globalContext);
   const plushieHammer = new Weapon(
     "Plushie Hammer",
     "cute but surprisingly powerful for a toy",
