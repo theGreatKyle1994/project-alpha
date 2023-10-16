@@ -1,14 +1,13 @@
 import { generateID } from "../utilities/general/functions/utilityFunctions";
 
 class Entity {
-  constructor(name, health, damage) {
+  constructor(name, health) {
     this.id = generateID(10, "#FF:");
     this.instance = null;
-    this.name = name;
-    this.level = 1; // Placeholder until persistant data is used
+    this.name = name; // Placeholder
+    this.level = 1; // Placeholder
     this.health = health;
     this.maxHealth = this.health;
-    this.damage = damage; // Placeholder until weapon class is created
     this.resistance = 1.0; // 1.0 mean taking full damage. 0.5 means taking half
     this.isDead = false;
     this.isInCombat = false;

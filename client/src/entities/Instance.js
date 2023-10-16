@@ -5,12 +5,12 @@ import { generateID } from "../utilities/general/functions/utilityFunctions";
 class Instance {
   constructor(
     id = "",
-    type = "box",
+    type = "",
     options = {
-      pos: { x: 0, y: 0 },
-      size: { x: 1, y: 1 },
-      speed: { x: 0, y: 0, actual: 0 },
-      color: "black",
+      pos: { x, y },
+      size: { x, y },
+      speed: { x, y, actual },
+      color: "",
       spriteSrc: "",
       useBounds: false,
       usePhysics: false,
