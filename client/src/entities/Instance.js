@@ -4,25 +4,25 @@ import { generateID } from "../utilities/general/functions/utilityFunctions";
 // Be warned to all those who hate math.
 class Instance {
   constructor(
-    id = "",
-    type = "",
+    id,
+    type,
     options = {
-      pos: { x, y },
-      size: { x, y },
-      speed: { x, y, actual },
-      color: "",
-      spriteSrc: "",
-      useBounds: false,
-      usePhysics: false,
-      useCollision: false,
-      useCollisionOutline: false,
-      isStatic: false,
+      pos,
+      size,
+      speed,
+      color,
+      spriteSrc,
+      useBounds,
+      usePhysics,
+      useCollision,
+      useCollisionOutline,
+      isStatic,
     }
   ) {
     this.id = id === "" ? generateID(10) : id;
     this.type = type || "box";
-    this.size = options.size || { x: 1, y: 1 };
     this.pos = options.pos || { x: 0, y: 0 };
+    this.size = options.size || { x: 1, y: 1 };
     this.speed = options.speed || { x: 0, y: 0, actual: 0 };
     this.color = options.color || "black";
     this.spriteSrc = options.spriteSrc || "";

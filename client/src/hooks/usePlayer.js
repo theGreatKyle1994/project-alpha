@@ -3,7 +3,7 @@ import Player from "../entities/player/Player";
 import PlayerInstance from "../entities/player/PlayerInstance";
 
 const usePlayer = (spawnSpaces = []) => {
-  const [player, setPlayer] = useState(new Player("Player", 100, 10));
+  const [player, setPlayer] = useState(new Player("Player", 100));
   // Memoized player instance for canvas.
   useMemo(() => {
     player.setInstance(

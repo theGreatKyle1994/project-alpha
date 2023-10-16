@@ -1,7 +1,6 @@
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Enemy from "../entities/enemy/Enemy";
 import EnemyInstance from "../entities/enemy/EnemyInstance";
-import Weapon from "../entities/weapons/Weapon";
 
 const useEnemies = (amountOfEnemies = 1, spawnSpaces = []) => {
   const [enemies, setEnemies] = useState([]);
@@ -9,7 +8,7 @@ const useEnemies = (amountOfEnemies = 1, spawnSpaces = []) => {
   useMemo(() => {
     const newList = [];
     for (let i = 0; i < amountOfEnemies; i++) {
-      const newEnemy = new Enemy("Enemy", 100, 5);
+      const newEnemy = new Enemy("Enemy", 100);
       newEnemy.setInstance(
         new EnemyInstance(newEnemy.id, "box", {
           size: { x: 20, y: 20 },

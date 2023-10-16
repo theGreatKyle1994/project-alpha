@@ -4,7 +4,7 @@ class EnemyInstance extends Instance {
   constructor(id, type, options) {
     super(id, type, options);
     // Setting up collision around the enemy boxes
-    this.combatCollision = new Instance("", "box", {
+    this.combatCollision = new Instance(this.id, "box", {
       size: { x: this.size.x + 50, y: this.size.y + 50 },
       color: "transparent",
       useCollisionOutline: true,
