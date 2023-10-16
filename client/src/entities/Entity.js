@@ -6,6 +6,7 @@ class Entity {
     this.instance = null;
     this.name = name; // Placeholder
     this.level = 1; // Placeholder
+    this.weapon = null; // Placeholder
     this.health = health;
     this.maxHealth = this.health;
     this.resistance = 1.0; // 1.0 mean taking full damage. 0.5 means taking half

@@ -6,7 +6,6 @@ class Player extends Entity {
     super(name, health);
     this.xp = 0;
     this.xpCap = 100;
-    this.weapon = null
   }
   // Base method used for leveling up
   levelUp() {

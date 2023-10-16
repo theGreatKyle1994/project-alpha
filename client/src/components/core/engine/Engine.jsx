@@ -19,7 +19,7 @@ const Engine = () => {
   // Creation of player
   const [player, setPlayer] = usePlayer(map.openSpace);
   // Creation of enemy(s)
-  const [enemies, setEnemies] = useEnemies(map.openSpace);
+  const [enemies, setEnemies] = useEnemies(5, map.openSpace);
   // Setup of combat system
   const [combatEnemy, setCombatEnemy] = useCombat(enemies, setEnemies);
   // Setting up the controls

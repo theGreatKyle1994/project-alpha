@@ -1,13 +1,14 @@
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect } from "react";
 import Enemy from "../entities/enemy/Enemy";
 import EnemyInstance from "../entities/enemy/EnemyInstance";
+import Weapon from "../entities/weapons/Weapon";
 
-const useEnemies = (spawnSpaces = []) => {
+const useEnemies = (amountOfEnemies = 1, spawnSpaces = []) => {
   const [enemies, setEnemies] = useState([]);
   // Generation of enemy list based on valid map spawn locations
   useMemo(() => {
     const newList = [];
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < amountOfEnemies; i++) {
       const newEnemy = new Enemy("Enemy", 100, 5);
       newEnemy.setInstance(
         new EnemyInstance(newEnemy.id, "box", {
@@ -17,6 +18,12 @@ const useEnemies = (spawnSpaces = []) => {
           useCollision: true,
         })
       );
+      newEnemy.weapon = new Weapon({
+        name: "Test Weapon",
+        baseDam: 10,
+        critChance: 0.05,
+        hitChance: 0.5,
+      });
       // If map spawns are not set we skip spawn location (debug purposes)
       if (spawnSpaces.length !== 0)
         newEnemy.instance.findSpawn("random", spawnSpaces);
@@ -24,6 +31,8 @@ const useEnemies = (spawnSpaces = []) => {
     }
     setEnemies(newList);
   }, []);
+
+  useEffect(() => console.log(enemies), [enemies]);
 
   return [enemies, setEnemies];
 };
