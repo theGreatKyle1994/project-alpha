@@ -8,9 +8,10 @@ class Weapon extends Item {
       description: creatorObj.description,
       image: creatorObj.image,
     });
-    this.baseDam = creatorObj.baseDam || 0; // Basic attack
-    this.critChance = creatorObj.critChance || 0.0; // Double Dam calc
-    this.hitChance = creatorObj.hitChance || 0.0; // Miss calc
+    this.hitChance = creatorObj.hitChance || 75; // Miss calc
+    this.baseDam = creatorObj.baseDam || 1; // Basic attack
+    this.critChance = creatorObj.critChance || 5; // Crit chance calc
+    this.critDam = creatorObj.critDam || 1.0; // Crit dam calc
   }
   // Calculate outgoing damage
   calcDamage() {
@@ -18,18 +19,24 @@ class Weapon extends Item {
     const outDamInfo = {
       isHit: true,
       isCrit: false,
-      outDam: this.baseDam, 
+      damOut: this.baseDam,
     };
     // Calc if a hit is made and return on miss
     if (applyChance(this.hitChance)) {
-      outDamInfo.isHit = false;
-      outDamInfo.outDam = 0;
+      console.log("Hit");
+      outDamInfo.isHit = true;
+      // Roll for crit strike
+      if (applyChance(this.critChance)) {
+        console.log("Crit");
+        outDamInfo.isCrit = true;
+        outDamInfo.damOut *= this.critDam;
+        return outDamInfo;
+      }
       return outDamInfo;
-    }
-    // Roll for crit strike
-    else if (applyChance(this.critChance)) {
-      outDamInfo.isCrit = true;
-      outDam *= 2;
+    } else {
+      console.log("Miss");
+      outDamInfo.isHit = false;
+      outDamInfo.damOut = 0;
       return outDamInfo;
     }
   }

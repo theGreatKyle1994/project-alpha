@@ -1,11 +1,5 @@
 class Item {
-  constructor(
-    creatorObj = {
-      name: "",
-      description: "",
-      image: "",
-    }
-  ) {
+  constructor(creatorObj) {
     this.name = creatorObj.name || "";
     this.description = creatorObj.description || "";
     this.image = creatorObj.image || "";

@@ -22,7 +22,7 @@ class Entity {
     return damIn * this.resistance;
   }
   // Base method to take damage
-  takeDamage(damIn) {
+  takeDamage({ damOut: damIn }) {
     if (this.health > 0) {
       this.health -= this.calcDefense(damIn);
     }

@@ -19,8 +19,6 @@ const usePlayer = (spawnSpaces = []) => {
       player.instance.findSpawn("random", spawnSpaces);
   }, []);
 
-  useEffect(() => console.log(player), [player]);
-
   return [player, setPlayer];
 };
 

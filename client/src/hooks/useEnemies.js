@@ -18,12 +18,6 @@ const useEnemies = (amountOfEnemies = 1, spawnSpaces = []) => {
           useCollision: true,
         })
       );
-      newEnemy.weapon = new Weapon({
-        name: "Test Weapon",
-        baseDam: 10,
-        critChance: 0.05,
-        hitChance: 0.5,
-      });
       // If map spawns are not set we skip spawn location (debug purposes)
       if (spawnSpaces.length !== 0)
         newEnemy.instance.findSpawn("random", spawnSpaces);
@@ -31,8 +25,6 @@ const useEnemies = (amountOfEnemies = 1, spawnSpaces = []) => {
     }
     setEnemies(newList);
   }, []);
-
-  useEffect(() => console.log(enemies), [enemies]);
 
   return [enemies, setEnemies];
 };
