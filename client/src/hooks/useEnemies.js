@@ -1,6 +1,7 @@
 import { useState, useMemo } from "react";
 import Enemy from "../entities/enemy/Enemy";
 import EnemyInstance from "../entities/enemy/EnemyInstance";
+import Weapon from "../entities/weapons/Weapon";
 
 const useEnemies = (amountOfEnemies = 1, spawnSpaces = []) => {
   const [enemies, setEnemies] = useState([]);
@@ -17,6 +18,7 @@ const useEnemies = (amountOfEnemies = 1, spawnSpaces = []) => {
           useCollision: true,
         })
       );
+      newEnemy.weapon = new Weapon({ name: "Axe", baseDam: 15 });
       // If map spawns are not set we skip spawn location (debug purposes)
       if (spawnSpaces.length !== 0)
         newEnemy.instance.findSpawn("random", spawnSpaces);

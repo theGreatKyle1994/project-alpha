@@ -2,7 +2,17 @@ import Item from "../Item.js";
 import { applyChance } from "../../utilities/general/functions/utilityFunctions.js";
 
 class Weapon extends Item {
-  constructor(creatorObj) {
+  constructor(
+    creatorObj = {
+      name,
+      description,
+      image,
+      hitChance,
+      baseDam,
+      critChance,
+      critDam,
+    }
+  ) {
     super({
       name: creatorObj.name,
       description: creatorObj.description,
@@ -11,13 +21,13 @@ class Weapon extends Item {
     this.hitChance = creatorObj.hitChance || 75; // Miss calc
     this.baseDam = creatorObj.baseDam || 1; // Basic attack
     this.critChance = creatorObj.critChance || 5; // Crit chance calc
-    this.critDam = creatorObj.critDam || 1.0; // Crit dam calc
+    this.critDamMult = creatorObj.critDam || 1.0; // Crit dam calc
   }
   // Calculate outgoing damage
-  calcDamage() {
+  calcDamage(type = "basic") {
     // Create base return obj
     const outDamInfo = {
-      isHit: true,
+      isHit: false,
       isCrit: false,
       damOut: this.baseDam,
     };
@@ -29,8 +39,7 @@ class Weapon extends Item {
       if (applyChance(this.critChance)) {
         console.log("Crit");
         outDamInfo.isCrit = true;
-        outDamInfo.damOut *= this.critDam;
-        return outDamInfo;
+        outDamInfo.damOut *= this.critDamMult;
       }
       return outDamInfo;
     } else {
