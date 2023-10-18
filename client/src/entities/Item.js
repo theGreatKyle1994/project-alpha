@@ -1,8 +1,14 @@
 class Item {
-  constructor(creatorObj) {
-    this.name = creatorObj.name || "";
+  constructor(
+    creatorObj = {
+      itemName: "",
+      description: "",
+      spriteSrc: "",
+    }
+  ) {
+    this.itemName = creatorObj.itemName || "";
     this.description = creatorObj.description || "";
-    this.image = creatorObj.image || "";
+    this.spriteSrc = creatorObj.spriteSrc || "";
   }
   // todo
 }

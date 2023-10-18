@@ -4,24 +4,24 @@ import { applyChance } from "../../utilities/general/functions/utilityFunctions.
 class Weapon extends Item {
   constructor(
     creatorObj = {
-      name,
-      description,
-      image,
-      hitChance,
-      baseDam,
-      critChance,
-      critDam,
+      itemName: "",
+      description: "",
+      spriteSrc: "",
+      hitChance: 0,
+      baseDam: 0,
+      critChance: 0,
+      critDamMult: 0.0,
     }
   ) {
     super({
-      name: creatorObj.name,
+      itemName: creatorObj.itemName,
       description: creatorObj.description,
-      image: creatorObj.image,
+      spriteSrc: creatorObj.spriteSrc,
     });
     this.hitChance = creatorObj.hitChance || 75; // Miss calc
     this.baseDam = creatorObj.baseDam || 1; // Basic attack
     this.critChance = creatorObj.critChance || 5; // Crit chance calc
-    this.critDamMult = creatorObj.critDam || 1.0; // Crit dam calc
+    this.critDamMult = creatorObj.critDamMult || 1.0; // Crit dam calc
   }
   // Calculate outgoing damage
   calcDamage(type = "basic") {

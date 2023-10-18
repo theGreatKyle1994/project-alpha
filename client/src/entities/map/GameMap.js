@@ -3,8 +3,8 @@ import generateMap from "../../utilities/map/map-engine";
 
 class GameMap {
   constructor(mapWidth = 0, mapHeight = 0) {
-    this.mapWidth = mapWidth;
-    this.mapHeight = mapHeight;
+    this.mapWidth = mapWidth || 1;
+    this.mapHeight = mapHeight || 1;
     this.mapLayout = [];
     this.walls = [];
     this.openSpace = [];

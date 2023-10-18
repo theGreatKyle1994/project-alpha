@@ -1,7 +1,7 @@
 import Entity from "../Entity";
 
 class Enemy extends Entity {
-  constructor(name, health) {
+  constructor(name = "", health = 0) {
     super(name, health);
   }
   // Event to trigger connection with react combat system

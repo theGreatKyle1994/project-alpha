@@ -2,7 +2,7 @@ import Entity from "../Entity";
 import { applyRange } from "../../utilities/general/functions/utilityFunctions";
 
 class Player extends Entity {
-  constructor(name, health) {
+  constructor(name = "", health = 0) {
     super(name, health);
     this.xp = 0;
     this.xpCap = 100;

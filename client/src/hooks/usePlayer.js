@@ -15,7 +15,8 @@ const usePlayer = (spawnSpaces = []) => {
         useCollision: true,
       })
     );
-    player.weapon = new Weapon({ name: "Sword", baseDam: 25 });
+    // Placeholder for testing weapons
+    player.weapon = new Weapon({ itemName: "Sword", baseDam: 25 });
     // If map spawns are not set we skip spawn location (debug purposes)
     if (spawnSpaces.length !== 0)
       player.instance.findSpawn("random", spawnSpaces);

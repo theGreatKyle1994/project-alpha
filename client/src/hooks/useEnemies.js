@@ -18,7 +18,8 @@ const useEnemies = (amountOfEnemies = 1, spawnSpaces = []) => {
           useCollision: true,
         })
       );
-      newEnemy.weapon = new Weapon({ name: "Axe", baseDam: 15 });
+      // Placeholder for testing weapons
+      newEnemy.weapon = new Weapon({ itemName: "Axe", baseDam: 15 });
       // If map spawns are not set we skip spawn location (debug purposes)
       if (spawnSpaces.length !== 0)
         newEnemy.instance.findSpawn("random", spawnSpaces);

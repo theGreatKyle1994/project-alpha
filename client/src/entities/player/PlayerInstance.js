@@ -1,7 +1,22 @@
 import Instance from "../Instance";
 
 class PlayerInstance extends Instance {
-  constructor(id, type, options) {
+  constructor(
+    id = "",
+    type = "",
+    options = {
+      pos: { x: 0, y: 0 },
+      size: { x: 0, y: 0 },
+      speed: { x: 0, y: 0, actual: 0 },
+      color: "",
+      spriteSrc: "",
+      useBounds: false,
+      usePhysics: false,
+      useCollision: false,
+      useCollisionOutline: false,
+      isStatic: false,
+    }
+  ) {
     super(id, type, options);
     this.spawnPoint = null;
   }

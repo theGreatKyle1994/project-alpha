@@ -4,19 +4,19 @@ import { generateID } from "../utilities/general/functions/utilityFunctions";
 // Be warned to all those who hate math.
 class Instance {
   constructor(
-    id,
-    type,
+    id = "",
+    type = "",
     options = {
-      pos,
-      size,
-      speed,
-      color,
-      spriteSrc,
-      useBounds,
-      usePhysics,
-      useCollision,
-      useCollisionOutline,
-      isStatic,
+      pos: { x: 0, y: 0 },
+      size: { x: 0, y: 0 },
+      speed: { x: 0, y: 0, actual: 0 },
+      color: "",
+      spriteSrc: "",
+      useBounds: false,
+      usePhysics: false,
+      useCollision: false,
+      useCollisionOutline: false,
+      isStatic: false,
     }
   ) {
     this.id = id === "" ? generateID(10) : id;

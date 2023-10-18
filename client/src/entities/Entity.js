@@ -1,13 +1,13 @@
 import { generateID } from "../utilities/general/functions/utilityFunctions";
 
 class Entity {
-  constructor(name, health) {
+  constructor(name = "", health = 0) {
     this.id = generateID(10, "#FF:");
     this.instance = null;
-    this.name = name; // Placeholder
+    this.name = name || "DefaultName"; // Placeholder
     this.level = 1; // Placeholder
     this.weapon = null; // Placeholder
-    this.health = health;
+    this.health = health || 100;
     this.maxHealth = this.health;
     this.resistance = 1.0; // 1.0 mean taking full damage. 0.5 means taking half
     this.isDead = false;

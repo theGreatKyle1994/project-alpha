@@ -1,7 +1,22 @@
 import Instance from "../Instance";
 
 class EnemyInstance extends Instance {
-  constructor(id, type, options) {
+  constructor(
+    id = "",
+    type = "",
+    options = {
+      pos: { x: 0, y: 0 },
+      size: { x: 0, y: 0 },
+      speed: { x: 0, y: 0, actual: 0 },
+      color: "",
+      spriteSrc: "",
+      useBounds: false,
+      usePhysics: false,
+      useCollision: false,
+      useCollisionOutline: false,
+      isStatic: false,
+    }
+  ) {
     super(id, type, options);
     // Setting up collision around the enemy boxes
     this.combatCollision = new Instance(this.id, "box", {
