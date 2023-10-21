@@ -6,6 +6,8 @@ import CanvasTesting from "./components/testing/CanvasTesting";
 // Core Game
 import GameCore from "./components/core/GameCore";
 import Player from "./entities/player/Player";
+//* Backend Implimentations, Feel free to move around
+import Login from "./Backend/Login";
 
 export const globalContext = createContext();
 
@@ -16,6 +18,7 @@ const App = () => {
     // Global context values used across the application
     <globalContext.Provider value={{ player, setPlayer }}>
       <Routes>
+        <Route path="/login" element={<Login />}/>
         <Route path="/entity" element={<EntityTesting />} />
         <Route path="/canvas" element={<CanvasTesting />} />
         <Route path="/game" element={<GameCore />} />
