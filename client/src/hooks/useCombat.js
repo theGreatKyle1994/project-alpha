@@ -14,8 +14,6 @@ const useCombat = (enemies, setEnemies) => {
     }
   }, [combatEnemy]);
 
-  useEffect(() => console.log(combatEnemy), [combatEnemy]);
-
   return [combatEnemy, setCombatEnemy];
 };
 
