@@ -126,7 +126,8 @@ const CombatCore = () => {
         <hr />
         <h3>Player</h3>
         <div>Turn: {String(state.isPlayerTurn)}</div>
-        <div>Damage: {player.damage}</div>
+        <div>Weapon Name: {player.weapon.itemName}</div>
+        <div>Damage: {player.weapon.baseDam}</div>
         <div>
           Health: {player.health}/{player.maxHealth}
           {player.health < player.maxHealth && (
@@ -144,7 +145,8 @@ const CombatCore = () => {
         <hr />
         <h3>Enemy</h3>
         <div>Turn: {String(state.isEnemyTurn)}</div>
-        <div>Damage: {enemy.damage}</div>
+        <div>Weapon Name: {enemy.weapon.itemName}</div>
+        <div>Damage: {enemy.weapon.baseDam}</div>
         <div>
           Health: {enemy.health}/{enemy.maxHealth}
         </div>
