@@ -2,13 +2,13 @@ import Instance from "../Instance";
 import generateMap from "../../utilities/map/map-engine";
 
 class GameMap {
-  constructor(mapWidth = 0, mapHeight = 0) {
-    this.mapWidth = mapWidth || 1;
-    this.mapHeight = mapHeight || 1;
+  constructor(mapWidth = 1, mapHeight = 1, size = 50) {
+    this.mapWidth = mapWidth;
+    this.mapHeight = mapHeight;
     this.mapLayout = [];
     this.walls = [];
     this.openSpace = [];
-    this.size = 50;
+    this.size = size;
   }
 
   // This method is called once whenever we need to generate a map
@@ -30,7 +30,7 @@ class GameMap {
           useCollision: isWall,
           isStatic: true,
           // Debug for seeing tile outlines
-          useCollisionOutline: true,
+          // useCollisionOutline: true,
         });
         // Capture walls for collision algos
         if (isWall) this.walls.push(currentTile);

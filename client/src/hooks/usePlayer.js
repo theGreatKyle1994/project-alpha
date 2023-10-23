@@ -9,7 +9,7 @@ const usePlayer = (spawnSpaces = []) => {
   useMemo(() => {
     player.setInstance(
       new PlayerInstance(player.id, "box", {
-        size: { x: 20, y: 20 },
+        size: { x: 40, y: 40 },
         speed: { x: 0, y: 0, actual: 2 },
         color: "blue",
         useCollision: true,

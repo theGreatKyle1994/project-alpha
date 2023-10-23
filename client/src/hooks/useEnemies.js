@@ -12,7 +12,7 @@ const useEnemies = (amountOfEnemies = 1, spawnSpaces = []) => {
       const newEnemy = new Enemy("Enemy", 100);
       newEnemy.setInstance(
         new EnemyInstance(newEnemy.id, "box", {
-          size: { x: 20, y: 20 },
+          size: { x: 40, y: 40 },
           speed: { x: 0, y: 0, actual: 2 },
           color: "yellow",
           useCollision: true,

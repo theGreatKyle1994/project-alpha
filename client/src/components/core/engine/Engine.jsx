@@ -18,7 +18,7 @@ const Engine = () => {
   // Grabbing canvas ref
   const canvasRef = useRef(null);
   // Creation of the map
-  const map = useMap(2, 2);
+  const map = useMap(5, 5);
   // Creation of player
   const [player, setPlayer] = usePlayer(map.openSpace);
   // Creation of enemy(s)
@@ -33,8 +33,8 @@ const Engine = () => {
     // Calculating the player position offset relative to
     // the canvas center
     const playerPosOffset = {
-      x: player.instance.pos.x - canvasRef.current.width / 2,
-      y: player.instance.pos.y - canvasRef.current.height / 2,
+      x: Math.round(player.instance.pos.x - canvasRef.current.width / 2),
+      y: Math.round(player.instance.pos.y - canvasRef.current.height / 2),
     };
     // Any onLoad functions here needed for logic setup
     map.onLoad(playerPosOffset);
