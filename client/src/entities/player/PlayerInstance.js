@@ -44,12 +44,21 @@ class PlayerInstance extends Instance {
     if (keyObj.a) this.speed.x = -this.speed.actual;
     else if (keyObj.d) this.speed.x = this.speed.actual;
     else this.speed.x = 0;
-    // diagonal movement speed adjustment, if both x and y axis are used, we
-    // apply the product of the square root of both directions by 0.5 sqrt(0.5) per axis
+    // diagonal movement speed adjustment if both x and y axis are used
     // if you comment this out you will find diagonal movement is too fast
     if (this.speed.x && this.speed.y) {
-      this.speed.x *= Math.SQRT1_2;
-      this.speed.y *= Math.SQRT1_2;
+      // Grabbing our magnitude
+      const magnitude = Math.sqrt(this.speed.x ** 2 + this.speed.y ** 2);
+      // Normalizing the speed vector
+      const normalizedSpeed = {
+        x: Math.round((this.speed.x / magnitude) * this.speed.actual),
+        y: Math.round((this.speed.y / magnitude) * this.speed.actual),
+      };
+      // Making sure our magnitude isnt exactly zero
+      if (magnitude !== 0) {
+        this.speed.x = normalizedSpeed.x;
+        this.speed.y = normalizedSpeed.y;
+      }
     }
   }
 }

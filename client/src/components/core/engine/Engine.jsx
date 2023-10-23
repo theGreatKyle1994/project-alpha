@@ -1,9 +1,11 @@
 import { useRef, useEffect, createContext, useState } from "react";
+import { updateInstanceLocation } from "../../../utilities/core/functions/updateInstanceLocation";
 import useMap from "../../../hooks/useMap";
 import usePlayer from "../../../hooks/usePlayer";
 import useEnemies from "../../../hooks/useEnemies";
 import useCombat from "../../../hooks/useCombat";
 import useControlEvents from "../../../hooks/useControlEvents";
+import useMovementHandler from "../../../hooks/useMovementHandler";
 import GameCore from "../GameCore";
 // CSS Imports
 import "../../../css/engine/engine.css";
@@ -26,7 +28,9 @@ const Engine = () => {
   // Setup of combat system
   const [combatEnemy, setCombatEnemy] = useCombat(enemies, setEnemies);
   // Setting up the controls
-  const keyObj = useControlEvents(player.instance);
+  const keyObj = useControlEvents();
+  // Setting up various instance movement when player moves
+  useMovementHandler(keyObj, player.instance);
 
   // onLoad functions to setup map and item locations
   const setupOnLoad = () => {
@@ -68,6 +72,8 @@ const Engine = () => {
         enemy.instance.render(ctx, map.walls, canvas);
         enemy.checkForCombat(player, setCombatEnemy);
       });
+      // Update instances based on player speed
+      updateInstanceLocation(player.instance, map.mapLayout, enemies);
       frameId = requestAnimationFrame(update);
     };
     update();

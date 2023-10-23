@@ -64,6 +64,9 @@ class Instance {
   // This is the method we will always call from the function
   // we pass to the engine. It's routing is already setup
   render(ctx, targets, canvas) {
+    // Required to prevent position grid lines
+    // this.pos.x = Math.round(this.pos.x);
+    // this.pos.y = Math.round(this.pos.y);
     switch (this.type) {
       case "box":
         this.drawRect(ctx);

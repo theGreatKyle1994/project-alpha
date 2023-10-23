@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const useControlEvents = (player) => {
+const useControlEvents = () => {
   // Initial key state, place any keys here to be listened for
   const [keyObj, setKeyObj] = useState({
     w: false,
@@ -33,9 +33,6 @@ const useControlEvents = (player) => {
       document.removeEventListener("keyup");
     };
   }, []);
-  // useEffect used to delegate and internal changes
-  // needed when keys are pressed
-  useEffect(() => player.checkControls(keyObj), [keyObj]);
   // returning the keyobj for the game to manage various state
   return keyObj;
 };
