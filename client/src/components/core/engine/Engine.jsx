@@ -20,7 +20,7 @@ const Engine = () => {
   // Grabbing canvas ref
   const canvasRef = useRef(null);
   // Creation of the map
-  const map = useMap(5, 5);
+  const map = useMap(10, 10);
   // Creation of player
   const [player, setPlayer] = usePlayer(map.openSpace);
   // Creation of enemy(s)
@@ -30,7 +30,7 @@ const Engine = () => {
   // Setting up the controls
   const keyObj = useControlEvents();
   // Setting up various instance movement when player moves
-  useMovementHandler(keyObj, player.instance);
+  useMovementHandler(canvasRef.current, keyObj, player.instance);
 
   // onLoad functions to setup map and item locations
   const setupOnLoad = () => {
@@ -67,6 +67,7 @@ const Engine = () => {
       map.renderMap(ctx);
       // Render player and check for collisions
       player.instance.render(ctx, map.walls, canvas);
+      player.instance.checkBoundsCollision(canvas, 500);
       // Render enemies and check for valid collisions
       enemies.forEach((enemy) => {
         enemy.instance.render(ctx, map.walls, canvas);
