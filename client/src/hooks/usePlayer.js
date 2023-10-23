@@ -10,10 +10,9 @@ const usePlayer = (spawnSpaces = []) => {
     player.setInstance(
       new PlayerInstance(player.id, "box", {
         size: { x: 40, y: 40 },
-        speed: { x: 0, y: 0, actual: 3 },
+        speed: { x: 0, y: 0, actual: 2 },
         color: "blue",
         useCollision: true,
-        isStatic: true,
       })
     );
     // Placeholder for testing weapons

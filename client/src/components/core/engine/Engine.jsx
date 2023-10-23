@@ -1,5 +1,5 @@
 import { useRef, useEffect, createContext, useState } from "react";
-import { updateInstanceLocation } from "../../../utilities/core/functions/updateInstanceLocation";
+import { updateInstanceLocation } from "../../../utilities/core/functions/engine/updateInstanceLocation";
 import useMap from "../../../hooks/useMap";
 import usePlayer from "../../../hooks/usePlayer";
 import useEnemies from "../../../hooks/useEnemies";

@@ -11,7 +11,6 @@ class EnemyInstance extends Instance {
       color: "",
       spriteSrc: "",
       useBounds: false,
-      usePhysics: false,
       useCollision: false,
       useCollisionOutline: false,
       isStatic: false,

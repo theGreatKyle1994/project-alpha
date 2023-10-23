@@ -1,4 +1,5 @@
 import Instance from "../Instance";
+import { normalizeVector } from "../../utilities/core/functions/math/assortedMath";
 
 class PlayerInstance extends Instance {
   constructor(
@@ -11,7 +12,6 @@ class PlayerInstance extends Instance {
       color: "",
       spriteSrc: "",
       useBounds: false,
-      usePhysics: false,
       useCollision: false,
       useCollisionOutline: false,
       isStatic: false,
@@ -47,18 +47,7 @@ class PlayerInstance extends Instance {
     // diagonal movement speed adjustment if both x and y axis are used
     // if you comment this out you will find diagonal movement is too fast
     if (this.speed.x && this.speed.y) {
-      // Grabbing our magnitude
-      const magnitude = Math.sqrt(this.speed.x ** 2 + this.speed.y ** 2);
-      // Normalizing the speed vector
-      const normalizedSpeed = {
-        x: Math.round((this.speed.x / magnitude) * this.speed.actual),
-        y: Math.round((this.speed.y / magnitude) * this.speed.actual),
-      };
-      // Making sure our magnitude isnt exactly zero
-      if (magnitude !== 0) {
-        this.speed.x = normalizedSpeed.x;
-        this.speed.y = normalizedSpeed.y;
-      }
+      this.speed = normalizeVector(this.speed);
     }
   }
 }

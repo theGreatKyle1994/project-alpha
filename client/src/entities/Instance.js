@@ -13,7 +13,6 @@ class Instance {
       color: "",
       spriteSrc: "",
       useBounds: false,
-      usePhysics: false,
       useCollision: false,
       useCollisionOutline: false,
       isStatic: false,
@@ -27,7 +26,6 @@ class Instance {
     this.color = options.color || "black";
     this.spriteSrc = options.spriteSrc || "";
     this.useBounds = options.useBounds || false;
-    this.usePhysics = options.usePhysics || false;
     this.useCollision = options.useCollision || false;
     this.useCollisionOutline = options.useCollisionOutline || false;
     this.isStatic = options.isStatic || false;
@@ -64,9 +62,9 @@ class Instance {
   // This is the method we will always call from the function
   // we pass to the engine. It's routing is already setup
   render(ctx, targets, canvas) {
-    // Required to prevent position grid lines
-    // this.pos.x = Math.round(this.pos.x);
-    // this.pos.y = Math.round(this.pos.y);
+    // Required to prevent gridding
+    this.pos.x = Math.floor(this.pos.x);
+    this.pos.y = Math.floor(this.pos.y);
     switch (this.type) {
       case "box":
         this.drawRect(ctx);
@@ -130,53 +128,12 @@ class Instance {
     }
   }
   // Our method used to have our instance react after colliding
-  handleCollision(target) {
-    if (!this.usePhysics) {
-      // Pushing back a few pixels to prevent collision vacuum
-      this.pos.x -= this.speed.x;
-      this.pos.y -= this.speed.y;
-      target.pos.x -= target.speed.x;
-      target.pos.y -= target.speed.y;
-      this.speed.x = 0;
-      this.speed.y = 0;
-      target.speed.x = 0;
-      target.speed.y = 0;
-    } else {
-      // Calc the collision vector
-      const vCollision = {
-        x: target.pos.x - this.pos.x,
-        y: target.pos.y - this.pos.y,
-      };
-      // Calc the distance of the collision vector
-      const distance = Math.sqrt(
-        (target.pos.x - this.pos.x) * (target.pos.x - this.pos.x) +
-          (target.pos.y - this.pos.y) * (target.pos.y - this.pos.y)
-      );
-      // Calc the normalized collision vector
-      const vCollisionNorm = {
-        x: vCollision.x / distance,
-        y: vCollision.y / distance,
-      };
-      // Calc collision velocity/speed
-      const vRelativeVelocity = {
-        x: this.speed.x - target.speed.x,
-        y: this.speed.y - target.speed.y,
-      };
-      const speed =
-        vRelativeVelocity.x * vCollisionNorm.x +
-        vRelativeVelocity.y * vCollisionNorm.y;
-      // Check speed direction towards or away from target
-      if (speed < 0) {
-        return;
-      }
-      // Assigning new values
-      this.speed.x -= speed * vCollisionNorm.x;
-      this.speed.y -= speed * vCollisionNorm.y;
-      if (!target.isStatic) {
-        target.speed.x += speed * vCollisionNorm.x;
-        target.speed.y += speed * vCollisionNorm.y;
-      }
-    }
+  handleCollision() {
+    // Pushing back a few pixels to prevent collision vacuum
+    this.pos.x -= this.speed.x;
+    this.pos.y -= this.speed.y;
+    this.speed.x = 0;
+    this.speed.y = 0;
   }
   // Checking canvas bounds collision
   checkBoundsCollision(canvas) {
