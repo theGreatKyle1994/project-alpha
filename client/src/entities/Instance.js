@@ -143,43 +143,30 @@ class Instance {
         {
           // Checking left bound collision
           if (this.pos.x < 0) {
-            if (this.usePhysics) {
-              this.speed.x *= -1;
-            } else {
-              this.pos.x = 0;
-              this.speed.x = 0;
-              this.speed.y = 0;
-            }
+            this.pos.x = 0;
+            this.speed.x = 0;
+            this.speed.y = 0;
           }
+
           // Checking right bound collision
           if (this.pos.x > canvas.width - this.size.x) {
-            if (this.usePhysics) {
-              this.speed.x *= -1;
-            } else {
-              this.pos.x = canvas.width - this.size.x;
-              this.speed.x = 0;
-              this.speed.y = 0;
-            }
+            this.pos.x = canvas.width - this.size.x;
+            this.speed.x = 0;
+            this.speed.y = 0;
           }
+
           // Checking top bound collision
           if (this.pos.y < 0) {
-            if (this.usePhysics) {
-              this.speed.y *= -1;
-            } else {
-              this.pos.y = 0;
-              this.speed.x = 0;
-              this.speed.y = 0;
-            }
+            this.pos.y = 0;
+            this.speed.x = 0;
+            this.speed.y = 0;
           }
+
           // Checking bottom bound collision
           if (this.pos.y > canvas.height - this.size.y) {
-            if (this.usePhysics) {
-              this.speed.y *= -1;
-            } else {
-              this.pos.y = canvas.height - this.size.y;
-              this.speed.x = 0;
-              this.speed.y = 0;
-            }
+            this.pos.y = canvas.height - this.size.y;
+            this.speed.x = 0;
+            this.speed.y = 0;
           }
         }
         break;
@@ -187,43 +174,28 @@ class Instance {
         {
           // Checking left bound collision
           if (this.pos.x - this.size.x < 0) {
-            if (this.usePhysics) {
-              this.speed.x *= -1;
-            } else {
-              this.pos.x = 0 + this.size.x;
-              this.speed.x = 0;
-              this.speed.y = 0;
-            }
+            this.pos.x = 0 + this.size.x;
+            this.speed.x = 0;
+            this.speed.y = 0;
           }
+
           // Checking right bound collision
           if (this.pos.x > canvas.width - this.size.x) {
-            if (this.usePhysics) {
-              this.speed.x *= -1;
-            } else {
-              this.pos.x = canvas.width - this.size.x;
-              this.speed.x = 0;
-              this.speed.y = 0;
-            }
+            this.pos.x = canvas.width - this.size.x;
+            this.speed.x = 0;
+            this.speed.y = 0;
           }
           // Checking top bound collision
           if (this.pos.y - this.size.y < 0) {
-            if (this.usePhysics) {
-              this.speed.y *= -1;
-            } else {
-              this.pos.y = 0 + this.size.y;
-              this.speed.x = 0;
-              this.speed.y = 0;
-            }
+            this.pos.y = 0 + this.size.y;
+            this.speed.x = 0;
+            this.speed.y = 0;
           }
           // Checking bottom bound collision
           if (this.pos.y > canvas.height - this.size.y) {
-            if (this.usePhysics) {
-              this.speed.y *= -1;
-            } else {
-              this.pos.y = canvas.height - this.size.y;
-              this.speed.x = 0;
-              this.speed.y = 0;
-            }
+            this.pos.y = canvas.height - this.size.y;
+            this.speed.x = 0;
+            this.speed.y = 0;
           }
         }
         break;
