@@ -27,6 +27,11 @@ class Enemy extends Entity {
       return false;
     }
   }
+  // Update any internal enemy needs on level load
+  onLoad(playerPosOffset) {
+    this.instance.pos.x -= playerPosOffset.x;
+    this.instance.pos.y -= playerPosOffset.y;
+  }
 }
 
 export default Enemy;

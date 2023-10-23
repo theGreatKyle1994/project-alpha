@@ -1,4 +1,4 @@
-import { useRef, useEffect, createContext } from "react";
+import { useRef, useEffect, createContext, useState } from "react";
 import useMap from "../../../hooks/useMap";
 import usePlayer from "../../../hooks/usePlayer";
 import useEnemies from "../../../hooks/useEnemies";
@@ -13,6 +13,9 @@ export const globalContext = createContext({});
 // use player. to access player data
 // use player.instance. to access the canvas variant
 const Engine = () => {
+  // Setting up level onload state
+  const [isLevelSetup, setIsLevelSetup] = useState(false);
+  // Grabbing canvas ref
   const canvasRef = useRef(null);
   // Creation of the map
   const map = useMap(2, 2);
@@ -25,6 +28,23 @@ const Engine = () => {
   // Setting up the controls
   const keyObj = useControlEvents(player.instance);
 
+  // onLoad functions to setup map and item locations
+  const setupOnLoad = () => {
+    // Calculating the player position offset relative to
+    // the canvas center
+    const playerPosOffset = {
+      x: player.instance.pos.x - canvasRef.current.width / 2,
+      y: player.instance.pos.y - canvasRef.current.height / 2,
+    };
+    // Any onLoad functions here needed for logic setup
+    map.onLoad(playerPosOffset);
+    player.onLoad(canvasRef.current);
+    enemies.forEach((enemy) => enemy.onLoad(playerPosOffset));
+    // This is required to keep this function from running
+    // more then once per level state change
+    setIsLevelSetup(true);
+  };
+
   // Creation of the canvas
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -32,6 +52,8 @@ const Engine = () => {
     canvas.height = innerHeight;
     const ctx = canvas.getContext("2d");
     let frameId = 0;
+    // This needs to be run only once per level setup
+    if (!isLevelSetup) setupOnLoad();
     // Eveything we need rendered per frame goes here
     // passed through context
     const update = () => {
@@ -48,9 +70,7 @@ const Engine = () => {
       });
       frameId = requestAnimationFrame(update);
     };
-
     update();
-
     return () => {
       cancelAnimationFrame(frameId);
     };
@@ -62,7 +82,6 @@ const Engine = () => {
       canvasRef.current.width = innerWidth;
       canvasRef.current.height = innerHeight;
     });
-
     return () => {
       removeEventListener("resize");
     };

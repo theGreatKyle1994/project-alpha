@@ -40,7 +40,13 @@ class GameMap {
       }
     }
   }
-
+  // Update any internal map needs on level load
+  onLoad(playerPosOffset) {
+    for (let tile of this.mapLayout) {
+      tile.pos.x -= playerPosOffset.x;
+      tile.pos.y -= playerPosOffset.y;
+    }
+  }
   // Map render method, this is called directly from the Engine
   renderMap(ctx) {
     // Calling render on each tile per frame
