@@ -5,7 +5,6 @@ const useMovementHandler = (canvas, keyObj, player) => {
   // when keys are pressed
   useEffect(() => {
     player.checkControls(keyObj);
-    console.log(player.speed);
   }, [keyObj]);
 };
 
