@@ -1,4 +1,4 @@
-const { round, sqrt } = Math;
+const { sqrt } = Math;
 
 export const normalizeVector = (vectorIn = { x: 0, y: 0, actual: 1 }) => {
   const vector = vectorIn;

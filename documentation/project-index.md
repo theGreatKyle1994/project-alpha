@@ -70,5 +70,5 @@
   This game project isn't using an established game engine. This choice was made
   so devs can have a better idea of how a core html canvas and react game can be
   made. You can see how our major files work
-  <a href="./table-of-contents/table-of-contents.md">here</a>.
+  <a href="./table-of-contents/table-of-contents.md">HERE</a>.
 </p>

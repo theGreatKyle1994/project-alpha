@@ -1,0 +1,127 @@
+<h1>Table of Contents</h1>
+<p>
+  Project-Alpha uses 2 major catagories to determine how data is split up and
+  designed: <b>Instance data</b> and <b>Functional data</b>. Instance data is
+  any code/logic for the Canvas system while Functional data relates to the
+  React system.
+</p>
+
+<h2>Data Types Examples</h2>
+<ul>
+  <li>
+    Instance Data
+    <ul>
+      <li>Sprites</li>
+      <li>Movement</li>
+      <li>Particle Effects</li>
+      <li>Collision Detection</li>
+      <li>Projectiles</li>
+      <li>Animations</li>
+    </ul>
+  </li>
+  <li>
+    Functional Data
+    <ul>
+      <li>UI</li>
+      <li>Combat Functionality</li>
+      <li>Item/Weapon/Enemy Generation</li>
+      <li>Various World Logic</li>
+      <li>Inventories</li>
+      <li>Questing</li>
+    </ul>
+  </li>
+</ul>
+
+<h2>Source File</h2>
+<p>
+  Our source file is technically App.jsx. This file is where any all all routes
+  will be defined. The main game however, launches directly from Engine.jsx.
+  This file drives and branches out into all other functionality across the
+  application.
+</p>
+
+<h2>Glossary</h2>
+<ul>
+  <li>
+    Main Files
+    <ul>
+      <li><a href="">App.jsx</a></li>
+      <li><a href="">Engine.jsx</a></li>
+    </ul>
+  </li>
+  <li>
+    Core Files
+    <ul>
+      <li><a href="">GameCore.jsx</a></li>
+      <li><a href="">CombatCore.jsx</a></li>
+      <li><a href="">UICore.jsx</a></li>
+    </ul>
+  </li>
+  <li>
+    Custom Hooks
+    <ul>
+      <li><a href="">usePlayer.js</a></li>
+      <li><a href="">useEnemies.js</a></li>
+      <li><a href="">useCombat.js</a></li>
+      <li><a href="">useMap.js</a></li>
+      <li><a href="">useControlEvents.js</a></li>
+      <li><a href="">useMovementHandler.js</a></li>
+      <li><a href="">useUIEvents.js</a></li>
+    </ul>
+  </li>
+  <li>
+    Entities
+    <ul>
+      <li><a href="">Entity.js</a></li>
+      <li><a href="">Item.js</a></li>
+      <li><a href="">GameMap.js</a></li>
+      <li><a href="">Player.js</a></li>
+      <li><a href="">Enemy.js</a></li>
+      <li><a href="">Weapon.js</a></li>
+    </ul>
+  </li>
+  <li>
+    Instances
+    <ul>
+      <li><a href="">Instance.js</a></li>
+      <li><a href="">PlayerInstance.js</a></li>
+      <li><a href="">EnemyInstance.js</a></li>
+    </ul>
+  </li>
+  <li>
+    Components
+    <ul>
+      <li>
+        UI
+        <ul>
+          <li><a href="">InventoryMenu.jsx</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li>
+    Utilities
+    <ul>
+      <li>
+        Engine
+        <ul>
+          <li><a href="">updateInstanceLocation.js</a></li>
+          <li><a href="">assortedMath.js</a></li>
+        </ul>
+      </li>
+      <li>
+        Combat
+        <ul>
+          <li><a href="">playerCombatRouting.js</a></li>
+          <li><a href="">enemyCombatRouting.js</a></li>
+        </ul>
+      </li>
+      <li>
+        General
+        <ul>
+          <li><a href="">utilityFunctions.js</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
