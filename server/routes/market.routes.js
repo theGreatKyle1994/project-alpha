@@ -2,6 +2,5 @@
 //TODO Create a Market Model
 
 module.exports = (app) => {
-    //TODO Routes
-    
-}
+  //TODO Routes
+};

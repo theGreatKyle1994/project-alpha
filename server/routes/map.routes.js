@@ -2,5 +2,5 @@
 //TODO Create map Model
 
 module.exports = (app) => {
-    //TODO Routes
-}
+  //TODO Routes
+};

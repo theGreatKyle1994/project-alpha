@@ -6,7 +6,7 @@ module.exports = (app) => {
   app.post("/api/register", UserController.registerUser);
   app.post("/api/login", UserController.loginUser);
   app.post("/api/logout", UserController.logoutUser);
-  
+
   //*  CRUD functions
   //? Finds all users
   app.get("/api/users", UserController.findAllUsers);
@@ -15,5 +15,5 @@ module.exports = (app) => {
   //? Updates current user
   app.patch("/api/updateUser", UserController.updateUser);
   //! Deletes user
-  app.delete("/api/deleteUser", UserController.deleteUser)
+  app.delete("/api/deleteUser", UserController.deleteUser);
 };

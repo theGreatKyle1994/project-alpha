@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { isEmail } = require("validator")
+const { isEmail } = require("validator");
 
 const PlayerSchema = new mongoose.Schema(
   {
@@ -13,14 +13,14 @@ const PlayerSchema = new mongoose.Schema(
       type: String,
       required: [true, "Email is required"],
       validate: [isEmail, "Invalid email address"],
-      unique: true
+      unique: true,
     },
     //! Required Information to REGISTER
     password: {
       type: String,
       required: [true, "Password is required"],
-      minlength: [8, "Password must be at least 8 characters"]
-    }
+      minlength: [8, "Password must be at least 8 characters"],
+    },
   },
   { timestamps: true }
 );

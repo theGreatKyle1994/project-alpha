@@ -6,7 +6,9 @@ module.exports = {
   //* Register user
   registerUser: async (req, res) => {
     // Making sure Username/Email isn't taken
-    const potentialUser = await User.findOne({ username: req.body.username}) || await User.findOne({ email: req.body.email });
+    const potentialUser =
+      (await User.findOne({ username: req.body.username })) ||
+      (await User.findOne({ email: req.body.email }));
     // If username/email is free, create user
     if (!potentialUser) {
       await User.create(req.body)
@@ -40,7 +42,7 @@ module.exports = {
   //* Login user
   loginUser: async (req, res) => {
     // Find User
-    const potentialUser = await User.findOne({ username: req.body.username })
+    const potentialUser = await User.findOne({ username: req.body.username });
     // If user exists, compare passwords
     if (potentialUser) {
       // Compare passwords
@@ -94,33 +96,42 @@ module.exports = {
 module.exports.findAllUsers = (req, res) => {
   User.find()
     .then((allUsers) => res.json(allUsers))
-    .catch((err) => {res.status(400).json({message: "Something went wrong finding all users", error: err});
-  });
-}
+    .catch((err) => {
+      res
+        .status(400)
+        .json({
+          message: "Something went wrong finding all users",
+          error: err,
+        });
+    });
+};
 
 //* Finds one user
 
 module.exports.findOneUser = (req, res) => {
-  User.findById({_id: req.params._id})
-  .then((oneUser) => res.json(oneUser))
-    .catch((err) => {res.status(400).json({message: "Something went wrong finding one user", error: err});
-  });
-}
+  User.findById({ _id: req.params._id })
+    .then((oneUser) => res.json(oneUser))
+    .catch((err) => {
+      res
+        .status(400)
+        .json({ message: "Something went wrong finding one user", error: err });
+    });
+};
 
 //* Update
 module.exports.updateUser = (req, res) => {
   //* Finds the current users ID and the forms information
-  User.findByIdAndUpdate({_id: req.params._id}, req.body, {
+  User.findByIdAndUpdate({ _id: req.params._id }, req.body, {
     //* Acts like a new user registration, runs the validations along with it
     new: true,
     runValidators: true,
   })
-  .then((updatedUser) => {
-    res.json(updatedUser);
-  })
-  .catch((err) => {
-    res.status(400).json({ message: "Error Updating User", error: err });
-  });
+    .then((updatedUser) => {
+      res.json(updatedUser);
+    })
+    .catch((err) => {
+      res.status(400).json({ message: "Error Updating User", error: err });
+    });
 };
 //* Delete
 
