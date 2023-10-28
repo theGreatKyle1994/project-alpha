@@ -4,7 +4,7 @@ import EntityTesting from "./components/testing/EntityTesting";
 import CanvasTesting from "./components/testing/CanvasTesting";
 // Core Game
 import Engine from "./components/core/engine/Engine";
-import LoginCore from "./Backend/LoginCore";
+import LoginCore from "./components/backend/LoginCore";
 
 const App = () => {
   return (
