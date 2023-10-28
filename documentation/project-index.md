@@ -53,22 +53,24 @@
   Project-Alpha is a randomly generated turn-based 2D Roguelike with light
   multiplayer features. The gameplay loop will consist of a floor progression
   system utilizing the core combat system. The player is expected to fight, loot
-  and scavange what they can from a randomly generated world in order to go
+  and scavange what they can from a randomly generated world in order to survive
   against tougher enemies in upcoming floors. Enemies will have generated and
   scaled inventories to keep the player looking for better gear to get a
   competitive edge. Win conditions won't typically rely on killing all enemies
-  but rather simply finding the exit. If the player deems themselves ready to
-  move foreward to the next floor then nothing will stop them. On player death,
-  the current game is lost. Though, a special currency is planned to make any
-  run worth it to some extent by spending it on starting gear for the next run
-  attempt. Shop systems and a out-of-game player stash is planned. No current
-  information regarding questing.
+  but simply finding the exit. If the player deems themselves ready to move
+  forward to the next floor, nothing will stop them, but strong enemies will
+  attempt to hinder progress ad-infinitum until either the enemy or player is
+  killed. When the player's health reaches zero, the player dies and the current
+  game is lost. Though, players can accrue a special in-game currency after each
+  run, allowing for improved starting gear to be purchased for the next game.
+  Shop systems and a out-of-game player stash is planned. As of this time, there
+  is no information available regarding questing.
 </p>
 
 <h2>File Documentation</h2>
 <p>
   This game project isn't using an established game engine. This choice was made
-  so devs can have a better idea of how a core html canvas and react game can be
+  so devs can have a better idea of how a core HTML Canvas and React game can be
   made. You can see how our major files work
   <a href="./table-of-contents/table-of-contents.md">HERE</a>.
 </p>
