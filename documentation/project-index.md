@@ -48,4 +48,6 @@ is no information available regarding questing.
 
 This game project isn't using an established game engine. This choice was made
 so devs can have a better idea of how a core HTML Canvas and React game can be
-made. You can see how our major files work [HERE](./table-of-contents/table-of-contents.md).
+made.
+
+### [Table Of Contents](./table-of-contents/table-of-contents.md)
