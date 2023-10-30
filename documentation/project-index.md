@@ -4,7 +4,7 @@ This is a overview of some of the main files/technologies at work in Project-Alp
 
 ## Overview
 
-Project-Alpha is built on traditional MERN technology and takes quite a bit of use from the frontend to serve most logic and content. The backend is mainly a source of cloud saving but is open for ideas to make the game more feature rich. HTML5 Canvas is being used as our 2D drawing system while React.js is used for our UI system.
+Project-Alpha is built on traditional MERN technology and takes quite a bit of use from the frontend to serve most logic and content. The backend is mainly a source of cloud saving but is open for ideas to make the game more feature rich. HTML5 Canvas is being used as the 2D drawing system while React.js is used for the UI system.
 
 ## Current Project Technologies
 
