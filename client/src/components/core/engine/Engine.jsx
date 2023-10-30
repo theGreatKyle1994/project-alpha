@@ -20,7 +20,7 @@ const Engine = () => {
   // Grabbing canvas ref
   const canvasRef = useRef(null);
   // Creation of the map
-  const map = useMap(10, 10);
+  const map = useMap(1, 1);
   // Creation of player
   const [player, setPlayer] = usePlayer(map.openSpace);
   // Creation of enemy(s)
@@ -81,7 +81,7 @@ const Engine = () => {
     return () => {
       cancelAnimationFrame(frameId);
     };
-  }, [map, enemies, combatEnemy, player]);
+  }, []);
 
   // Resize event for the canvas
   useEffect(() => {

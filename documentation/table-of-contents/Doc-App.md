@@ -1,6 +1,6 @@
 # App.jsx
 
-Our App.jsx route file is like any other one. Here we assign various routes using custom components.
+Our App.jsx route file is like any other one. Here, we assign various routes using custom components.
 
 ## Current Routes
 
@@ -11,9 +11,9 @@ Our App.jsx route file is like any other one. Here we assign various routes usin
 | /entity (testing) |  various entity value/method testing   |
 | /canvas (testing) | 2D canvas instance testing environment |
 
-_Any routes may come and go. Feel free to create a testing route and component to isolate your testing environment._
+_Any routes are subject to change. Feel free to create a testing route and component to isolate your testing environment._
 
-Here is an example of a custom route using a custom component:
+Here is an example of a route using a custom component:
 
 ```jsx
 import MyComponent from "./components/MyComponent";
