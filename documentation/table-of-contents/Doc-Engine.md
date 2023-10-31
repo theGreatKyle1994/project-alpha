@@ -1,6 +1,6 @@
 # Engine.jsx
 
-Welcome to the root of the project! Every thing that makes Project-Alpha tick is routed through this file. There is a lot going on in this file, so we will break it into categories to understand the role and order of everything inside.
+Welcome to the root of the project! Everything that makes Project-Alpha tick is routed through this file. There is a lot going on in this file which will be broken down into categories to better understand the role and order of everything inside.
 
 The flow of this file is as follows:
 
@@ -19,9 +19,9 @@ const map = useMap(1, 1);
 const [player, setPlayer] = usePlayer(map.openSpace);
 ```
 
-Once the map is generated we can send in the available spawn locations into the player hook.
+Once the map is generated, it can send the available spawn locations into the player hook.
 
-Every hook we create and use is meant to _prepare_ the game for the user. Here are a few ecamples of what hooks are meant to do:
+Every hook that is created and used is meant to _prepare_ the game for the user. Here are a few functions of the game's custom hooks:
 
 - Generating random enemies
 - Setting up the player
@@ -32,23 +32,21 @@ These are all examples of logic that must be constructed before the game can tru
 
 ## useEffect()
 
-Currently, we have two useEffects, The first useEffect is ran only once directly after Engine.jsx mounts. It directly sets up the canvas element and extracts the context system we need which is filled with various methods and properties used to add, remove and move the various Instances accross the canvas system.
+Currently, there are two useEffects. The first useEffect is ran once directly after Engine.jsx mounts. It sets up the canvas element and extracts the context system we need which is filled with various methods and properties used to add, remove and move the various Instances accross the canvas system.
 
-### NOTE: _Make sure nothing is in the first useEffect dependency array. We let React handle state changes and the Instance code to control the canvas. Filling in this dependency array takes the control away from the Instances which is not ideal._
+### NOTE: _Make sure nothing is in the first useEffect dependency array. React handles state changes and the Instance system controls the canvas. Filling in this dependency array takes the control away from the Instances which is not ideal._
 
-The second useEffect adds event listeners to listen for screen resolution changes. This is good for debug purposes in the browser but may be removed for production. _Take note that every pixel that the canvas is resized, forces a rerender._
+The second useEffect adds event listeners to listen for screen resolution changes. This is good for debug purposes in the browser but may be removed for production. _Take note that for every pixel that the canvas is resized, a rerender is forced._
 
 ## Canvas
 
-The root of everything visual (non-text) is displayed and manipulated through HTML5's canvas context system. Since React loves to rerender on state change (and a game typically has tons of state changes), we require the canvas to be bound to a reference to keep the frames in sync at all times.
-
-The canvas ref is global through the context system.
+The root of everything visual (non-text) is displayed and manipulated through HTML5's canvas context system. Since React loves to rerender on state change (and a game typically has tons of state changes), it is required that the canvas is bound to a reference to keep the frames in sync at all times.
 
 ## setupOnLoad()
 
 This function is called before the frame loop (update) starts in the useEffect. It runs once to setup any level post-load criteria that must be fulfilled before gameplay can start.
 
-Ideally, anything you place inside setupOnLoad should come with an onLoad() method like so:
+Ideally, anything placed inside setupOnLoad should come with an onLoad() method like so:
 
 ```javascript
 // Move map tiles based on player spawn offset
@@ -70,20 +68,20 @@ const [isLevelSetup, setIsLevelSetup] = useState(false);
 
 ## update()
 
-Our update function is called inside the useEffect to render the game in a frame-by-frame format. Since React only calls useEffect once with an empty dependency array, we need to call a special function to start the loop in the background.
+The update function is called inside the useEffect to render the game in a frame-by-frame format. Since React only calls useEffect once with an empty dependency array, it's required to call a special function to start the loop in the background.
 
 ```javascript
 requestAnimationFrame(update);
 ```
 
-Once this function is called and we pass in the update function reference, it runs the update function _60 times a second_. Whatever functions you put inside update **must be performance conscious**. Anything you want to _update_ per frame is placed inside this function.
+Once this function is called and the update function reference is passed in, it runs the update function _60 times a second_. Whatever functions one puts inside update **must be performance conscious**. Anything needing to be _updated_ per frame is placed inside this function.
 
 An example of something that needs to be updated per frame is player movement and canvas bounds checking:
 
 ```javascript
 // Player is rendered and sends in collision Instances to check per frame
 player.instance.render(ctx, map.walls, canvas);
-// Player s checked against the bounds of the canvas for fluid map movement
+// Player is checked against the bounds of the canvas for fluid map movement
 player.instance.checkBoundsCollision(canvas, 500);
 ```
 
@@ -107,7 +105,7 @@ Engine.jsx is the host of all the various global values used throughout the appl
 }
 ```
 
-Access any of these by importing useContext() from react and the globalContext variable. Simply deconstruct whatever value you want to access, like so:
+Access any of these by importing useContext() from react and the globalContext variable. Simply deconstruct whatever accessible value is targetedF, like so:
 
 ```javascript
 import { useContext } from "react";
