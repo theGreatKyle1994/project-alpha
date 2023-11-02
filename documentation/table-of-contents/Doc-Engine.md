@@ -6,7 +6,7 @@ The flow of this file is as follows:
 
 #### [**Hooks**](#hooks) _->_ [**useEffect()**](#useeffect) _->_ [**Canvas**](#canvas) _->_ [**setupOnLoad()**](#setuponload) _->_ [**update()**](#update)
 
-## Hooks
+## Custom Hooks
 
 Custom hooks are used to abstract state and hold internal functionality for setting up various game components. Most of these hooks rely on another being loaded before they can function correctly. Order **does** matter. The map needs to be created before the player can be made as it would be impossible to find a spawn point with a non-existant map.
 
@@ -29,6 +29,8 @@ Every hook that is created and used is meant to _prepare_ the game for the user.
 - Adding key control listeners
 
 These are all examples of logic that must be constructed before the game can truly start.
+
+Custom hooks are typically the result of needing abstracted logic outside of a JSX component. They can be used outside Engine.jsx and can also be used in Core Module files. See [GameCore](./Doc-GameCore.md) for more information.
 
 ## useEffect()
 
@@ -127,6 +129,6 @@ const { player } = useContext(globalContext);
 
 ### Components
 
-- [GameCore.jsx]()
+- [GameCore.jsx](./Doc-GameCore.md)
 
 ### [Table Of Contents](./table-of-contents.md)
