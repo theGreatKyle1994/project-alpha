@@ -35,7 +35,7 @@ Our source file is indirectly App.jsx. This file is where any routes are defined
 
 **Core Files**
 
-- [GameCore.jsx]()
+- [GameCore.jsx](./Doc-GameCore.md)
 - [CombatCore.jsx]()
 - [UICore.jsx]()
 

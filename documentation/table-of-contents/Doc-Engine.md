@@ -1,6 +1,6 @@
 # Engine.jsx
 
-Welcome to the root of the project! Everything that makes Project-Alpha tick is routed through this file. There is a lot going on in this file which will be broken down into categories to better understand the role and order of everything inside.
+Welcome to the root of the project! Everything that makes Project-Alpha tick is routed through this file. This file is host to the [GameCore.jsx](./Doc-GameCore.md) file which is used to import most core systems in the game. There is a lot going on in this file which will be broken down into categories to better understand the role and order of everything inside.
 
 The flow of this file is as follows:
 
@@ -89,7 +89,7 @@ player.instance.checkBoundsCollision(canvas, 500);
 
 ## Global Context
 
-Engine.jsx is the host of all the various global values used throughout the application. Most of these are created from custom hooks. However, some may come from other origins like the canvas ref. The current available values are:
+Engine.jsx is the host of all the various global values used throughout the /game route. Most of these are created from custom hooks. However, some may come from other origins like the canvas ref. The current available values are:
 
 ```javascript
 {
@@ -105,7 +105,7 @@ Engine.jsx is the host of all the various global values used throughout the appl
 }
 ```
 
-Access any of these by importing useContext() from react and the globalContext variable. Simply deconstruct whatever accessible value is targetedF, like so:
+Access any of these by importing useContext() from react and the globalContext variable. Simply deconstruct whatever accessible value is targeted, like so:
 
 ```javascript
 import { useContext } from "react";
