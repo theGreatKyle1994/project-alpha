@@ -12,11 +12,11 @@ class GameMap {
   }
 
   // This method is called once whenever we need to generate a map
-  createMap() {
+  createMap(chunkSize) {
     // Clears out previous map
     this.mapLayout = [];
     // Placeholder for testing, internal integration needed
-    const map = generateMap(this.mapHeight, this.mapWidth);
+    const map = generateMap(this.mapHeight, this.mapWidth, chunkSize);
     // Map creation loop using instances
     for (let i = 0; i < map.length; i++) {
       for (let j = 0; j < map[i].length; j++) {

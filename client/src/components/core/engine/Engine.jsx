@@ -20,7 +20,7 @@ const Engine = () => {
   // Grabbing canvas ref
   const canvasRef = useRef(null);
   // Creation of the map
-  const map = useMap(1, 1);
+  const map = useMap(2, 2, 10);
   // Creation of player
   const [player, setPlayer] = usePlayer(map.openSpace);
   // Creation of enemy(s)
