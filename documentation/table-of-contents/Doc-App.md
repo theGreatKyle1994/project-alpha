@@ -1,6 +1,6 @@
 # App.jsx
 
-Our App.jsx route file is like any other one. Here, we assign various routes using custom components.
+Our App.jsx routing file is like any other one. Here, we assign various routes using custom components.
 
 ## Current Routes
 

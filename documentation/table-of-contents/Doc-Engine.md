@@ -4,7 +4,7 @@ Welcome to the root of the project! Everything that makes Project-Alpha tick is 
 
 The flow of this file is as follows:
 
-#### [**Hooks**](#hooks) _->_ [**useEffect()**](#useeffect) _->_ [**Canvas**](#canvas) _->_ [**setupOnLoad()**](#setuponload) _->_ [**update()**](#update)
+#### [**Custom Hooks**](#custom-hooks) _->_ [**useEffect()**](#useeffect) _->_ [**Canvas**](#canvas) _->_ [**setupOnLoad()**](#setuponload) _->_ [**update()**](#update)
 
 ## Custom Hooks
 
@@ -30,7 +30,9 @@ Every hook that is created and used is meant to _prepare_ the game for the user.
 
 These are all examples of logic that must be constructed before the game can truly start.
 
-Custom hooks are typically the result of needing abstracted logic outside of a JSX component. They can be used outside Engine.jsx and can also be used in Core Module files. See [GameCore](./Doc-GameCore.md) for more information.
+### _NOTE: See [Custom Hooks](#custom-hooks) at the bottom of this file to see currently hosted custom hooks._
+
+Custom hooks are typically the result of needing abstracted logic outside of a JSX component. They can be used outside Engine.jsx and are also be used inside Core Module files. See [GameCore](./Doc-GameCore.md) for more information.
 
 ## useEffect()
 
@@ -43,6 +45,12 @@ The second useEffect adds event listeners to listen for screen resolution change
 ## Canvas
 
 The root of everything visual (non-text) is displayed and manipulated through HTML5's canvas context system. Since React loves to rerender on state change (and a game typically has tons of state changes), it is required that the canvas is bound to a reference to keep the frames in sync at all times.
+
+Engine.jsx is host to our canvas html element.
+
+```html
+<canvas id="game-canvas" ref={canvasRef} />
+```
 
 ## setupOnLoad()
 
@@ -118,7 +126,7 @@ const { player } = useContext(globalContext);
 
 ## Files Used
 
-### Hooks
+### Custom Hooks
 
 - [useMap()]()
 - [usePlayer()]()
