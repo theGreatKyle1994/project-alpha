@@ -23,7 +23,7 @@ A new core module _must_ have the following criteria to be considered:
 
 _Take note that a core module can host it's own personal custom hooks if abstracting state is preferred._
 
-If a core module isn't hosting any JSX components or modules, it may be more appropriate to implement the logic as a custom hook instead in the [Engine.jsx](./Doc-Engine.md) file.
+If a core module isn't hosting any JSX components or modules, it may be more appropriate to implement the logic as a custom hook instead in the [Engine.jsx](../Doc-Engine.md) file.
 
 ## Files Used
 
@@ -32,4 +32,4 @@ If a core module isn't hosting any JSX components or modules, it may be more app
 - [CombatCore.jsx]()
 - [UICore.jsx]()
 
-### [Table Of Contents](./table-of-contents.md)
+### [Table Of Contents](../table-of-contents.md)

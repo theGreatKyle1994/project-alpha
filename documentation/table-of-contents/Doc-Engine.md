@@ -4,7 +4,7 @@ Welcome to the root of the project! Everything that makes Project-Alpha tick is 
 
 The flow of this file is as follows:
 
-#### [**Custom Hooks**](#custom-hooks) _->_ [**useEffect()**](#useeffect) _->_ [**Canvas**](#canvas) _->_ [**setupOnLoad()**](#setuponload) _->_ [**update()**](#update)
+#### [**Custom Hooks**](#custom-hooks-1) _->_ [**useEffect()**](#useeffect) _->_ [**Canvas**](#canvas) _->_ [**setupOnLoad()**](#setuponload) _->_ [**update()**](#update)
 
 ## Custom Hooks
 
@@ -128,7 +128,7 @@ const { player } = useContext(globalContext);
 
 ### Custom Hooks
 
-- [useMap()]()
+- [useMap()](./custom-hooks/Doc-useMap.md)
 - [usePlayer()]()
 - [useEnemies()]()
 - [useCombat()]()
@@ -137,6 +137,6 @@ const { player } = useContext(globalContext);
 
 ### Components
 
-- [GameCore.jsx](./Doc-GameCore.md)
+- [GameCore.jsx](./core-modules/Doc-GameCore.md)
 
 ### [Table Of Contents](./table-of-contents.md)

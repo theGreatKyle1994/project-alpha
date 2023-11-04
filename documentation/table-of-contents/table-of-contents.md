@@ -35,7 +35,7 @@ Our source file is indirectly App.jsx. This file is where any routes are defined
 
 **Core Files**
 
-- [GameCore.jsx](./Doc-GameCore.md)
+- [GameCore.jsx](./core-modules/Doc-GameCore.md)
 - [CombatCore.jsx]()
 - [UICore.jsx]()
 
@@ -44,7 +44,7 @@ Our source file is indirectly App.jsx. This file is where any routes are defined
 - [usePlayer.js]()
 - [useEnemies.js]()
 - [useCombat.js]()
-- [useMap.js]()
+- [useMap.js](./custom-hooks/Doc-useMap.md)
 - [useControlEvents.js]()
 - [useMovementHandler.js]()
 - [useUIEvents.js]()
