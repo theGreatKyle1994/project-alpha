@@ -1,6 +1,6 @@
 # useCombat()
 
-useCombat manages combat state from a single enemy returned from the [useEnemies()]() custom hook.
+useCombat manages combat state from the enemies array returned from the [useEnemies()]() custom hook.
 
 ## Arguments
 
