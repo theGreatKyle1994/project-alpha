@@ -131,7 +131,7 @@ const { player } = useContext(globalContext);
 - [useMap()](./custom-hooks/Doc-useMap.md)
 - [usePlayer()]()
 - [useEnemies()]()
-- [useCombat()]()
+- [useCombat()](./custom-hooks/Doc-useCombat.md)
 - [useControlEvents()]()
 - [useMovementHandler()]()
 

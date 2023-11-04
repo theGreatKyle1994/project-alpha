@@ -43,7 +43,7 @@ Our source file is indirectly App.jsx. This file is where any routes are defined
 
 - [usePlayer.js]()
 - [useEnemies.js]()
-- [useCombat.js]()
+- [useCombat.js](./custom-hooks/Doc-useCombat.md)
 - [useMap.js](./custom-hooks/Doc-useMap.md)
 - [useControlEvents.js]()
 - [useMovementHandler.js]()
