@@ -4,6 +4,7 @@ import { createChain, createSpoke, createWeb } from "./algos";
 
 const generatePopulatedChunk = (engine = "random", size = 10) => {
   const chunkParams = createBlankChunk(size);
+  // Chunk options holds all of the available algos to create a chunk sizeXsize.
   const chunkOptions = {
     chain: () => {
       console.log("chain algo");
@@ -24,8 +25,8 @@ const generatePopulatedChunk = (engine = "random", size = 10) => {
       chunkOptions[optionKeys[choice]]();
     },
   };
-  const chunkFunction = chunkOptions[engine];
-  chunkFunction();
+  // whatever algo is passed in through the engine variable gets run through chunkOptions to create a new mapChunk
+  chunkOptions[engine]()
   return chunkParams.newChunk;
 };
 
