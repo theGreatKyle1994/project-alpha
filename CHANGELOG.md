@@ -1,59 +1,65 @@
-<h1>Project Alpha Change Log</h1>
-<h2>Current Version: v0.1.2</h2>
+# Project Alpha Change Log
 
-<h3>UI/Keys Update</h3>
-<ul>
-    <li>Engine.jsx is the new core file to directly use canvas globally</li>
-    <li>Now using react context to prevent the need for prop drilling</li>
-    <li>First iteration of the UI system using UICore.jsx</li>
-    <li>useControlEvents.js is the new hook root for key listeners and managing key state</li>
-    <li>useUIEvents.js is the hook root for checking various keys for menu state toggling</li>
-</ul>
+## Current Version: v0.1.2
 
-<h2>Past Versions</h2>
+### UI/Keys Update
+
+- Engine.jsx is the new core file to directly use canvas globally
+- Now using react context to prevent the need for prop drilling
+- First iteration of the UI system using UICore.jsx
+- useControlEvents.js is the new hook root for key listeners and managing key state
+- useUIEvents.js is the hook root for checking various keys for menu state toggling
+
+## Past Versions
+
 <details>
-    <summary>v0.1.1</summary>
-    <h4>Combat Collision Update</h4>
-    <ul>
-        <li>Dynamic combat system when next to enemies</li>
-        <li>Enemy Collision</li>
-        <li>Basic turn based combat features</li>
-    </ul>
+<summary>v0.1.1</summary>
+
+#### Combat Collision Update
+
+- Dynamic combat system when next to enemies
+- Enemy Collision
+- Basic turn based combat features
+
 </details>
+
 <details>
-    <summary>v0.1.0</summary>
-    <h4>Canvas Update</h4>
-    <ul>
-        <li>Migration to the canvas system</li>
-        <li>Player movement</li>
-        <li>W A S D controls for movement</li>
-        <li>Wall collision system</li>
-        <li>Map drawing system</li>
-        <li>Game route defined ( /game )</li>
-    </ul>
+<summary>v0.1.0</summary>
+
+#### Canvas Update
+
+- Migration to the canvas system
+- Player movement
+- W A S D controls for movement
+- Wall collision system
+- Map drawing system
+- Game route defined ( /game )
 </details>
+
 <details>
-    <summary>v0.0.2</summary>
-    <h4>Map Update 2</h4>
-    <ul>
-        <li>Second iteration of the map gen system ( /map )</li>
-        <li>Basic player movement using coord system ( /map )</li>
-        <li>XP system and Player class creation ( /entity )</li>
-    </ul>
+<summary>v0.0.2</summary>
+
+#### Map Update 2
+
+- Second iteration of the map gen system ( /map )
+- Basic player movement using coord system ( /map )
+- XP system and Player class creation ( /entity )
 </details>
+
 <details>
-    <summary>v0.0.1</summary>
-    <h4>Map Update</h4>
-    <ul>
-        <li>First iteration of the map gen system ( /map )</li>
-        <li>Concept for class state ( /entity )</li>
-        <li>Very basic combat loop: baisc loop with delays ( /combat )</li>
-    </ul>
+<summary>v0.0.1</summary>
+
+#### Map Update
+
+- First iteration of the map gen system ( /map )
+- Concept for class state ( /entity )
+- Very basic combat loop: baisc loop with delays ( /combat )
 </details>
+
 <details>
-    <summary>v0.0.0</summary>
-    <h4>Welcome to Project-Alpha!</h4>
-    <ul>
-        <li>Basic Project Setup</li>
-    </ul>
+<summary>v0.0.0</summary>
+
+#### Welcome to Project-Alpha!
+
+- Basic Project Setup
 </details>
