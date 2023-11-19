@@ -29,6 +29,8 @@ class Instance {
     this.useCollision = options.useCollision || false;
     this.useCollisionOutline = options.useCollisionOutline || false;
     this.isStatic = options.isStatic || false;
+    this.isColliding = false;
+    this.isBounding = false;
   }
   // Drawing a basic rectangle
   drawRect(ctx) {
@@ -97,7 +99,10 @@ class Instance {
             this.pos.y + this.size.y * 3 > target.pos.y &&
             target.pos.y + target.size.y > this.pos.y - this.size.y * 2
           ) {
-            if (this.verifyCollision(target)) this.handleCollision(target);
+            if (this.verifyCollision(target)) {
+              this.isColliding = true;
+              this.handleCollision(target);
+            } else this.isColliding = false;
           }
         }
       });
@@ -144,18 +149,22 @@ class Instance {
           // Checking left bound collision
           if (this.pos.x < 0 + distance) {
             this.pos.x = 0 + distance;
+            this.isBounding = true;
           }
           // Checking right bound collision
           if (this.pos.x > canvas.width - this.size.x - distance) {
             this.pos.x = canvas.width - this.size.x - distance;
+            this.isBounding = true;
           }
           // Checking top bound collision
           if (this.pos.y < 0 + distance) {
             this.pos.y = 0 + distance;
+            this.isBounding = true;
           }
           // Checking bottom bound collision
           if (this.pos.y > canvas.height - this.size.y - distance) {
             this.pos.y = canvas.height - this.size.y - distance;
+            this.isBounding = true;
           }
         }
         break;
@@ -167,7 +176,6 @@ class Instance {
           //   this.speed.x = 0;
           //   this.speed.y = 0;
           // }
-
           // // Checking right bound collision
           // if (this.pos.x > canvas.width - this.size.x) {
           //   this.pos.x = canvas.width - this.size.x;

@@ -12,7 +12,6 @@ const generateMap = (rows,cols, chunkSize = 10) => {
       // [ [chunk1, chunk 2], [chunk3, chunk4]]
           Array.from({ length: cols }, () => createPopulatedChunk('random', chunkSize))
     );
-    console.log('chunks', chunks)
     // Each chunk (1, 2, 3, 4) is a 2D array of length chunkSize.
     // For a playable map, we need to flatten these chunks down to a 2D array.
     // First for loop iterates through chunks. In our working example above,
@@ -21,7 +20,6 @@ const generateMap = (rows,cols, chunkSize = 10) => {
     for (let chunkRow = 0; chunkRow < rows; chunkRow++) {
       // The next for loop iterates through each row in each chunk in the row (first 1, 2, then 3, 4)
       for (let rowInChunk = 0; rowInChunk < chunkSize; rowInChunk++) {
-        console.log('newMap', newMap)
         // combinedRow will hold the values from chunkN[rowInChunk].
         // For example, chunk1[rowInChunk] and chunk2[rowInChunk]
         const combinedRow = [];
